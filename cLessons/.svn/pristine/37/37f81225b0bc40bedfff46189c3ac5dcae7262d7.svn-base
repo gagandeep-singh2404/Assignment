@@ -1,0 +1,32 @@
+
+#include <stdio.h>
+#include <ctype.h>
+// i think number c from 3a is the right code snippet, because an array is a pointer, so you dont need to point to a pointer.
+
+
+/*
+ function definition
+ pre : col has a value N, N>0 && N< 9,
+      row is a character from A-H
+ post: return position of the player
+*/
+void chessboard(char row, int col){
+  col -=1;
+  int calculatedRow = row -65;
+
+  if (calculatedRow > 7) {
+    printf(" this character is out of bound: %c\n", row);
+  }else {
+    printf("The row is: %d\n The col is: %d\n",calculatedRow, col);
+  }
+}
+
+
+
+int main(){
+
+  char row = 'F';
+  int col = 6;
+  chessboard(row,col);
+  return 0;
+}

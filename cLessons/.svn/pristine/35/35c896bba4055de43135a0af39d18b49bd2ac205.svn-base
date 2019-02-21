@@ -1,0 +1,33 @@
+
+#include <stdio.h>
+
+// function definition
+/* pre : n has a value N, N>0
+ * post: return value is the sum of the array
+ */
+  void sum(int array[], int size){
+    int sum;
+
+    sum = 0;
+    for (size_t i = 0; i < size; i++) {
+      sum += array[i];
+    }
+
+
+  printf("Thats the end sum: %d\n" , sum);
+}
+
+
+// declaration
+void sum(int[],int);
+
+  int main() {
+    int a[] = {1,1,1,1,1,1,1,1,1,1};
+    int size = 10;
+
+    sum(a,size);
+
+
+
+  return 0;
+}
