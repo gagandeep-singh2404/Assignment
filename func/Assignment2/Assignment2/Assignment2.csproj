@@ -5,4 +5,11 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Main\" />
+    <Folder Include="Individuals\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Individuals\EmptyClass.cs" />
+  </ItemGroup>
 </Project>

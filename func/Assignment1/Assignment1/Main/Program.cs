@@ -18,14 +18,6 @@ namespace Assignment1
             bool continueLoop = true;
             string decision;
 
-            Type[] carColours = carDealer.GetArrayOfCarColours();
-            Type[] colourDecos = carDealer.GetArrayOfColourDecos();
-            Type[] carWheel = carDealer.GetArrayOfCarWheels();
-            Type[] wheelDecos = carDealer.GetArrayOfWheelDecos();
-            Type[] engine = carDealer.GetArrayOfEngines();
-            Type[] brand = carDealer.GetArrayOfBrands();
-
-
             do
             {
                 Console.WriteLine("Welcome Mr. Douchebag " +
@@ -70,7 +62,6 @@ namespace Assignment1
                 }
 
             } while (continueLoop);
-
         }
     }
 }
