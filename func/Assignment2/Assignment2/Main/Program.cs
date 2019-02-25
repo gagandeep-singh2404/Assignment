@@ -1,4 +1,7 @@
 ﻿using System;
+using Assignment2.Commands;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace Assignment2
 {
@@ -14,7 +17,7 @@ namespace Assignment2
 
             do
             {
-                Console.WriteLine("Welcome Mr. Douchebag " +
+                Console.WriteLine("Welcome Mrs. Douchebag " +
                 "\r\nPress \"help\" to see the list of Commands");
                 decision = Console.ReadLine();
 
@@ -24,22 +27,13 @@ namespace Assignment2
                         command = new HelpCommand();
                         break;
                     case "0":
-                        command = new PrintVehicleCommand() { List = carDealer.Vehicles };
+                        command = new AddCommand();
                         break;
                     case "1":
-                        command = new NumberOfAvailableVehiclesCommand() { Vehicles = carDealer.Vehicles };
+                        command = new ShowOverviewCommand();
                         break;
                     case "2":
-                        command = new AddVehicleCommand(carDealer);
-                        break;
-                    case "3":
-                        command = new ChangePriceCommand() { Vehicles = carDealer.Vehicles };
-                        break;
-                    case "4":
-                        command = new SearchVehicleCommand() { Vehicles = carDealer.Vehicles };
-                        break;
-                    case "5":
-                        command = new ShowTotalSumCommand() { Vehicles = carDealer.Vehicles };
+                        command = new SpecificSearchCommand();
                         break;
                     case "q":
                         continueLoop = false;

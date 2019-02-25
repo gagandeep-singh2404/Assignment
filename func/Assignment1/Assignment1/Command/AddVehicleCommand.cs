@@ -12,7 +12,8 @@ namespace Assignment1.Command
     {
         private Type[] wheelList;
         private Type[] carColourList;
-        private Type[] types;    
+        private Type[] types;
+        Type type; 
 
         private CarDealer carDealer;
         List<Int32> listOfIndex = new List<int>();
@@ -56,7 +57,7 @@ namespace Assignment1.Command
 
         private void SelectCarType()
         {
-            var type = typeof(Vehicle);
+            type = typeof(Vehicle);
                  types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && !p.IsAbstract).ToArray();

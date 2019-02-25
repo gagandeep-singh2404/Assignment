@@ -62,7 +62,7 @@ class Queue<T> {
         else
             t.next = tail;
 
-        notify();
+        notifyAll();
     }
 
     /**
@@ -79,14 +79,13 @@ class Queue<T> {
     }
 
     synchronized T take() {
-        if (empty())
+        while (empty()) {
             try {
                 wait();
-                take();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Queue.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+        }
         return get();
     }
 }

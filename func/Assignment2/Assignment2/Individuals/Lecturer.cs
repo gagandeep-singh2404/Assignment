@@ -1,11 +1,13 @@
 ﻿using System;
+using Assignment2.Main;
+
 namespace Assignment2.Individuals
 {
-    public class Lecturer
+    public class Lecturer:Person
     {
-      [IndividualProperty] public string Phonenumber { get; set; }
-      [IndividualProperty] public string LecturersAbbreviation  { get; set; }
-      [IndividualProperty] public DateTime DateStarted  { get; set; }
+      [IndividualProperty(RegexString = StaticData.ONLYNUMBER)] public string Phonenumber { get; set; }
+      [IndividualProperty(RegexString = StaticData.ONLYCHARS)] public string LecturersAbbreviation  { get; set; }
+      [IndividualProperty(RegexString = StaticData.ONLYNUMBER)] public string DateStarted  { get; set; }
 
     }
 }

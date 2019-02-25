@@ -8,6 +8,8 @@
   <ItemGroup>
     <Folder Include="Main\" />
     <Folder Include="Individuals\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Factorys\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Individuals\EmptyClass.cs" />

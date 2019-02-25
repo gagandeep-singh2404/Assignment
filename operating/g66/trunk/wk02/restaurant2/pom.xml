@@ -33,4 +33,5 @@
             <version>27.0-jre</version>
         </dependency>
     </dependencies>
+    <name>restaurant2</name>
 </project>

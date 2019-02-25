@@ -1,12 +1,11 @@
 ﻿<Properties StartupConfiguration="{AB353C5A-5C61-4017-BFE3-74D7062991F7}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assignment1/Main/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assignment1/Command/AddVehicleCommand.cs">
     <Files>
-      <File FileName="Assignment1/Command/AddVehicleCommand.cs" Line="25" Column="40" />
+      <File FileName="Assignment1/Command/AddVehicleCommand.cs" Line="16" Column="19" />
       <File FileName="Assignment1/Command/ChangePriceCommand.cs" Line="21" Column="16" />
-      <File FileName="Assignment1/Command/HelpCommand.cs" Line="8" Column="8" />
+      <File FileName="Assignment1/Command/HelpCommand.cs" Line="11" Column="1" />
       <File FileName="Assignment1/Command/ICommand.cs" Line="1" Column="1" />
-      <File FileName="Assignment1/Command/NumberOfAvailableVehiclesCommand.cs" Line="10" Column="68" />
-      <File FileName="Assignment1/Command/PrintVehicleCommand.cs" Line="14" Column="1" />
+      <File FileName="Assignment1/Command/PrintVehicleCommand.cs" Line="10" Column="34" />
       <File FileName="Assignment1/Command/SearchVehicleCommand.cs" Line="89" Column="14" />
       <File FileName="Assignment1/Command/ShowTotalSumCommand.cs" Line="12" Column="1" />
       <File FileName="Assignment1/Main/Program.cs" Line="15" Column="1" />
