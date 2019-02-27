@@ -1,7 +1,5 @@
 ﻿using System;
 using Assignment2.Commands;
-using System.Configuration;
-using System.Collections.Specialized;
 
 namespace Assignment2
 {
@@ -44,10 +42,8 @@ namespace Assignment2
                         break;
                 }
 
-                if (command != null)
-                {
-                    command.Execute();
-                }
+                if (command != null)  command.Execute();
+                
 
             } while (continueLoop);
         }

@@ -1,19 +1,26 @@
 ﻿<Properties StartupConfiguration="{B54A64C8-20D4-43F2-BCE8-EE3C6AB8F9F1}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assignment2/Main/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assignment2/Individuals/Person.cs">
     <Files>
       <File FileName="Assignment2/Factorys/DBFactory.cs" Line="10" Column="1" />
       <File FileName="App.config" Line="8" Column="17" />
-      <File FileName="Assignment2/Main/Program.cs" Line="5" Column="1" />
+      <File FileName="Assignment2/Main/Program.cs" Line="28" Column="44" />
+      <File FileName="Assignment2/Commands/ICommand.cs" Line="1" Column="1" />
+      <File FileName="Assignment2/Commands/HelpCommand.cs" Line="1" Column="1" />
+      <File FileName="Assignment2/Commands/AddCommand.cs" Line="42" Column="88" />
+      <File FileName="Assignment2/Individuals/Student.cs" Line="8" Column="7" />
+      <File FileName="Assignment2/Individuals/Person.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Assignment2" expanded="True">
-            <Node name="Solution Items" expanded="True" />
             <Node name="Assignment2" expanded="True">
-              <Node name="Main" expanded="True">
-                <Node name="Program.cs" selected="True" />
+              <Node name="Commands" expanded="True" />
+              <Node name="Factorys" expanded="True" />
+              <Node name="Individuals" expanded="True">
+                <Node name="Person.cs" selected="True" />
               </Node>
+              <Node name="Main" expanded="True" />
             </Node>
           </Node>
         </State>
