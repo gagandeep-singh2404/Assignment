@@ -22,25 +22,26 @@ int main(){
 }
 
 void readString(){
- char decision[32];
  char input[NUMBER];
  int counter = 0;
   
     for(int i = 0; i< NUMBER; i++){
         printf("Please enter a WeekDay: ");
 
-        fgets(decision,sizeof(decision),stdin);
-        sscanf(decision, "%s", &input);
-        printf("Hello World");
-        
+        /* Is not safe, but it works*/
+        gets(input);
+
+        /* checking if the input machtes with the beginning of the weekdays, 3 char long*/
         for(int j = 0; j < NUMBER; j++){
-            
-            if(strcmp(&input[i], weekInString[j]) == 0){ 
+            if(strcmp(input, weekInString[j]) == 0){ 
                 days[i] = enumDays[j];
-                printf("\n%d",++counter);
+                counter++;
                 break;
-        }else {printf("\nYour input is not known");}
+            }
        }
+
+    if (counter == i) i--;
+
     }
 }
     void writeWeekDays(){
