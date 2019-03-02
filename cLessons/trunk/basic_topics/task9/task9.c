@@ -7,12 +7,14 @@ int main()
     int min = __INT_MAX__;
     int secondMin;
     int given;
-    char choice[20];
+    char c[10];
+    char compare[] = {"end"}; 
     printf("Please enter numbers: ");
     while (1)
-    {
-        if ( sscanf(sizeof(choice),"%c",choice) != 1) break;
-        given = atoi(choice);
+    {   
+        gets(c);
+        if (strcmp(c,"") == 0) break;
+        given = atoi(c);
 
         if (given < min) {
             secondMin = min;
