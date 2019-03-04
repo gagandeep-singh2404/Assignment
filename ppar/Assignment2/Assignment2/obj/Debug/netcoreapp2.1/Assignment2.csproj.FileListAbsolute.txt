@@ -9,3 +9,14 @@
 /Users/gagandeepsingh/Documents/GitHub/Assignment/func/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.AssemblyInfo.cs
 /Users/gagandeepsingh/Documents/GitHub/Assignment/func/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.dll
 /Users/gagandeepsingh/Documents/GitHub/Assignment/func/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.pdb
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.csprojAssemblyReference.cache
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.csproj.CoreCompileInputs.cache
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.AssemblyInfoInputs.cache
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.AssemblyInfo.cs
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.dll
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/obj/Debug/netcoreapp2.1/Assignment2.pdb
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/bin/Debug/netcoreapp2.1/Assignment2.deps.json
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/bin/Debug/netcoreapp2.1/Assignment2.runtimeconfig.json
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/bin/Debug/netcoreapp2.1/Assignment2.runtimeconfig.dev.json
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/bin/Debug/netcoreapp2.1/Assignment2.dll
+/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/Assignment2/Assignment2/bin/Debug/netcoreapp2.1/Assignment2.pdb
