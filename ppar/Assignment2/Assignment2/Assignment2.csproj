@@ -15,4 +15,7 @@
     <Compile Remove="Individuals\EmptyClass.cs" />
     <Compile Remove="Individuals\Staff.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Appconfig.xml" />
+  </ItemGroup>
 </Project>

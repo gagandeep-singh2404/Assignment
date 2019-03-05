@@ -9,37 +9,27 @@ namespace Assignment2
 {
     class Program
     {
-        private static Dictionary<string, Command> commands;
-        private static Command initilizeCommand = new Command() { SpecificAction = InitialzeCommand, Desc = "Initize All important Command" };
-
-        static void Main(string[] args)
+        private Dictionary<string, Command> commands;
+        private Command initilizeCommand;
+        public Program()
         {
-            initilizeCommand.Execute();
-            string index;
-
-            do
-            {
-                foreach (KeyValuePair<string, Command> cd in commands) Console.WriteLine("{0}: {1}", cd.Key, cd.Value.Desc);
-                index = Console.ReadLine();
-                if (commands.ContainsKey(index)) commands[index].Execute();
-
-            } while (index != "0");
+           initilizeCommand = new Command() { SpecificAction = InitialzeCommand, Desc = "Initize All important Command" };
         }
-
-        private static void InitialzeCommand()
+   
+        private void InitialzeCommand()
         {
-     
+
             commands = new Dictionary<string, Command>()
-        {
-            ["0"] = new Command { SpecificAction= QuietApplication, Desc = "Exit the Applikation" },
-            ["1"] =  new Command { SpecificAction= AddUserHandler, Desc = "Add a new User" }, 
-            ["2"] =  new Command { SpecificAction = ListUser, Desc = "Show Overview of User" }, 
-            ["3"] =  new Command { SpecificAction= ShowUser, Desc = "Search User with ID" } 
-        };
+            {
+                ["0"] = new Command { SpecificAction = QuietApplication, Desc = "Exit the Applikation" },
+                ["1"] = new Command { SpecificAction = AddUserHandler, Desc = "Add a new User" },
+                ["2"] = new Command { SpecificAction = ListUser, Desc = "Show Overview of User" },
+                ["3"] = new Command { SpecificAction = ShowUser, Desc = "Search User with ID" }
+            };
 
         }
 
-        private static void AddUserHandler()
+        private void AddUserHandler()
         {
             int index;
             Type type = typeof(Person);
@@ -85,8 +75,30 @@ namespace Assignment2
                 if (isOk) { propertyInfo.SetValue(person, value); }
             }
         }
-        private static void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); }
-        private static void ListUser() { Console.WriteLine("ich bin gerade in ListUser"); }
-        private static void ShowUser() { Console.WriteLine("ich bin hier in Show User"); }
+        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); }
+        private void ListUser() { Console.WriteLine("ich bin gerade in ListUser"); }
+        private void ShowUser() { Console.WriteLine("ich bin hier in Show User"); }
+
+
+
+        public void Run()
+        {
+            initilizeCommand.Execute();
+            string index;
+
+            do
+            {
+                foreach (KeyValuePair<string, Command> cd in commands) Console.WriteLine("{0}: {1}", cd.Key, cd.Value.Desc);
+                index = Console.ReadLine();
+                if (commands.ContainsKey(index)) commands[index].Execute();
+
+            } while (index != "0");
+        }
+
+        static void Main(string[] args)
+        {
+            Program MainProgramm = new Program();
+            MainProgramm.Run();
+        }
     }
 }
