@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NewAssignment2.Factorys;
 using NewAssignment2.Individuals;
 using NewAssignment2.Main;
 
@@ -11,11 +12,27 @@ namespace NewAssignment2
     {
         private Dictionary<string, Command> commands;
         private Command initilizeCommand;
+        private IAbstractFactory abstractFactory;
+
         public Program()
         {
             initilizeCommand = new Command() { SpecificAction = InitialzeCommand, Desc = "Initize All important Command" };
+            abstractFactory = XMLDBFactory();
         }
 
+        public void Run()
+        {
+            initilizeCommand.Execute();
+            string index;
+
+            do
+            {
+                foreach (KeyValuePair<string, Command> cd in commands) Console.WriteLine("{0}: {1}", cd.Key, cd.Value.Desc);
+                index = Console.ReadLine();
+                if (commands.ContainsKey(index)) commands[index].Execute();
+
+            } while (index != "0");
+        }
         private void InitialzeCommand()
         {
 
@@ -74,27 +91,30 @@ namespace NewAssignment2
                 if (prop.Regex != null && !prop.Regex.IsMatch(value)) { isOk = false; i--; }
                 if (isOk) { propertyInfo.SetValue(person, value); }
             }
+
+            abstractFactory.CreateUser(person);
         }
-        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); }
-        private void ListUser() { Console.WriteLine("ich bin gerade in ListUser"); }
-        private void ShowUser() { Console.WriteLine("ich bin hier in Show User"); }
 
+        private void ShowOverview()
+        { 
+        
+            Console.WriteLine("A list of all Users in our System: ");
 
-
-        public void Run()
+            IEnumerable<Person> people = abstractFactory.ShowOverview();
+        }
+        private void GetPerson() 
         {
-            initilizeCommand.Execute();
-            string index;
 
-            do
-            {
-                foreach (KeyValuePair<string, Command> cd in commands) Console.WriteLine("{0}: {1}", cd.Key, cd.Value.Desc);
-                index = Console.ReadLine();
-                if (commands.ContainsKey(index)) commands[index].Execute();
+            Console.WriteLine("Please enter the ID of the User you want to search: ");
+            int id = int.Parse(Console.ReadLine());
+            abstractFactory.GetPerson(id);
 
-            } while (index != "0");
+
         }
 
+
+
+        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); }
         static void Main(string[] args)
         {
             Program MainProgramm = new Program();

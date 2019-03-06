@@ -9,6 +9,7 @@
     <Folder Include="Main\" />
     <Folder Include="Factorys\" />
     <Folder Include="Individuals\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Main\StaticData.xml" />

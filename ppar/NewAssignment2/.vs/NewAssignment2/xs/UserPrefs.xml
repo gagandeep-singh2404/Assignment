@@ -1,18 +1,21 @@
 ﻿<Properties StartupConfiguration="{1067FB0B-EDDE-46C2-8E13-8B87AB95626F}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="NewAssignment2/Main/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NewAssignment2/Factorys/XMLMapper.cs">
     <Files>
-      <File FileName="NewAssignment2/Main/Program.cs" Line="69" Column="33" />
+      <File FileName="NewAssignment2/Factorys/XMLDBFactory.cs" Line="30" Column="27" />
+      <File FileName="NewAssignment2/Factorys/XMLMapper.cs" Line="16" Column="67" />
+      <File FileName="NewAssignment2/Main/Program.cs" Line="103" Column="73" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="NewAssignment2" expanded="True">
             <Node name="NewAssignment2" expanded="True">
-              <Node name="Factorys" expanded="True" />
-              <Node name="Individuals" expanded="True" />
-              <Node name="Main" expanded="True">
-                <Node name="Program.cs" selected="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="Factorys" expanded="True">
+                <Node name="XMLMapper.cs" selected="True" />
               </Node>
+              <Node name="Individuals" expanded="True" />
+              <Node name="Main" expanded="True" />
             </Node>
           </Node>
         </State>

@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/NewAssignment2.csproj",
+      "projectUniqueName": "/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/NewAssignment2/NewAssignment2/NewAssignment2.csproj",
       "projectName": "NewAssignment2",
-      "projectPath": "/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/NewAssignment2.csproj",
+      "projectPath": "/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/NewAssignment2/NewAssignment2/NewAssignment2.csproj",
       "packagesPath": "/Users/gagandeepsingh/.nuget/packages/",
-      "outputPath": "/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/obj/",
+      "outputPath": "/Users/gagandeepsingh/Documents/GitHub/Assignment/ppar/NewAssignment2/NewAssignment2/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

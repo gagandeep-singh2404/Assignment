@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NewAssignment2.Individuals;
 
 namespace NewAssignment2.Factorys
@@ -6,8 +7,8 @@ namespace NewAssignment2.Factorys
     public interface IDBMapper
     {
 
-        void CreateUser();
-        void ShowOverview();
+        void CreateUser(Person person);
+        ICollection<Person> ShowOverview();
         Person GetPerson(int id);
     }
 }
