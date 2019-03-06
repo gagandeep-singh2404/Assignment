@@ -1,0 +1,11 @@
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/bin/Debug/netcoreapp2.1/NewAssignment2.deps.json
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/bin/Debug/netcoreapp2.1/NewAssignment2.runtimeconfig.json
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/bin/Debug/netcoreapp2.1/NewAssignment2.runtimeconfig.dev.json
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/bin/Debug/netcoreapp2.1/NewAssignment2.dll
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/bin/Debug/netcoreapp2.1/NewAssignment2.pdb
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/obj/Debug/netcoreapp2.1/NewAssignment2.csprojAssemblyReference.cache
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/obj/Debug/netcoreapp2.1/NewAssignment2.csproj.CoreCompileInputs.cache
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/obj/Debug/netcoreapp2.1/NewAssignment2.AssemblyInfoInputs.cache
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/obj/Debug/netcoreapp2.1/NewAssignment2.AssemblyInfo.cs
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/obj/Debug/netcoreapp2.1/NewAssignment2.dll
+/Users/gagandeepsingh/Desktop/NewAssignment2/NewAssignment2/obj/Debug/netcoreapp2.1/NewAssignment2.pdb
