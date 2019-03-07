@@ -12,10 +12,6 @@ namespace NewAssignment2.Factorys
             CreateDBMapper();
         }
 
-        public void AddListToXML()
-        {
-            mapper.AddListToXML();
-        }
 
         public void CreateDBMapper()
         {

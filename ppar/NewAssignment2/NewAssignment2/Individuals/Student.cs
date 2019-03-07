@@ -12,10 +12,8 @@ namespace NewAssignment2.Individuals
         [IndividualProperty(RegexString = StaticData.ONLYCHARS)] public string Class { get; set; }
 
 
-         public string ToString(){ 
-            return base.ToString() + "Study Programm: "+StudyProgram+", Cohort: "+ Cohort+", Class "+ Class+"\n";
+         public override string ToString(){ 
+            return base.ToString() + "Study Programm: "+StudyProgram+", Cohort: "+ Cohort+", Class "+ Class+ "\n-------------------------------------\n";
         }
-
-
     }
 }

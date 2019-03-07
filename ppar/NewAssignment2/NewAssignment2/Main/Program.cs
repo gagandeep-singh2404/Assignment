@@ -101,6 +101,11 @@ namespace NewAssignment2
             Console.WriteLine("A list of all Users in our System: ");
 
             IEnumerable<Person> people = abstractFactory.ShowOverview();
+
+            foreach (Person per in people)
+            {
+                Console.WriteLine(per.ToString());
+            }
         }
         private void GetPerson() 
         {
@@ -113,7 +118,7 @@ namespace NewAssignment2
 
         }
 
-        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); abstractFactory.AddListToXML(); }
+        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); }
         static void Main(string[] args)
         {
             Program MainProgramm = new Program();

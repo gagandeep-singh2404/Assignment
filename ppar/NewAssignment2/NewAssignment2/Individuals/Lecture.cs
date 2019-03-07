@@ -11,5 +11,11 @@ namespace NewAssignment2.Individuals
         [IndividualProperty(RegexString = StaticData.ONLYCHARS)] public string LecturersAbbreviation { get; set; }
         [IndividualProperty(RegexString = StaticData.ONLYCHARS)] public string DateStarted { get; set; }
 
+
+
+        public override string ToString()
+        {
+            return base.ToString() + "Phonenumber: " + Phonenumber + ", Lecture Abbreviation: " + LecturersAbbreviation + ", Date Started: " + DateStarted + "\n-------------------------------------\n";
+        }
     }
 }

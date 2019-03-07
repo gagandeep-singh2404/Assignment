@@ -35,8 +35,8 @@ namespace NewAssignment2.Individuals
 
         public override string ToString()
         {
-            return "ID: " + ID + ", Firstname: " + Firstname + ", Lastname: " + Lastname +
-            "\nNationality: " + Nationality + ", Email" + Email + "\n";
+            return "\n-------------------------------------\nID: " + ID + ", Firstname: " + Firstname + ", Lastname: " + Lastname +
+            "\nNationality: " + Nationality + ", Email: " + Email + "\n";
         }
     }
 }

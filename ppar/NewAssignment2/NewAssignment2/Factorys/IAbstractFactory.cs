@@ -10,6 +10,5 @@ namespace NewAssignment2.Factorys
         void CreateUser(Person person);
         ICollection<Person> ShowOverview();
         Person GetPerson(int id);
-        void AddListToXML();
     }
 }

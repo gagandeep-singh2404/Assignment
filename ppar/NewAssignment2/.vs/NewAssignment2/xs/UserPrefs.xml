@@ -1,9 +1,11 @@
 ﻿<Properties StartupConfiguration="{1067FB0B-EDDE-46C2-8E13-8B87AB95626F}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="NewAssignment2/Factorys/XMLMapper.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NewAssignment2/Individuals/Lecture.cs">
     <Files>
-      <File FileName="NewAssignment2/Main/Program.cs" Line="116" Column="148" />
-      <File FileName="NewAssignment2/Factorys/XMLMapper.cs" Line="46" Column="26" />
-      <File FileName="NewAssignment2/Factorys/XMLDBFactory.cs" Line="17" Column="35" />
+      <File FileName="NewAssignment2/Main/Program.cs" Line="108" Column="14" />
+      <File FileName="NewAssignment2/Factorys/XMLMapper.cs" Line="18" Column="10" />
+      <File FileName="NewAssignment2/Individuals/Student.cs" Line="15" Column="7" />
+      <File FileName="NewAssignment2/Individuals/Lecture.cs" Line="18" Column="42" />
+      <File FileName="NewAssignment2/Individuals/Person.cs" Line="5" Column="11" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,10 +13,10 @@
           <Node name="NewAssignment2" expanded="True">
             <Node name="NewAssignment2" expanded="True">
               <Node name="Data" expanded="True" />
-              <Node name="Factorys" expanded="True">
-                <Node name="XMLMapper.cs" selected="True" />
+              <Node name="Factorys" expanded="True" />
+              <Node name="Individuals" expanded="True">
+                <Node name="Lecture.cs" selected="True" />
               </Node>
-              <Node name="Individuals" expanded="True" />
               <Node name="Main" expanded="True" />
             </Node>
           </Node>
