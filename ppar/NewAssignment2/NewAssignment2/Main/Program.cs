@@ -17,7 +17,7 @@ namespace NewAssignment2
         public Program()
         {
             initilizeCommand = new Command() { SpecificAction = InitialzeCommand, Desc = "Initize All important Command" };
-            abstractFactory = XMLDBFactory();
+            abstractFactory = new XMLDBFactory();
         }
 
         public void Run()
@@ -40,8 +40,8 @@ namespace NewAssignment2
             {
                 ["0"] = new Command { SpecificAction = QuietApplication, Desc = "Exit the Applikation" },
                 ["1"] = new Command { SpecificAction = AddUserHandler, Desc = "Add a new User" },
-                ["2"] = new Command { SpecificAction = ListUser, Desc = "Show Overview of User" },
-                ["3"] = new Command { SpecificAction = ShowUser, Desc = "Search User with ID" }
+                ["2"] = new Command { SpecificAction = ShowOverview, Desc = "Show Overview of User" },
+                ["3"] = new Command { SpecificAction = GetPerson, Desc = "Search User with ID" }
             };
 
         }
@@ -107,14 +107,13 @@ namespace NewAssignment2
 
             Console.WriteLine("Please enter the ID of the User you want to search: ");
             int id = int.Parse(Console.ReadLine());
-            abstractFactory.GetPerson(id);
-
+            Person tempPerson = abstractFactory.GetPerson(id);
+            if (tempPerson == null) { Console.WriteLine("\n--------------------------------\n        User not found\n--------------------------------\n"); return; }
+            Console.WriteLine(tempPerson.OnlyRelevantData());
 
         }
 
-
-
-        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); }
+        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); abstractFactory.AddListToXML(); }
         static void Main(string[] args)
         {
             Program MainProgramm = new Program();
