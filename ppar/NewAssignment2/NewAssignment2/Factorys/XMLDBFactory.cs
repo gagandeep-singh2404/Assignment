@@ -4,14 +4,13 @@ using NewAssignment2.Individuals;
 
 namespace NewAssignment2.Factorys
 {
-    public class XMLDBFactory:IAbstractFactory
+    public class XMLDBFactory : IAbstractFactory
     {
         private IDBMapper mapper;
         public XMLDBFactory()
         {
             CreateDBMapper();
         }
-
 
         public void CreateDBMapper()
         {
@@ -30,7 +29,7 @@ namespace NewAssignment2.Factorys
 
         public ICollection<Person> ShowOverview()
         {
-           return mapper.ShowOverview();
+            return mapper.ShowOverview();
         }
     }
 }

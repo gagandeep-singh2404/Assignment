@@ -14,4 +14,9 @@
   <ItemGroup>
     <None Remove="Main\StaticData.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Main\Program.cs">
+      <IncludeInPackage>false</IncludeInPackage>
+    </Compile>
+  </ItemGroup>
 </Project>

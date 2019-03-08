@@ -2,155 +2,32 @@
 <ArrayOfPerson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Person xsi:type="Student">
     <ID>1</ID>
-    <Firstname>ES</Firstname>
-    <Lastname>ES</Lastname>
-    <Nationality>ES</Nationality>
-    <Email>ES@fontys.nl</Email>
-    <StudyProgram>DE</StudyProgram>
-    <Cohort>DE</Cohort>
-    <Class>DE</Class>
+    <Firstname>asda</Firstname>
+    <Lastname>asd</Lastname>
+    <Nationality>ad</Nationality>
+    <Email>a@fontys.nl</Email>
+    <StudyProgram>asd</StudyProgram>
+    <Cohort>asda</Cohort>
+    <Class>dasd</Class>
   </Person>
   <Person xsi:type="Lecturer">
     <ID>2</ID>
-    <Firstname>casdcasd</Firstname>
-    <Lastname>adasdasiudsa</Lastname>
-    <Nationality>sajdsadb</Nationality>
-    <Email>asdsahdb@fontys.nl</Email>
-    <Phonenumber>DE</Phonenumber>
-    <LecturersAbbreviation>sd</LecturersAbbreviation>
-    <DateStarted>asdada</DateStarted>
-  </Person>
-  <Person xsi:type="Student">
-    <ID>3</ID>
-    <Firstname>asdkjsad</Firstname>
-    <Lastname>asdjnaskjdnsakdnmpij</Lastname>
-    <Nationality>okjiojioda</Nationality>
-    <Email>doiadjio@fontys.nl</Email>
-    <StudyProgram>saklndad</StudyProgram>
-    <Cohort>asdjasndd</Cohort>
-    <Class>asdjnasbd</Class>
-  </Person>
-  <Person xsi:type="Student">
-    <ID>4</ID>
-    <Firstname>Gaga</Firstname>
-    <Lastname>SIn</Lastname>
-    <Nationality>DE</Nationality>
-    <Email>fdsff@fontys.nl</Email>
-    <StudyProgram>SE</StudyProgram>
-    <Cohort>Gagan</Cohort>
-    <Class>DE</Class>
-  </Person>
-  <Person xsi:type="Student">
-    <ID>5</ID>
-    <Firstname>S</Firstname>
-    <Lastname>S</Lastname>
-    <Nationality>S</Nationality>
-    <Email>S@fontys.nl</Email>
-    <StudyProgram>S</StudyProgram>
-    <Cohort>S</Cohort>
-    <Class>S</Class>
+    <Firstname>saknaskjdn</Firstname>
+    <Lastname>asdjnajkdn</Lastname>
+    <Nationality>asklmdklmdl</Nationality>
+    <Email>askdmalkd@fontys.nl</Email>
+    <Phonenumber>238179</Phonenumber>
+    <LecturersAbbreviation>sadjbj</LecturersAbbreviation>
+    <DateStarted>21-12-2000</DateStarted>
   </Person>
   <Person xsi:type="Lecturer">
-    <ID>6</ID>
-    <Firstname>SDDsjndk</Firstname>
-    <Lastname>asdkjsabdjhasbjhaf</Lastname>
-    <Nationality>saoidjsaoidjaosidj</Nationality>
-    <Email>sajdbaj@fontys.nl</Email>
-    <Phonenumber>DESW</Phonenumber>
-    <LecturersAbbreviation>SDSDSD</LecturersAbbreviation>
-    <DateStarted>SDSDSDS</DateStarted>
-  </Person>
-</ArrayOfPerson>LecturersAbbreviation>
-    <DateStarted>asdada</DateStarted>
-  </Person>
-  <Person p1:type="Student" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
     <ID>3</ID>
-    <Firstname>asdkjsad</Firstname>
-    <Lastname>asdjnaskjdnsakdnmpij</Lastname>
-    <Nationality>okjiojioda</Nationality>
-    <Email>doiadjio@fontys.nl</Email>
-    <StudyProgram>saklndad</StudyProgram>
-    <Cohort>asdjasndd</Cohort>
-    <Class>asdjnasbd</Class>
-  </Person>
-  <Person p1:type="Student" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
-    <ID>4</ID>
-    <Firstname>Gaga</Firstname>
-    <Lastname>SIn</Lastname>
-    <Nationality>DE</Nationality>
-    <Email>fdsff@fontys.nl</Email>
-    <StudyProgram>SE</StudyProgram>
-    <Cohort>Gagan</Cohort>
-    <Class>DE</Class>
-  </Person>
-  <Person p1:type="Student" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
-    <ID>5</ID>
-    <Firstname>S</Firstname>
-    <Lastname>S</Lastname>
-    <Nationality>S</Nationality>
-    <Email>S@fontys.nl</Email>
-    <StudyProgram>S</StudyProgram>
-    <Cohort>S</Cohort>
-    <Class>S</Class>
-  </Person>
-  <Person p1:type="Student" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
-    <ID>1</ID>
-    <Firstname>ES</Firstname>
-    <Lastname>ES</Lastname>
-    <Nationality>ES</Nationality>
-    <Email>ES@fontys.nl</Email>
-    <StudyProgram>DE</StudyProgram>
-    <Cohort>DE</Cohort>
-    <Class>DE</Class>
-  </Person>
-  <Person p1:type="Lecturer" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
-    <ID>2</ID>
-    <Firstname>casdcasd</Firstname>
-    <Lastname>adasdasiudsa</Lastname>
-    <Nationality>sajdsadb</Nationality>
-    <Email>asdsahdb@fontys.nl</Email>
-    <Phonenumber>DE</Phonenumber>
-    <LecturersAbbreviation>sd</LecturersAbbreviation>
-    <DateStarted>asdada</DateStarted>
-  </Person>
-  <Person p1:type="Student" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
-    <ID>3</ID>
-    <Firstname>asdkjsad</Firstname>
-    <Lastname>asdjnaskjdnsakdnmpij</Lastname>
-    <Nationality>okjiojioda</Nationality>
-    <Email>doiadjio@fontys.nl</Email>
-    <StudyProgram>saklndad</StudyProgram>
-    <Cohort>asdjasndd</Cohort>
-    <Class>asdjnasbd</Class>
-  </Person>
-  <Person p1:type="Student" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
-    <ID>4</ID>
-    <Firstname>Gaga</Firstname>
-    <Lastname>SIn</Lastname>
-    <Nationality>DE</Nationality>
-    <Email>fdsff@fontys.nl</Email>
-    <StudyProgram>SE</StudyProgram>
-    <Cohort>Gagan</Cohort>
-    <Class>DE</Class>
-  </Person>
-  <Person p1:type="Student" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
-    <ID>5</ID>
-    <Firstname>S</Firstname>
-    <Lastname>S</Lastname>
-    <Nationality>S</Nationality>
-    <Email>S@fontys.nl</Email>
-    <StudyProgram>S</StudyProgram>
-    <Cohort>S</Cohort>
-    <Class>S</Class>
-  </Person>
-  <Person p1:type="Lecturer" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance">
-    <ID>6</ID>
-    <Firstname>SDDsjndk</Firstname>
-    <Lastname>asdkjsabdjhasbjhaf</Lastname>
-    <Nationality>saoidjsaoidjaosidj</Nationality>
-    <Email>sajdbaj@fontys.nl</Email>
-    <Phonenumber>DESW</Phonenumber>
-    <LecturersAbbreviation>SDSDSD</LecturersAbbreviation>
-    <DateStarted>SDSDSDS</DateStarted>
+    <Firstname>asjkbd</Firstname>
+    <Lastname>adjnad</Lastname>
+    <Nationality>aslkdn</Nationality>
+    <Email>kdnja@fontys.nl</Email>
+    <Phonenumber>213</Phonenumber>
+    <LecturersAbbreviation>asdad</LecturersAbbreviation>
+    <DateStarted>31-12-2009</DateStarted>
   </Person>
 </ArrayOfPerson>

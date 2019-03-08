@@ -13,7 +13,7 @@ namespace NewAssignment2.Individuals
 
 
          public override string ToString(){ 
-            return base.ToString() + "Study Programm: "+StudyProgram+", Cohort: "+ Cohort+", Class "+ Class+ "\n-------------------------------------\n";
+            return base.ToString() + "Study Programm: "+StudyProgram+", Cohort: "+ Cohort+", Class "+ Class+ "\n---------------------------------------------\n\n";
         }
     }
 }

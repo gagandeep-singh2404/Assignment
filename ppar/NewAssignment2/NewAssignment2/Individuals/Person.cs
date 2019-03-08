@@ -28,15 +28,15 @@ namespace NewAssignment2.Individuals
 
         public string OnlyRelevantData()
         {
-            return "\n-------------------------------------\n" +
-            	"ID: "+ID+", Firstname: "+Firstname+", Lastname: "+Lastname+ "\n-------------------------------------\n";
+            return "\n----------------------------------------------\n" +
+            	"ID: "+ID+"| Firstname: "+Firstname+"| Lastname: "+Lastname+ "\n----------------------------------------------\n";
         }
 
 
         public override string ToString()
         {
-            return "\n-------------------------------------\nID: " + ID + ", Firstname: " + Firstname + ", Lastname: " + Lastname +
-            "\nNationality: " + Nationality + ", Email: " + Email + "\n";
+            return "\n---------------------------------------------\nID: " + ID + "| Firstname: " + Firstname + "| Lastname: " + Lastname +
+            "\nNationality: " + Nationality + "| Email: " + Email + "\n";
         }
     }
 }

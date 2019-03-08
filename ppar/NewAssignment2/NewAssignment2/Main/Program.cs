@@ -6,6 +6,7 @@ using NewAssignment2.Factorys;
 using NewAssignment2.Individuals;
 using NewAssignment2.Main;
 
+
 namespace NewAssignment2
 {
     class Program
@@ -16,6 +17,7 @@ namespace NewAssignment2
 
         public Program()
         {
+            
             initilizeCommand = new Command() { SpecificAction = InitialzeCommand, Desc = "Initize All important Command" };
             abstractFactory = new XMLDBFactory();
         }
@@ -71,6 +73,7 @@ namespace NewAssignment2
                 decision = Console.ReadLine();
 
                 if (!int.TryParse(decision, out index)) continue;
+                Console.WriteLine(index);
                 if (index < 0 || index > types.Length) continue;
 
                 break;
@@ -96,29 +99,29 @@ namespace NewAssignment2
         }
 
         private void ShowOverview()
-        { 
-        
+        {
+
             Console.WriteLine("A list of all Users in our System: ");
 
             IEnumerable<Person> people = abstractFactory.ShowOverview();
 
             foreach (Person per in people)
             {
-                Console.WriteLine(per.ToString());
+                Console.WriteLine(per.OnlyRelevantData());
             }
         }
-        private void GetPerson() 
+        private void GetPerson()
         {
 
             Console.WriteLine("Please enter the ID of the User you want to search: ");
             int id = int.Parse(Console.ReadLine());
             Person tempPerson = abstractFactory.GetPerson(id);
             if (tempPerson == null) { Console.WriteLine("\n--------------------------------\n        User not found\n--------------------------------\n"); return; }
-            Console.WriteLine(tempPerson.OnlyRelevantData());
+            Console.WriteLine(tempPerson);
 
         }
 
-        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------"); }
+        private void QuietApplication() { Console.WriteLine("-----------Thank you for using our System----------");}
         static void Main(string[] args)
         {
             Program MainProgramm = new Program();

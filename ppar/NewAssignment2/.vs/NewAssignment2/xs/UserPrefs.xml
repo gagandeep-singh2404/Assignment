@@ -1,11 +1,10 @@
 ﻿<Properties StartupConfiguration="{1067FB0B-EDDE-46C2-8E13-8B87AB95626F}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="NewAssignment2/Individuals/Lecture.cs">
     <Files>
-      <File FileName="NewAssignment2/Main/Program.cs" Line="108" Column="14" />
-      <File FileName="NewAssignment2/Factorys/XMLMapper.cs" Line="18" Column="10" />
-      <File FileName="NewAssignment2/Individuals/Student.cs" Line="15" Column="7" />
-      <File FileName="NewAssignment2/Individuals/Lecture.cs" Line="18" Column="42" />
-      <File FileName="NewAssignment2/Individuals/Person.cs" Line="5" Column="11" />
+      <File FileName="NewAssignment2/Main/Program.cs" Line="124" Column="116" />
+      <File FileName="NewAssignment2/Individuals/Student.cs" Line="16" Column="158" />
+      <File FileName="NewAssignment2/Individuals/Person.cs" Line="38" Column="68" />
+      <File FileName="NewAssignment2/Individuals/Lecture.cs" Line="18" Column="124" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
