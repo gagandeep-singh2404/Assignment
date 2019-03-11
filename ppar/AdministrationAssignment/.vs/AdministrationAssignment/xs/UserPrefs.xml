@@ -1,24 +1,17 @@
 ﻿<Properties StartupConfiguration="{2E1F1050-B279-4E28-AA60-B29D69CDA797}|Default">
   <MonoDevelop.Ide.ItemProperties.AdministrationAssignment PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AdministrationAssignment/Factory/XMLDBFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AdministrationAssignment/Factory/AbstractFactory.cs">
     <Files>
-      <File FileName="AdministrationAssignment/Factory/AbstractFactory.cs" Line="18" Column="73" />
+      <File FileName="AdministrationAssignment/Factory/AbstractFactory.cs" Line="23" Column="2" />
       <File FileName="AdministrationAssignment/App.config" Line="7" Column="42" />
-      <File FileName="AdministrationAssignment/Main/Program.cs" Line="41" Column="10" />
+      <File FileName="AdministrationAssignment/Main/Program.cs" Line="24" Column="46" />
       <File FileName="AdministrationAssignment/Main/StaticData.cs" Line="11" Column="42" />
-      <File FileName="AdministrationAssignment/Factory/XMLDBFactory.cs" Line="15" Column="30" />
+      <File FileName="AdministrationAssignment/Factory/XMLDBFactory.cs" Line="12" Column="34" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="AdministrationAssignment" expanded="True">
-            <Node name="AdministrationAssignment" expanded="True">
-              <Node name="Factory" expanded="True">
-                <Node name="XMLDBFactory.cs" selected="True" />
-              </Node>
-              <Node name="Main" expanded="True" />
-            </Node>
-          </Node>
+          <Node name="AdministrationAssignment" expanded="True" selected="True" />
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
