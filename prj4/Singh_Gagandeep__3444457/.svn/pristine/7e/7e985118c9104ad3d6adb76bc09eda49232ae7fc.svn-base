@@ -1,0 +1,4 @@
+import { PrjblueApplication } from './application';
+import { ApplicationConfig } from '@loopback/core';
+export { PrjblueApplication };
+export declare function main(options?: ApplicationConfig): Promise<PrjblueApplication>;

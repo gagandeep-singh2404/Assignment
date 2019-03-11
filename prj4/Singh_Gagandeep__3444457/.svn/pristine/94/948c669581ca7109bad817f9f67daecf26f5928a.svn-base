@@ -1,0 +1,6 @@
+import { DefaultCrudRepository } from '@loopback/repository';
+import { Projects } from '../models';
+import { DbDataSource } from '../datasources';
+export declare class ProjectsRepository extends DefaultCrudRepository<Projects, typeof Projects.prototype.number> {
+    constructor(dataSource: DbDataSource);
+}

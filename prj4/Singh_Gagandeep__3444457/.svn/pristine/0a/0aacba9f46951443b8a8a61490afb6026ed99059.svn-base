@@ -1,0 +1,7 @@
+import { DepartmentRepository } from '../repositories';
+import { Projects } from '../models';
+export declare class DepartmentProjectsController {
+    protected departmentRepo: DepartmentRepository;
+    constructor(departmentRepo: DepartmentRepository);
+    create(id: number, Projects: Projects): Promise<Projects>;
+}

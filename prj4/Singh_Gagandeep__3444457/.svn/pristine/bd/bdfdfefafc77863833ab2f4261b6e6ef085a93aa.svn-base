@@ -1,0 +1,9 @@
+import { Entity } from '@loopback/repository';
+import { Projects } from './projects.model';
+export declare class Department extends Entity {
+    number?: number;
+    name: string;
+    location?: string;
+    projects?: Projects[];
+    constructor(data?: Partial<Department>);
+}

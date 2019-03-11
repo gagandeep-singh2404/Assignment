@@ -1,0 +1,9 @@
+import { Getter } from '@loopback/core';
+import { DefaultCrudRepository, HasManyRepositoryFactory, juggler } from '@loopback/repository';
+import { Projects, Department } from '../models';
+import { ProjectsRepository } from './projects.repository';
+export declare class DepartmentRepository extends DefaultCrudRepository<Department, typeof Department.prototype.number> {
+    protected projectRepositoryGetter: Getter<ProjectsRepository>;
+    readonly projects: HasManyRepositoryFactory<Projects, typeof Department.prototype.number>;
+    constructor(dataSource: juggler.DataSource, projectRepositoryGetter: Getter<ProjectsRepository>);
+}
