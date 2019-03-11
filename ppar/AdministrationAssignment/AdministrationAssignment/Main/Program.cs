@@ -21,6 +21,7 @@ namespace AdministrationAssignment
         {
             initilizeCommand = new Command() { SpecificAction = InitialzeCommand, Desc = "Initize All important Command" };
             abstractFactory = AbstractFactory.CreateDB();
+            abstractFactory.CreateDBMapper();
         }
         
 

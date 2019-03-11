@@ -26,6 +26,8 @@ namespace AdministrationAssignment.Factory
             }
             catch (InvalidOperationException) { userList = new List<Person>(); }
         }
+
+
         public void CreateUser(Person person)
         {
             userList.Add(person);

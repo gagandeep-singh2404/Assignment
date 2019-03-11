@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define null 0
 #include <string.h> 
+#include <stdlib.h>
 char* mygetenv(const char *name);
 int mysetenv(const char *name, const char *value, int overwrite);
 extern char **environ; 
@@ -11,31 +12,26 @@ int main(int argc, char* argv[], char*env[]){
         return 0;
     }
 
-     char* nu =  mygetenv(*env);
+     char* nu =  mygetenv(argv[1]);
 
-        if (nu == NULL) {
-          printf("nul");
-          for(char* e = nu; e != 0; ++e) {
-          printf("%s",e);
-        }
-      }
     
     return 0;
 }
 
 char* mygetenv(const char *name){
-    for(char** i = environ; *i != 0; ++i)
+    
+    int sizeOfInput = strlen(name);
+    char* copy = (char*)malloc(strlen(name) + 1); 
+    for(char** i = environ; *i != NULL; ++i)
     {
-      char* found = strstr(*i, name);
-      if (found != *i) continue;
-      char copy [strlen(*i)];
-      strcpy(copy, name);
-      if (strcmp(name,strtok(copy,"=")) == 0) {
-        printf("not here");
-        return *i;
-      }  
+      
+      if (strncmp(*i,name,sizeOfInput)== 0) {
+              printf("Es hat geklappt");
+              strcpy(copy, *i);
+              printf("\n %s", *i);
+              return copy;
+      }
     }
-    printf("jo vergess es");
 return NULL;
 }
 

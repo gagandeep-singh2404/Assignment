@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdministrationAssignment.Factory
 {
@@ -18,7 +15,8 @@ namespace AdministrationAssignment.Factory
 
         public static AbstractFactory CreateDB()
         {
-            Type t = Type.GetType("AdministrationAssignment.Factory" + "." + ConfigurationManager.AppSettings["XML"]);
+            Type t = Type.GetType("AdministrationAssignment.Factory." + ConfigurationManager.AppSettings["XML"]);
+            Console.WriteLine(t.FullName);
             return (AbstractFactory)Activator.CreateInstance(t);
         }
     }

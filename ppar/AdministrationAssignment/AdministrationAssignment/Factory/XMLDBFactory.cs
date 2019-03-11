@@ -10,10 +10,6 @@ namespace AdministrationAssignment.Factory
     public class XMLDBFactory : AbstractFactory
     {
         private IDBMapper mapper;
-        public XMLDBFactory()
-        {
-            CreateDBMapper();
-        }
 
         public override void CreateDBMapper()
         {
