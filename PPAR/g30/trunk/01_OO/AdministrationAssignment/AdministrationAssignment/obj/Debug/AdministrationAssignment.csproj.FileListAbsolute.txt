@@ -1,0 +1,7 @@
+C:\Users\GAGANDEEP\Desktop\AdministrationAssignment\AdministrationAssignment\obj\Debug\AdministrationAssignment.csprojAssemblyReference.cache
+C:\Users\GAGANDEEP\Desktop\AdministrationAssignment\AdministrationAssignment\obj\Debug\AdministrationAssignment.csproj.CoreCompileInputs.cache
+C:\Users\GAGANDEEP\Desktop\AdministrationAssignment\AdministrationAssignment\bin\Debug\AdministrationAssignment.exe.config
+C:\Users\GAGANDEEP\Desktop\AdministrationAssignment\AdministrationAssignment\bin\Debug\AdministrationAssignment.exe
+C:\Users\GAGANDEEP\Desktop\AdministrationAssignment\AdministrationAssignment\bin\Debug\AdministrationAssignment.pdb
+C:\Users\GAGANDEEP\Desktop\AdministrationAssignment\AdministrationAssignment\obj\Debug\AdministrationAssignment.exe
+C:\Users\GAGANDEEP\Desktop\AdministrationAssignment\AdministrationAssignment\obj\Debug\AdministrationAssignment.pdb

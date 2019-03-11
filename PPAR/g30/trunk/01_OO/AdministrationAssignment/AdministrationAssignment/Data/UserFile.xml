@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ArrayOfPerson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Person xsi:type="Lecturer">
+    <ID>1</ID>
+    <Firstname>asjdbnajd</Firstname>
+    <Lastname>asdjknasikdn</Lastname>
+    <Nationality>asdjansdjn</Nationality>
+    <Email>askjdnasdn@fontys.nl</Email>
+    <Phonenumber>1231233</Phonenumber>
+    <LecturersAbbreviation>asdad</LecturersAbbreviation>
+    <DateStarted>31-12-1990</DateStarted>
+  </Person>
+  <Person xsi:type="Student">
+    <ID>2</ID>
+    <Firstname>da</Firstname>
+    <Lastname>da</Lastname>
+    <Nationality>da</Nationality>
+    <Email>d@fontys.nl</Email>
+    <StudyProgram>askdmna</StudyProgram>
+    <Cohort>asdkasnd</Cohort>
+    <Class>adada</Class>
+  </Person>
+  <Person xsi:type="Lecturer">
+    <ID>3</ID>
+    <Firstname>asda</Firstname>
+    <Lastname>asdasd</Lastname>
+    <Nationality>dad</Nationality>
+    <Email>asd@fontys.nl</Email>
+    <Phonenumber>21313</Phonenumber>
+    <LecturersAbbreviation>sad</LecturersAbbreviation>
+    <DateStarted>31-12-2009</DateStarted>
+  </Person>
+</ArrayOfPerson>
