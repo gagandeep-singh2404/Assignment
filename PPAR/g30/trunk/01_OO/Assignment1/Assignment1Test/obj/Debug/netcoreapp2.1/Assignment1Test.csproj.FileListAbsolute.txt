@@ -1,0 +1,17 @@
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/xunit.runner.reporters.netcoreapp10.dll
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/xunit.runner.utility.netcoreapp10.dll
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/Assignment1Test.deps.json
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/Assignment1Test.runtimeconfig.json
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/Assignment1Test.runtimeconfig.dev.json
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/Assignment1Test.dll
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/Assignment1Test.pdb
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/Assignment1.dll
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/bin/Debug/netcoreapp2.1/Assignment1.pdb
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/obj/Debug/netcoreapp2.1/Assignment1Test.csprojAssemblyReference.cache
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/obj/Debug/netcoreapp2.1/Assignment1Test.csproj.CoreCompileInputs.cache
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/obj/Debug/netcoreapp2.1/Assignment1Test.AssemblyInfoInputs.cache
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/obj/Debug/netcoreapp2.1/Assignment1Test.AssemblyInfo.cs
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/obj/Debug/netcoreapp2.1/Assignment1Test.csproj.CopyComplete
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/obj/Debug/netcoreapp2.1/Assignment1Test.dll
+/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1Test/obj/Debug/netcoreapp2.1/Assignment1Test.pdb

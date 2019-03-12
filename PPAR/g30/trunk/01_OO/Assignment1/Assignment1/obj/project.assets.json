@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/gagandeepsingh/Documents/fontys/3semester/subject/PPAR/g30/trunk/01_OO/Assignment1/Assignment1/Assignment1.csproj",
+      "projectUniqueName": "/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1/Assignment1.csproj",
       "projectName": "Assignment1",
-      "projectPath": "/Users/gagandeepsingh/Documents/fontys/3semester/subject/PPAR/g30/trunk/01_OO/Assignment1/Assignment1/Assignment1.csproj",
+      "projectPath": "/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1/Assignment1.csproj",
       "packagesPath": "/Users/gagandeepsingh/.nuget/packages/",
-      "outputPath": "/Users/gagandeepsingh/Documents/fontys/3semester/subject/PPAR/g30/trunk/01_OO/Assignment1/Assignment1/obj/",
+      "outputPath": "/Users/gagandeepsingh/Documents/GitHub/Assignment/PPAR/g30/trunk/01_OO/Assignment1/Assignment1/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
