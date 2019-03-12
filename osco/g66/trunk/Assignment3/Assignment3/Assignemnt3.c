@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
 #include<stdio.h>
 
 
@@ -23,14 +25,19 @@ typedef struct std {
 int main(void) {
 	struct std student;
 	
-	printf("Please enter the first and Lastname of the Student: You have to add Whitespace");
-	scanf_s("%s" "%s",&student.firstname, &student.lastname);
-	printf("\nPlese enter the studentnumber");
+	printf("Please enter the firstname: ");
+	scanf("%s",&student.firstname);
+	printf("Please enter the lastname: ");
+	scanf("%s",&student.lastname);
+	printf("%s", student.firstname);
+	printf("Plese enter the studentnumber: ");
 	scanf("%ld",&student.studentnumber);
-	printf("\nPlease enter course Name ");
-	scanf_s("%s",&student.course1.coursename);
-	printf("\nPlease enter the course ID and his GPA");
-	scanf("%ld %f",&student.course1.courseId, &student.course1.gpa);
+	printf("Please enter course Name: ");
+	scanf("%s",&student.course1.coursename);
+	printf("Please enter the course ID: ");
+	scanf("%ld", &student.course1.courseId);
+	printf("Please enter the course GPA: ");
+	//scanf("%f", &student.course1.gpa);
+	printf("HALLO");
 
-	printf("%s",student.firstname);
 }
