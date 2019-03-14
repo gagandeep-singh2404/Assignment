@@ -4,12 +4,8 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Assignment1" expanded="True">
-            <Node name="Assignment1" expanded="True">
-              <Node name="CarBrands" expanded="True" />
-              <Node name="Main" expanded="True" />
-            </Node>
             <Node name="Assignment1Test" expanded="True">
-              <Node name="UnitTest1.cs" selected="True" />
+              <Node name="Dependencies" selected="True" />
             </Node>
           </Node>
         </State>

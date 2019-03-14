@@ -5,6 +5,9 @@
 char* mygetenv(const char *name);
 int mysetenv(const char *name, const char *value, int overwrite);
 extern char **environ; 
+
+
+
 int main(int argc, char* argv[], char*env[]){
     
     if (argc < 2) {
@@ -19,22 +22,19 @@ int main(int argc, char* argv[], char*env[]){
 }
 
 char* mygetenv(const char *name){
-    
-    int sizeOfInput = strlen(name);
-    char* copy = (char*)malloc(strlen(name) + 1); 
-    for(char** i = environ; *i != NULL; ++i)
-    {
-      
-      if (strncmp(*i,name,sizeOfInput)== 0) {
-              printf("Es hat geklappt");
-              strcpy(copy, *i);
-              printf("\n %s", *i);
-              return copy;
+    int length = strlen(name);
+    for(char** i = environ; *i != NULL; ++i){
+      if (strncmp(*i,name,length)== 0) return *i;
       }
-    }
-return NULL;
+    return NULL;
 }
 
-int mysetenv(const char *name, const char *value, int overwrite){
-return 0;
+int mysetenv(const char *envName, const char *value, int overwrite){
+    int length = strlen(envName);
+    
+    if (overwrite) {
+       for(char** i = environ; *i != NULL; ++i){
+          if (strncmp(*i,name,length)== 0) return *i;
+      }
+    }
 }

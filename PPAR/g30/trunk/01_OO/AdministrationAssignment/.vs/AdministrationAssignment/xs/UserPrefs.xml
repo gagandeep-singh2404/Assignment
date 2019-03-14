@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{2E1F1050-B279-4E28-AA60-B29D69CDA797}|Default">
+  <MonoDevelop.Ide.ItemProperties.AdministrationAssignment PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="AdministrationAssignment" expanded="True">
+            <Node name="AdministrationAssignment" expanded="True">
+              <Node name="Factory" expanded="True" />
+              <Node name="Main" expanded="True">
+                <Node name="StaticData.cs" selected="True" />
+              </Node>
+              <Node name="Properties" expanded="True" />
+              <Node name="User" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
