@@ -4,13 +4,8 @@
 int main(void) {
 
 	student *initStudent1 = init("Hallo");
-	student *newStudent = add();
-	print(initStudent1);
-	print(newStudent);
-	printf("\n");
-	copyRecordVariable(initStudent1,newStudent);
-	print(initStudent1);
-	print(newStudent);
-    //print(newStudent);
-	//addStudentToTextFile();
+	//student *newStudent = add();
+	//exchangeRecordVariable(initStudent1,newStudent);
+	addStudentToFile();
+	//copyRecordVariable(initStudent1,newStudent);
 }

@@ -23,6 +23,7 @@ student* init(char* firstname){
 	
 	return newStudent;
 }
+
     student *add(){
     student *newStudent = (student *) malloc(sizeof(student));
 	course *newCourse = (course *) malloc(sizeof(course));
@@ -58,10 +59,16 @@ student* init(char* firstname){
 		printf("\nGPA: %f\n",std->course1.gpa);
     }
 
-	void addStudentToTextFile(){
+	void addStudentToFile(){
 		student *newStudent = (student *) malloc(sizeof(student));
 		FILE *file;
-		file = fopen("student.txt","w");
+		printf("Binary or Textfile: (B|T)");
+		char textOrBinary = tolower(getchar());
+		if (textOrBinary == '\n') textOrBinary = tolower(getchar());
+		
+		if (textOrBinary == 'b') {
+		file = fopen("student.txt","wb");
+		} else if(textOrBinary == 't') {file = fopen("student.txt","w");}
 
 		if (!file) {
 			printf("There is no file");
@@ -71,10 +78,14 @@ student* init(char* firstname){
 		while(1){
 			
 		 newStudent = add();
-		
-		fprintf(file,"%s\t%s\t%ld\t%s\t%ld\t%f\n",newStudent->firstname,newStudent->lastname,newStudent->studentnumber
+		if (textOrBinary == 't') {
+			fprintf(file,"%s\t%s\t%ld\t%s\t%ld\t%f\n",newStudent->firstname,newStudent->lastname,newStudent->studentnumber
 												,newStudent->course1.coursename,newStudent->course1.courseId,newStudent->course1.gpa);
 
+		}else{ 
+			fwrite(newStudent, sizeof(student), 1, file);
+			}
+		
 			printf("You want to add another student ? (Y|N)");
 			char input = tolower(getchar());
 			
@@ -89,4 +100,25 @@ student* init(char* firstname){
 	void copyRecordVariable(student* std1, student* std2){
 		*std2  = *std1;
 
+	}
+
+	void exchangeRecordVariable(student* std1, student* std2){
+		student *temp = (student *) malloc(sizeof(student));
+
+		*temp = *std1; 
+		*std1 = *std2;
+		*std2 = *temp;
+	}
+	void addStudentToBinaryFile(student *std1){
+	FILE *file;
+
+	
+	if (!file)
+		{
+			printf("Unable to open file!");
+			return;
+		}
+
+		
+		fclose(file);
 	}

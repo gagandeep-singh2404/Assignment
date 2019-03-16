@@ -39,12 +39,15 @@ void print(student *std);
 	void copyRecordVariable(student *std1,student* std2);
 
 /*
-	add a student in a textfile
+	add a student in a textfile or binary
 */
-	void addStudentToTextFile();
+	void addStudentToFile();
 
 /*
 	exchange two variables values
 */
-	exchangeRecordVariable(student *std1, student * std2);
+	void exchangeRecordVariable(student *std1, student * std2);
+
+
+
 #endif
