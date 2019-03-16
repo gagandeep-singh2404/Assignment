@@ -79,14 +79,8 @@ student* init(char* firstname){
 			char input = tolower(getchar());
 			
 			if (input == '\n') input = tolower(getchar());
-			if (input == 'n') break;
+			if ( input == 'n') break;
 			
 		}
 		fclose(file);
-	}
-
-
-	void copyRecordVariable(student* std1, student* std2){
-		*std2  = *std1;
-
 	}
