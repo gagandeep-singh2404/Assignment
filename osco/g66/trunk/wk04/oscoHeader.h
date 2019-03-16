@@ -48,6 +48,10 @@ void print(student *std);
 */
 	void exchangeRecordVariable(student *std1, student * std2);
 
+/*
+	sum up a integer array	
+*/
 
+	void sum(int [],int size);
 
 #endif

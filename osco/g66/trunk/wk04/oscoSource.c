@@ -109,16 +109,9 @@ student* init(char* firstname){
 		*std1 = *std2;
 		*std2 = *temp;
 	}
-	void addStudentToBinaryFile(student *std1){
-	FILE *file;
+	void sum(int array[], int size){
+		int sum = 0;
+		for(int i = 0; i < size; i++) sum += array[i];
 
-	
-	if (!file)
-		{
-			printf("Unable to open file!");
-			return;
-		}
-
-		
-		fclose(file);
+		printf("The sum: %d\n",sum);	
 	}
