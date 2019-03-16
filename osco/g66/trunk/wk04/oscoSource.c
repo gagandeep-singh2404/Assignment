@@ -4,8 +4,26 @@
 	#include <stdlib.h>
 	#include <stdio.h>
 	#include <string.h>
+	#include <ctype.h>
 
-    student *init(){
+
+student* init(char* firstname){
+   	student *newStudent = (student *) malloc(sizeof(student));
+	course *newCourse = (course *) malloc(sizeof(course));
+
+	strcpy(newStudent->firstname,firstname);
+	strcpy(newStudent->lastname,"Pudding");
+	newStudent->studentnumber = 343434;
+	
+	strcpy(newCourse->coursename,"SE");
+	newCourse->courseId = 5;
+	newCourse->gpa = 9.0;
+
+	newStudent->course1 = *newCourse;
+	
+	return newStudent;
+}
+    student *add(){
     student *newStudent = (student *) malloc(sizeof(student));
 	course *newCourse = (course *) malloc(sizeof(course));
 	printf("Please enter the firstname: ");
@@ -30,7 +48,6 @@
 	return newStudent;
     }
 
-
     void print(student * std){
 
 		printf("Firstname: %s",std->firstname);
@@ -38,7 +55,32 @@
 		printf("\nStudentnumber: %ld",std->studentnumber);
 		printf("\nCoursename: %s",std->course1.coursename);
 		printf("\nCourseID: %ld",std->course1.courseId);
-		printf("\nGPA: %f",std->course1.gpa);
-		
-
+		printf("\nGPA: %f\n",std->course1.gpa);
     }
+
+	void addStudentToTextFile(){
+		student *newStudent = (student *) malloc(sizeof(student));
+		FILE *file;
+		file = fopen("student.txt","w");
+
+		if (!file) {
+			printf("There is no file");
+			return;
+		}
+		
+		while(1){
+			
+		 newStudent = add();
+		
+		fprintf(file,"%s\t%s\t%ld\t%s\t%ld\t%f\n",newStudent->firstname,newStudent->lastname,newStudent->studentnumber
+												,newStudent->course1.coursename,newStudent->course1.courseId,newStudent->course1.gpa);
+
+			printf("You want to add another student ? (Y|N)");
+			char input = tolower(getchar());
+			
+			if (input == '\n') input = tolower(getchar());
+			if ( input == 'n') break;
+			
+		}
+		fclose(file);
+	}

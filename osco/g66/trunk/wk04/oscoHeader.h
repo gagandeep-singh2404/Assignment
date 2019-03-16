@@ -18,12 +18,30 @@ typedef struct std {
 
 }student;
 
+/*
+	creates a predefined Student with one value different
+*/
+
+student* init(char * firstname);
 
 /* 
     creates a student with Input of the Console
 */
-student * init();
+student * add();
 
+/*
+	prints the student
+*/
 void print(student *std);
+/*
+	 copy a record variable to another record variable. 
+*/
+	void copyRecordVariable(student *std);
+
+/*
+	add a student in a textfile
+*/
+
+	void addStudentToTextFile();
 
 #endif

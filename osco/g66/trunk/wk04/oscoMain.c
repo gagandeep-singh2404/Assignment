@@ -3,6 +3,9 @@
 #include "oscoSource.c"
 int main(void) {
 
-	student *newStudent = init();
-    print(newStudent);
+	student *initStudent = init("Hallo");
+	//print(initStudent);
+	//student *newStudent = add();
+    //print(newStudent);
+	addStudentToTextFile();
 }
