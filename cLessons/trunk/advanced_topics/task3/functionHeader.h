@@ -2,10 +2,6 @@
 #define _FUNCTIONHEADER_
 
 #include <stdbool.h>
-
-
-
-
 /*
     initialize the Index structure 
     set the sizes for Overflow and Bucket

@@ -6,46 +6,19 @@
 
 
 void init(){
+    printf("wo1\n");
+    *myIndex->bucket = (Bucket*)malloc(IndexSize*sizeof(Bucket*));
+    printf("wo2\n");
+    *myIndex->overflow = malloc(OverflowSize*sizeof(OverflowSize));
     
-
     for(int i = 0; i < IndexSize; i++)
     {
-        myIndex[i]->id = NULL;
+        myIndex->bucket[i] = malloc(BucketSize*sizeof(Bucket));
     }
-
-   
     
-    printf("ich bin hier\n");
 }
 
-bool add(int id){
-
-    if (id < 0 || id > IndexSize) {
-        printf("Id (%d) is not valid!\n",id);
-        return 0;
-    }
-    int loops =0;
-    for(int i = 0; i < BucketSize; i++,loops++)
-    {
-        if (myIndex[id]->bucket[i] != NULL) {
-            printf("Es hat geklappt Bucket");
-            addObject(myIndex[id]->bucket[i]);
-         return 1;
-        }
-        loops++;
-    }
-
-    if (loops == BucketSize) {
-        loops = 0;
-        for(int i = 0; i < OverflowSize; i++)
-        {
-            if (myIndex[id]->overflow[i] != NULL) {
-                printf("Es hat geklappt Overflow");
-                return 1;
-            }
-        }
-        
-    }
+bool add(){
     printf("Wird geaddet");
 return 0;
 }

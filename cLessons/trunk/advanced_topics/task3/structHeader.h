@@ -2,9 +2,9 @@
 #ifndef _STRUCTHEADER_
 #define _STRUCTHEADER_
 
-#define IndexSize 1
-#define OverflowSize 1
-#define BucketSize 1
+#define IndexSize 10
+#define OverflowSize 10
+#define BucketSize 18
 /*
     An Bucket structure. 
     Contains: 
@@ -26,25 +26,11 @@
     2. array of structs (bucket)
 */
 
- /*
-    An index structure. 
-    Contains: 
-    1. array of structs (bucket)
- 
- */   
-    typedef struct over_str{
-        int id;
-        char *name;
-        char* address;
-    }Overflow;
-    
-
     typedef struct index_str{
-        int id;
         Bucket *bucket[BucketSize];
-        Overflow *overflow[OverflowSize];
+        Bucket *overflow[OverflowSize];
     }Index;
     
 
-    Index *myIndex[IndexSize];
+    Index *myIndex;
 #endif
