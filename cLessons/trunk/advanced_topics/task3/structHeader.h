@@ -2,9 +2,9 @@
 #ifndef _STRUCTHEADER_
 #define _STRUCTHEADER_
 
-#define IndexSize 2
-#define OverflowSize 2
-#define BucketSize 2
+#define IndexSize 1
+#define OverflowSize 1
+#define BucketSize 1
 /*
     An Bucket structure. 
     Contains: 
@@ -41,10 +41,10 @@
 
     typedef struct index_str{
         int id;
-        Bucket bucket[BucketSize];
-        Overflow overflow[OverflowSize];
+        Bucket *bucket[BucketSize];
+        Overflow *overflow[OverflowSize];
     }Index;
     
 
-    Index myIndex[IndexSize];
+    Index *myIndex[IndexSize];
 #endif

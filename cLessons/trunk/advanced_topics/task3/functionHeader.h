@@ -17,7 +17,7 @@ void init();
     store new Objects into the Bucket or Overflow
     Also add to a json file
 */
-bool addInfo();
+bool addInfo(int id);
 
 /*
     delete a object from the Bucket or Overflow
@@ -30,5 +30,5 @@ bool myDelete(int id);
 */
 bool myRead(int id);
 
-
+void addObject(Bucket * bucket);
 #endif
