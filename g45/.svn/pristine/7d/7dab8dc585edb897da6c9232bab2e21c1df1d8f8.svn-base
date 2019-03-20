@@ -1,0 +1,90 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package appointmentplanner;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class TimeTest {
+
+    public TimeTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    /**
+     *
+     * tests the method correctNegativeTime
+     *
+     *
+     */
+    @Test
+    public void getCorrectNegativeTimeTest() {
+
+        Time firstNegativeTime = Time.getProperTime(-5, 40);
+        Time firstExpected = new Time(0, 40);
+        assertEquals(firstExpected, firstNegativeTime);
+
+        Time secondNegativeTime = Time.getProperTime(-5, -59);
+        Time secondExpected = new Time(23, 01);
+        assertEquals(secondExpected, secondNegativeTime);
+        /*
+        Time thirdNegativeTime = Time.getProperTime(5, -45);
+        Time thirdExpected = new Time(4, 15);
+        assertEquals(thirdExpected, thirdNegativeTime);
+         */
+        
+        /*
+        Time fourthNegtativeTime = Time.getProperTime(-4, 77);
+        Time fourthExpected = new Time(22, 43);
+        assertEquals(fourthExpected, fourthNegtativeTime);
+*/
+
+    }
+
+    /**
+     * getProperTimeTest tests if the time is properly corrected
+     *
+     *
+     * public void getProperTimeTest() { Time firstTime = new Time(4, 50); Time
+     * firstExcpected = new Time(4, 50);
+     *
+     * Time secondTime = new Time(5, 60); Time secondExpected = new Time(6, 00);
+     *
+     * Time thirdTime = new Time(23, 60); Time thirdExpected = new Time(0, 00);
+     *
+     * assertEquals(firstExcpected, firstTime); assertEquals(secondExpected,
+     * secondTime); assertEquals(thirdExpected, thirdTime);
+     *
+     * }
+     *
+     * public void addTimeTest() { Time firstTime = new Time(4, 50); Time
+     * secondTime = new Time(5, 60); }
+     *
+     */
+}

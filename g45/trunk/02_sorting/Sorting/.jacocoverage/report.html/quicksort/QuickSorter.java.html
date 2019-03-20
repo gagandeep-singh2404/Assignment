@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>QuickSorter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Sorting&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">quicksort</a> &gt; <span class="el_source">QuickSorter.java</span></div><h1>QuickSorter.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package quicksort;
+
+import java.util.Comparator;
+import java.util.Random;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class QuickSorter&lt;E&gt; implements Sort {
+
+<span class="fc" id="L19">    private int counter = 0;</span>
+<span class="fc" id="L20">    private Node&lt;E&gt; head = new Node&lt;&gt;(null);</span>
+<span class="fc" id="L21">    private Node&lt;E&gt; tail = new Node&lt;&gt;(null);</span>
+    private Comparator&lt;E&gt; com;
+
+    private class Node&lt;E&gt; {
+
+        private E item;
+        private Node&lt;E&gt; next;
+        private Node&lt;E&gt; prev;
+
+<span class="fc" id="L30">        public Node(E item) {</span>
+<span class="fc" id="L31">            this.item = item;</span>
+<span class="fc" id="L32">            this.next = null;</span>
+<span class="fc" id="L33">        }</span>
+
+<span class="fc" id="L35">        public Node(E item, Node&lt;E&gt; next, Node&lt;E&gt; prev) {</span>
+<span class="fc" id="L36">            this.item = item;</span>
+<span class="fc" id="L37">            this.prev = prev;</span>
+<span class="fc" id="L38">            this.next = next;</span>
+<span class="fc" id="L39">        }</span>
+    }
+
+<span class="fc" id="L42">    public QuickSorter(E[] e) {</span>
+
+<span class="fc" id="L44">        head.next = new Node&lt;&gt;(null);</span>
+<span class="fc" id="L45">        Node&lt;E&gt; nodeList = head.next;</span>
+<span class="fc" id="L46">        Node&lt;E&gt; prev = head;</span>
+
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (int i = 0; i &lt; e.length; i++) {</span>
+<span class="fc" id="L49">            nodeList = new Node&lt;E&gt;(e[i], this.tail, prev);</span>
+
+<span class="fc" id="L51">            prev.next = nodeList;</span>
+<span class="fc" id="L52">            prev = nodeList;</span>
+
+<span class="fc" id="L54">            this.tail.prev = nodeList;</span>
+<span class="fc" id="L55">            nodeList = nodeList.next;</span>
+        }
+<span class="fc" id="L57">    }</span>
+
+    public int getSize() {
+<span class="fc" id="L60">        Node&lt;E&gt; temp = head.next;</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (; temp.next != null; temp = temp.next) {</span>
+<span class="fc" id="L62">            counter++;</span>
+        }
+<span class="fc" id="L64">        return counter;</span>
+    }
+
+  
+    @Override
+    public Queue sort(Comparator comparator) {
+<span class="fc" id="L70">        com = comparator;</span>
+<span class="fc" id="L71">        Queue&lt;E&gt; result = new Queue();</span>
+<span class="fc" id="L72">        int size = getSize();</span>
+
+        // switch to check the size of the double linked list
+<span class="fc bfc" id="L75" title="All 4 branches covered.">        switch (size) {</span>
+            case 1:
+<span class="fc" id="L77">                result.put(head.next.item);</span>
+            case 0:
+<span class="fc" id="L79">                return result;</span>
+            case 2:
+<span class="fc" id="L81">                this.compareTwoItems(head);</span>
+<span class="fc" id="L82">                result.put(head.next.item);</span>
+<span class="fc" id="L83">                result.put(head.next.next.item);</span>
+<span class="fc" id="L84">                return result;</span>
+         
+                // first get the pivot
+            default:
+<span class="fc" id="L88">                Node&lt;E&gt; p = this.getPivot(size, head.next, tail.prev);</span>
+<span class="fc" id="L89">                this._quickSort(head.next, p);</span>
+                break;
+        }
+<span class="fc" id="L92">        return getQueue(result);</span>
+    }
+    /**
+    * recursive _quicksort method 
+    * @param firstNode 
+    * @param lastNode 
+    */
+    private void _quickSort(Node&lt;E&gt; firstNode, Node&lt;E&gt; lastNode) {
+<span class="pc bpc" id="L100" title="1 of 4 branches missed.">        if (firstNode == null || isBeforeOrEqual(lastNode, firstNode))</span>
+<span class="fc" id="L101">            return;</span>
+
+<span class="fc" id="L103">        Node&lt;E&gt; pivot = lastNode, smaller = firstNode.prev, bigger = lastNode;</span>
+<span class="fc" id="L104">        Node&lt;E&gt; exLeft = smaller, exRight = bigger, tempNode;</span>
+
+        while (true) {
+
+            // go left to right 
+            do {
+<span class="fc" id="L110">                smaller = smaller.next;</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">            } while (isLess(smaller, pivot));</span>
+
+            // go right to left
+            do {
+<span class="fc bfc" id="L115" title="All 2 branches covered.">                if (bigger == firstNode) break;</span>
+<span class="fc" id="L116">                bigger = bigger.prev;</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            } while (isLess(pivot, bigger));</span>
+
+            // 
+<span class="fc bfc" id="L120" title="All 2 branches covered.">            if (isBeforeOrEqual(bigger, smaller)) break;</span>
+
+<span class="fc" id="L122">            exchange(smaller, bigger);</span>
+
+            // check if pivot equals smaller
+<span class="fc bfc" id="L125" title="All 2 branches covered.">            if (isEqual(pivot, smaller)) { exLeft = exLeft.next; exchange(exLeft, smaller); }</span>
+
+            // check if pivot equals bigger i 
+<span class="fc bfc" id="L128" title="All 2 branches covered.">            if (isEqual(pivot, bigger)) { exRight = exRight.prev; exchange(exRight, bigger);}</span>
+
+        }
+        // out of the loop swap lastNode and smaller so you can start with the 3 way partioning 
+        // we are changing here smaller and bigger because it could be that lo and hi are on the same Node, 
+
+<span class="fc" id="L134">        exchange(smaller, lastNode);</span>
+<span class="fc" id="L135">        bigger = smaller.prev;</span>
+<span class="fc" id="L136">        smaller = smaller.next;</span>
+
+        // here we are swapping all items which are equals to pivot in middle from the left side
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        for (tempNode = firstNode; tempNode != exLeft.next; tempNode = tempNode.next, bigger = bigger.prev) {</span>
+<span class="fc" id="L140">            this.exchange(tempNode, bigger);</span>
+        }
+        // here too from the right side 
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        for (tempNode = lastNode.prev; tempNode != exRight.prev; tempNode = tempNode.prev, smaller = smaller.next) {</span>
+<span class="fc" id="L144">            this.exchange(tempNode, smaller);</span>
+        }
+        
+<span class="fc" id="L147">        _quickSort(firstNode, bigger);</span>
+<span class="fc" id="L148">        _quickSort(smaller, lastNode);</span>
+
+<span class="fc" id="L150">    }</span>
+
+    /**
+     * first check if mediumNode is smaller than lastNode
+     * mediumNode is smaller than firstNode
+     * lastNode is smaller than firstNode
+     * @param size size of the noddList
+     * @param com
+     * @return pivot
+     */
+    
+    private Node&lt;E&gt; getPivot(int size, Node&lt;E&gt; firstNode, Node&lt;E&gt; lastNode) {
+<span class="fc" id="L162">        Node&lt;E&gt; mediumNode = head;</span>
+        // get The Middle Value of the List
+<span class="fc bfc" id="L164" title="All 2 branches covered.">        for (int i = 0; i &lt; (size / 2); i++) {</span>
+<span class="fc" id="L165">            mediumNode = mediumNode.next;</span>
+        }
+
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        if (isLess(mediumNode, lastNode)) this.exchange(mediumNode, lastNode);</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">        if (isLess(mediumNode, firstNode)) this.exchange(firstNode, mediumNode);</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        if (isLess(lastNode, firstNode)) this.exchange(firstNode, lastNode);</span>
+
+<span class="fc" id="L172">        return lastNode;</span>
+    }
+
+    // exhange two items 
+    private void exchange(Node&lt;E&gt; sm, Node&lt;E&gt; bi) {
+<span class="fc" id="L177">        E temp = sm.item;</span>
+<span class="fc" id="L178">        sm.item = bi.item;</span>
+<span class="fc" id="L179">        bi.item = temp;</span>
+
+<span class="fc" id="L181">    }</span>
+
+    // just comparing two nodes
+    private void compareTwoItems(Node&lt;E&gt; node) {
+<span class="fc bfc" id="L185" title="All 2 branches covered.">        if (this.com.compare(node.next.next.item, node.next.item) &lt; 0)</span>
+<span class="fc" id="L186">            this.exchange(node.next.next, node.next);</span>
+<span class="fc" id="L187">    }</span>
+
+    // check if first node is smaller than second node
+    private boolean isLess(Node&lt;E&gt; first, Node&lt;E&gt; second) {
+<span class="fc bfc" id="L191" title="All 2 branches covered.">        return this.com.compare(first.item, second.item) &lt; 0;</span>
+    }
+
+    // check of firstnode is equal to second node 
+    private boolean isEqual(Node&lt;E&gt; first, Node&lt;E&gt; second) {
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        return this.com.compare(first.item, second.item) == 0;</span>
+    }
+
+    // check if nodeOne is before nodeTwo or equal
+    private boolean isBeforeOrEqual(Node&lt;E&gt; nodeOne, Node&lt;E&gt; nodeTwo) {
+<span class="fc bfc" id="L201" title="All 4 branches covered.">        return nodeOne == nodeTwo || nodeOne.next == nodeTwo;</span>
+    }
+
+    // return the sorted queue 
+    private Queue&lt;E&gt; getQueue(Queue&lt;E&gt; result) {
+<span class="fc bfc" id="L206" title="All 2 branches covered.">        for (Node&lt;E&gt; temp = head.next; temp.next != null; temp = temp.next) {</span>
+<span class="fc" id="L207">            result.put(temp.item);</span>
+        }
+<span class="fc" id="L209">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

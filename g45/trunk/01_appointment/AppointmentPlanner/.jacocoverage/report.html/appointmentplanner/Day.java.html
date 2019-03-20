@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Day.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;AppointmentPlanner&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">appointmentplanner</a> &gt; <span class="el_source">Day.java</span></div><h1>Day.java</h1><pre class="source lang-java linenums">package appointmentplanner;
+
+//TODO
+import appointmentplanner.util.Priority;
+import appointmentplanner.util.Queue;
+import appointmentplanner.util.Stack;
+import java.util.Arrays;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public final class Day {
+
+<span class="fc" id="L15">    public final static String[] DAYS = {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;};</span>
+<span class="fc" id="L16">    public final static Time DAY_START = new Time(8, 30);</span>
+<span class="fc" id="L17">    public final static Time DAY_END = new Time(17, 30);</span>
+<span class="fc" id="L18">    public final static Time LUNCH_TIME = new Time(12, 30);</span>
+<span class="fc" id="L19">    public final static TimeSpan DAY_PART = new TimeSpan(4, 0);</span>
+<span class="fc" id="L20">    public final static Appointment LUNCH_BREAK = new Appointment(&quot;lunch break&quot;, new TimeSpan(1, 0));</span>
+<span class="fc" id="L21">    public final static TimeSpan StartAndEnd = new TimeSpan(0, 0);</span>
+    public final static String START_DESCRIPTION = &quot;Start of the Day&quot;;
+<span class="fc" id="L23">    public final static Appointment START_OF_DAY = new Appointment(START_DESCRIPTION, StartAndEnd, Priority.NOTOUCH);</span>
+    public final static String END_DESCRIPTION = &quot;End of the Day&quot;;
+<span class="fc" id="L25">    public final static Appointment END_OF_DAY = new Appointment(END_DESCRIPTION, StartAndEnd, Priority.NOTOUCH);</span>
+
+<span class="fc" id="L27">    private final static Time AFTERNOON_START = new Time(13, 30);</span>
+<span class="fc" id="L28">    private Node&lt;Appointment&gt; appointments = null;</span>
+    private final int nr;
+
+    /**
+     * The number of appointments added by the user.
+     */
+    private int nrOfAppointments;
+
+    private static class Node&lt;E&gt; {
+
+        //TODO: implement a linked list inner class.
+        private Node&lt;E&gt; next;
+        private E item;
+
+<span class="fc" id="L42">        public Node(E item) {</span>
+            // head
+<span class="fc" id="L44">            this.item = item;</span>
+<span class="fc" id="L45">            this.next = null;</span>
+<span class="fc" id="L46">        }</span>
+
+//        public Node(E item, Node&lt;E&gt; next) {
+//            this.item = item;
+//            this.next = next;
+//        }
+
+//        int sizeOfDummyHeadList(Node&lt;E&gt; list) {
+//            //TODO: implement a linked list with a dummy head.
+//            Node&lt;E&gt; newList = list;
+//            int counter = 1;
+//
+//            while (newList != null) {
+//                counter++;
+//                newList = newList.next;
+//            }
+//
+//            return counter;
+//        }
+    }
+
+    /**
+     * Creates a Day object with no appointments. A week does not contain a
+     * weekend: no appointments on Saturdays or Sundays. Days of the week are
+     * numbered as follows: Monday = 1 .. Friday = 5.
+     *
+     * @param nr day of the week: Monday = 1 .. Sunday = 7.
+     */
+<span class="fc" id="L74">    public Day(int nr) {</span>
+<span class="fc" id="L75">        this.nr = nr;</span>
+<span class="fc" id="L76">        LUNCH_BREAK.setStart(LUNCH_TIME);</span>
+<span class="fc" id="L77">        this.nrOfAppointments = 0;</span>
+        //TODO initialize datastructure for the appointments.
+
+<span class="fc bfc" id="L80" title="All 4 branches covered.">        if (nr &gt;= 1 &amp;&amp; nr &lt;= 5) {</span>
+
+<span class="fc" id="L82">            END_OF_DAY.setStart(DAY_END);</span>
+<span class="fc" id="L83">            Node&lt;Appointment&gt; dayEnd = new Node&lt;&gt;(END_OF_DAY);</span>
+<span class="fc" id="L84">            START_OF_DAY.setStart(DAY_START);</span>
+<span class="fc" id="L85">            Node&lt;Appointment&gt; dayStart = new Node&lt;&gt;(START_OF_DAY);</span>
+
+<span class="fc" id="L87">            this.appointments = new Node&lt;&gt;(null);</span>
+
+<span class="fc" id="L89">            LUNCH_BREAK.setStart(LUNCH_TIME);</span>
+<span class="fc" id="L90">            this.appointments.next = new Node&lt;&gt;(LUNCH_BREAK);</span>
+<span class="fc" id="L91">            this.appointments.next = dayStart;</span>
+<span class="fc" id="L92">            this.appointments.next.next = new Node&lt;&gt;(LUNCH_BREAK);</span>
+<span class="fc" id="L93">            this.appointments.next.next.next = dayEnd;</span>
+<span class="fc" id="L94">            this.nrOfAppointments++;</span>
+        }
+<span class="fc" id="L96">    }</span>
+
+    /**
+     * Returns the number of appointments on this day, including the lunch break
+     * which is always present.
+     *
+     * @return Number of appointments on this day!
+     */
+    public int getNrOfAppointments() {
+<span class="fc" id="L105">        return this.nrOfAppointments;</span>
+    }
+
+    // METHODS INTRODUCED IN WEEK 3 OF APPOINTMENT PROJECT
+    /**
+     * Returns the name of the day in English. So if number of this day is 1,
+     * the return value is &quot;Monday&quot; etc.
+     *
+     * @return String holding name of this day.
+     */
+    public String getNameOfTheDay() {
+<span class="fc" id="L116">        return DAYS[nr - 1];</span>
+    }
+
+    /**
+     * Checks if an appointment of given duration can be made. Returns true if
+     * an appointment can be made, false otherwise.
+     *
+     * @param duration time length of appointment
+     * @return true if there is a gap of at least the size of duration in the
+     * planning.
+     */
+    public boolean canAddAppointmentOfDuration(TimeSpan duration) {
+
+<span class="fc" id="L129">        TimeGap[] timegaps = this.getAvailableTimeGaps();</span>
+
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        for (TimeGap timegap : timegaps) {</span>
+
+<span class="fc bfc" id="L133" title="All 2 branches covered.">            if (duration.getTimeSpanInMinutes() &lt;= timegap.getLength().getTimeSpanInMinutes()) {</span>
+<span class="fc" id="L134">                return true;</span>
+            }
+        }
+<span class="fc" id="L137">        return false;</span>
+    }
+
+    /**
+     * Adds a new appointment to this day. The description of the appointment
+     * should be unique for this day. Objective is to insert an appointment in
+     * such a way that the list keeps all of its appointments ordered in time.
+     * &lt;pre&gt;
+     * pre:  The start time of the appointment has been set.&lt;br&gt;
+     *       The start time lies outside the time spans of other appointments.
+     *       The appointment does not overlap with existing appointments on this day.
+     * post: The appointment has been added to this day.
+     * &lt;/pre&gt; In case the pre-conditions are not fulfilled, the appointment will
+     * not be added to this day.
+     *
+     * @param appointment start time of the appointment has been set in advance
+     */
+    public void addAppointmentWithStartTimeSet(Appointment appointment) {
+        //TODO
+<span class="fc" id="L156">        Time[] allStartTimes = this.getAvailableStartTimesForAppointmentsOfDuration(appointment.getDuration());</span>
+<span class="fc" id="L157">        Node&lt;Appointment&gt; appointmentNode = new Node(appointment);</span>
+<span class="fc" id="L158">        Node&lt;Appointment&gt; nodeList = appointments;</span>
+
+<span class="fc bfc" id="L160" title="All 2 branches covered.">        if (!verification(appointment)) {</span>
+<span class="fc" id="L161">            return;</span>
+        }
+
+<span class="fc" id="L164">        Time endTime = DAY_START;</span>
+
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        while (nodeList.next != null) {</span>
+
+<span class="fc" id="L168">            Appointment nextAppointment = nodeList.next.item;</span>
+
+<span class="fc bfc" id="L170" title="All 2 branches covered.">            if ((endTime.isBefore(appointment.getStart())</span>
+<span class="fc bfc" id="L171" title="All 4 branches covered.">                    || appointment.getStart().equals(endTime)) &amp;&amp; (appointment.getEnd().isBefore(nextAppointment.getStart())</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">                    || appointment.getEnd().equals(nextAppointment.getStart()))) {</span>
+
+<span class="fc" id="L174">                Node&lt;Appointment&gt; tempNode = nodeList.next;</span>
+<span class="fc" id="L175">                nodeList.next = appointmentNode;</span>
+<span class="fc" id="L176">                appointmentNode.next = tempNode;</span>
+
+<span class="fc" id="L178">                this.nrOfAppointments++;</span>
+
+<span class="fc" id="L180">                return;</span>
+            }
+
+<span class="fc" id="L183">            nodeList = nodeList.next;</span>
+<span class="fc" id="L184">            endTime = nodeList.item.getEnd();</span>
+<span class="fc" id="L185">        }</span>
+<span class="fc" id="L186">    }</span>
+
+    private boolean verification(Appointment appointment) {
+
+<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (appointment.getStart() == null) {</span>
+<span class="fc" id="L191">            System.out.println(&quot;Start Problem&quot;);</span>
+<span class="fc" id="L192">            return false;</span>
+        }
+//        if (appointment.getDuration().getTimeSpanInMinutes() &gt; DAY_PART.getTimeSpanInMinutes()) {
+//            System.out.println(&quot;Duration Problem&quot;);
+//            return false;
+//        }
+<span class="fc bfc" id="L198" title="All 4 branches covered.">        if (appointment.getStart().isBefore(DAY_START) || DAY_END.isBefore(appointment.getEnd())) {</span>
+<span class="fc" id="L199">            System.out.println(&quot;Is Before Problem&quot;);</span>
+<span class="fc" id="L200">            return false;</span>
+
+        }
+<span class="fc bfc" id="L203" title="All 2 branches covered.">        if (this.containsAppointmentWithDescription(appointment.getDescription())) {</span>
+<span class="fc" id="L204">            System.out.println(&quot;Description Problem&quot;);</span>
+<span class="fc" id="L205">            return false;</span>
+        }
+<span class="fc bfc" id="L207" title="All 2 branches covered.">        if (!this.canAddAppointmentOfDuration(appointment.getDuration())) {</span>
+<span class="fc" id="L208">            System.out.println(&quot;Duration is too big&quot;);</span>
+<span class="fc" id="L209">            return false;</span>
+        }
+
+<span class="fc" id="L212">        return true;</span>
+    }
+
+    /**
+     * Adds a new appointment to this day. The method searches a time gap for an
+     * appointment of given duration. This will be done according to the first
+     * fit approach. The description of the appointment should be unique for
+     * this day. The start time will be set by this method, and the appointment
+     * is added to this day. The result is that the list of appointments in this
+     * class is ordered in time.
+     *
+     * @param appointment The appointment that will be added to this day.
+     */
+    public void addAppointment(Appointment appointment) {
+        //TODO
+
+<span class="fc bfc" id="L228" title="All 2 branches covered.">        if (this.canAddAppointmentOfDuration(appointment.getDuration())) {</span>
+<span class="fc" id="L229">            Time[] startTimes = new Time[nrOfAppointments];</span>
+<span class="fc" id="L230">            startTimes = this.getAvailableStartTimesForAppointmentsOfDuration(appointment.getDuration());</span>
+
+<span class="fc" id="L232">            appointment.setStart(startTimes[0]);</span>
+<span class="fc" id="L233">            this.addAppointmentWithStartTimeSet(appointment);</span>
+        }
+
+<span class="fc" id="L236">    }</span>
+
+    /**
+     * Removes the appointment with the given description.
+     *
+     * @param description The description of the appointment for which a search
+     * has to be done.
+     */
+    public void removeAppointment(String description) {
+        //TODO
+
+<span class="fc" id="L247">        Node&lt;Appointment&gt; nextNode = appointments.next;</span>
+
+<span class="fc bfc" id="L249" title="All 2 branches covered.">        while (nextNode.next != null) {</span>
+
+<span class="fc bfc" id="L251" title="All 2 branches covered.">            if (nextNode.next.item.getDescription().endsWith(description)) {</span>
+
+<span class="fc" id="L253">                nextNode.next = nextNode.next.next;</span>
+<span class="fc" id="L254">                this.nrOfAppointments--;</span>
+            }
+
+<span class="fc" id="L257">            nextNode = nextNode.next;</span>
+        }
+
+<span class="fc" id="L260">    }</span>
+
+    /**
+     * Checks if an appointment with given description exists.
+     *
+     * @param description The description of the appointment for which this
+     * method finds out if it exists. Each description is unique for
+     * appointments on the same day.
+     *
+     * @return Returns true if an appointment with given description exists.
+     */
+    public boolean containsAppointmentWithDescription(String description) {
+        //TODO
+<span class="fc" id="L273">        Node&lt;Appointment&gt; listOfAppointments = appointments.next;</span>
+
+        do {
+
+<span class="fc bfc" id="L277" title="All 2 branches covered.">            if (listOfAppointments.item.getDescription().equals(description)) {</span>
+<span class="fc" id="L278">                return true;</span>
+            }
+
+<span class="fc" id="L281">            listOfAppointments = listOfAppointments.next;</span>
+<span class="fc bfc" id="L282" title="All 2 branches covered.">        } while (listOfAppointments != null);</span>
+
+<span class="fc" id="L284">        return false;</span>
+    }
+
+    /**
+     * This method finds all start times that are available on this day for an
+     * appointment of given duration.
+     *
+     * @param duration the requested duration for an appointment
+     * @return an array of start times on which an appointment can be scheduled
+     */
+    public Time[] getAvailableStartTimesForAppointmentsOfDuration(TimeSpan duration) {
+
+<span class="fc" id="L296">        TimeGap[] timegaps = new TimeGap[nrOfAppointments + 1];</span>
+<span class="fc" id="L297">        timegaps = this.getAvailableTimeGaps();</span>
+<span class="fc" id="L298">        Time[] times = new Time[timegaps.length];</span>
+<span class="fc" id="L299">        int counter = 0;</span>
+<span class="fc bfc" id="L300" title="All 2 branches covered.">        for (TimeGap timegap : timegaps) {</span>
+
+<span class="fc bfc" id="L302" title="All 2 branches covered.">            if (duration.getTimeSpanInMinutes() &lt;= timegap.getLength().getTimeSpanInMinutes()) {</span>
+<span class="fc" id="L303">                times[counter++] = timegap.getStart();</span>
+            }
+        }
+<span class="fc" id="L306">        Time[] restTime = Arrays.copyOf(times, counter);</span>
+
+<span class="fc" id="L308">        return restTime;</span>
+    }
+
+    // METHODS INTRODUCED IN WEEK 4 OF APPOINTMENT PROJECT
+    /**
+     * This method gives a list of available time gaps on this day. Each time
+     * gap holds the available time between appointments, and possibly at the
+     * begin and at the end of the day.
+     *
+     * @return an array of TimeGaps containing all available time slots that are
+     * available on this day.
+     */
+    public TimeGap[] getAvailableTimeGaps() {
+        //TODO
+<span class="fc" id="L322">        int counter = 0;</span>
+<span class="fc" id="L323">        TimeGap[] timegaps = new TimeGap[20];</span>
+        TimeGap[] restgap;
+        Time start;
+        Time end;
+<span class="fc" id="L327">        Node&lt;Appointment&gt; currend = appointments.next;</span>
+
+<span class="fc bfc" id="L329" title="All 2 branches covered.">        for (Node&lt;Appointment&gt; i = appointments.next; i.next != null; i = i.next) {</span>
+
+            //System.out.println(i.item.getDescription());
+<span class="fc bfc" id="L332" title="All 2 branches covered.">            if (i.item.getEnd().isBefore(i.next.item.getStart())) {</span>
+<span class="fc" id="L333">                start = i.item.getEnd();</span>
+<span class="fc" id="L334">                end = i.next.item.getStart();</span>
+<span class="fc" id="L335">                timegaps[counter++] = new TimeGap(start, end);</span>
+            }
+
+        }
+<span class="fc" id="L339">        restgap = new TimeGap[counter];</span>
+
+<span class="fc bfc" id="L341" title="All 2 branches covered.">        for (int i = 0; i &lt; counter; i++) {</span>
+<span class="fc" id="L342">            restgap[i] = timegaps[i];</span>
+            // System.out.println(&quot;restgap &quot; + restgap[i].getStart() + &quot; &quot; + restgap[i].getEnd());
+
+        }
+<span class="fc" id="L346">        return restgap;</span>
+    }
+
+    public Queue&lt;Appointment&gt; getAppointments() {
+
+<span class="fc" id="L351">        Queue&lt;Appointment&gt; q = new Queue();</span>
+<span class="fc" id="L352">        Node&lt;Appointment&gt; newNode = appointments;</span>
+
+<span class="fc bfc" id="L354" title="All 2 branches covered.">        while (newNode.next != null) {</span>
+<span class="fc bfc" id="L355" title="All 2 branches covered.">            if (!newNode.next.item.getDescription().equals(END_DESCRIPTION)) {</span>
+<span class="fc bfc" id="L356" title="All 2 branches covered.">                if (!newNode.next.item.getDescription().equals(START_DESCRIPTION)) {</span>
+<span class="fc" id="L357">                    q.put(newNode.next.item);</span>
+                }
+            }
+<span class="fc" id="L360">            newNode = newNode.next;</span>
+        }
+
+<span class="fc" id="L363">        return q;</span>
+    }
+
+    public Stack getAppointmentsOfPriority(Priority priority) {
+<span class="fc" id="L367">        Stack firstStack = new Stack();</span>
+<span class="fc" id="L368">        Stack secondStack = new Stack();</span>
+
+<span class="fc" id="L370">        Node&lt;Appointment&gt; newNode = appointments.next;</span>
+
+<span class="fc bfc" id="L372" title="All 2 branches covered.">        while (newNode.next != null) {</span>
+
+<span class="fc bfc" id="L374" title="All 2 branches covered.">            if (priority.equals(newNode.item.getPriority())) {</span>
+<span class="fc" id="L375">                firstStack.push(newNode.item);</span>
+            }
+<span class="fc" id="L377">            newNode = newNode.next;</span>
+        }
+
+<span class="fc bfc" id="L380" title="All 2 branches covered.">        while (firstStack.size() != 0) {</span>
+
+<span class="fc" id="L382">            secondStack.push(firstStack.pop());</span>
+        }
+
+<span class="fc" id="L385">        return secondStack;</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

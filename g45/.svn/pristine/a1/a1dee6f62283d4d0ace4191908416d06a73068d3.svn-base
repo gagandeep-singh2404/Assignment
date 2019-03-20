@@ -1,0 +1,343 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sort;
+
+import basicsort.InsertionSorter;
+import basicsort.SelectionSorter;
+import heapsort.HeapSorter;
+import java.util.Comparator;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import quicksort.QuickSorter;
+
+/*
+ *
+ * @author gagandeepsingh
+ */
+public class SorttTest {
+
+    public SorttTest() {
+
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    private Character[] charData;
+    private Character[] sortedCharData;
+    private Integer[] integerData;
+    private Integer[] sortedIntegerData;
+
+    private QuickSorter quickSorter;
+    private SelectionSorter selectionSorter;
+    private HeapSorter heapsorter;
+    private InsertionSorter insertionSorter;
+    private static final Comparator<Character> CHAR_C = (c1, c2) -> {
+        return c1 - c2;
+    };
+    private static final Comparator<Integer> Interger_C = (n1, n2) -> {
+        return n1 - n2;
+    };
+    
+    @Test
+    public void testOneElement() {
+        charData = new Character[]{'C'};
+        sortedCharData = charData;
+
+        integerData = new Integer[]{1};
+        sortedIntegerData = integerData;
+
+        selectionSorter = new SelectionSorter(charData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(integerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(charData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(integerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(charData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(integerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+   }
+
+    @Test
+    public void testTwoElements() {
+        charData = new Character[]{'W', 'S'};
+        sortedCharData = new Character[]{'S', 'W'};
+
+        integerData = new Integer[]{1,4};
+        sortedIntegerData = new Integer[]{1, 4};
+
+        selectionSorter = new SelectionSorter(charData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(integerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(charData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(integerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(charData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(integerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+
+        heapsorter = new HeapSorter<>(charData);
+        compareQueueWithArray(heapsorter.sort(CHAR_C), sortedCharData);
+        heapsorter = new HeapSorter<>(integerData);
+        compareQueueWithArray(heapsorter.sort(Interger_C), sortedIntegerData);
+    }
+
+    @Test
+    public void testElementsSorted() {
+        sortedCharData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sortedIntegerData = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22};
+
+        selectionSorter = new SelectionSorter(sortedCharData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(sortedIntegerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(sortedCharData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(sortedIntegerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(sortedCharData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(sortedIntegerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+
+        heapsorter = new HeapSorter<>(sortedCharData);
+        compareQueueWithArray(heapsorter.sort(CHAR_C), sortedCharData);
+        heapsorter = new HeapSorter<>(sortedIntegerData);
+        compareQueueWithArray(heapsorter.sort(Interger_C), sortedIntegerData);
+    }
+
+    @Test
+    public void testSorter() {
+        charData = new Character[]{
+            'P', 'A', 'B', 'X', 'W', 'P', 'P', 'V', 'P', 'D', 'P', 'C', 'Y', 'Z'
+        };
+        sortedCharData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+
+        integerData = new Integer[]{3, 3, 1, 5, 3, 4, 3, 2, 1, 3};
+        sortedIntegerData = new Integer[]{1, 1, 2, 3, 3, 3, 3, 3, 4, 5};
+
+        selectionSorter = new SelectionSorter(charData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(integerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(charData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(integerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(charData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(integerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+
+        heapsorter = new HeapSorter<>(charData);
+        compareQueueWithArray(heapsorter.sort(CHAR_C), sortedCharData);
+        heapsorter = new HeapSorter<>(integerData);
+        compareQueueWithArray(heapsorter.sort(Interger_C), sortedIntegerData);
+
+    }
+
+    @Test
+    public void testSortedReverse() {
+        charData = new Character[]{
+            'Z', 'Y', 'X', 'W', 'V', 'P', 'P', 'P', 'P', 'P', 'D', 'C', 'B', 'A'
+        };
+        sortedCharData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+
+        integerData = new Integer[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        sortedIntegerData = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        selectionSorter = new SelectionSorter(charData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(integerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(charData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(integerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(charData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(integerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+
+        heapsorter = new HeapSorter<>(charData);
+        compareQueueWithArray(heapsorter.sort(CHAR_C), sortedCharData);
+        heapsorter = new HeapSorter<>(integerData);
+        compareQueueWithArray(heapsorter.sort(Interger_C), sortedIntegerData);
+    }
+
+    @Test
+    public void testMiddlesEqual() {
+        charData = new Character[]{
+            'W', 'A', 'B', 'X', 'P', 'P', 'P', 'P', 'P', 'D', 'V', 'C', 'Y', 'Z'
+        };
+        sortedCharData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+
+        integerData = new Integer[]{1, 4, 5, 3, 6, 6, 6, 6, 6, 6, 6, 6, 8, 4, 3, 6, 8};
+        sortedIntegerData = new Integer[]{1, 3, 3, 4, 4, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 8, 8};
+
+        selectionSorter = new SelectionSorter(charData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(integerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(charData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(integerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(charData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(integerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+
+        heapsorter = new HeapSorter<>(charData);
+        compareQueueWithArray(heapsorter.sort(CHAR_C), sortedCharData);
+        heapsorter = new HeapSorter<>(integerData);
+        compareQueueWithArray(heapsorter.sort(Interger_C), sortedIntegerData);
+    }
+
+    @Test
+    public void testEqualsLeft() {
+        charData = new Character[]{
+            'P', 'P', 'P', 'P', 'P', 'W', 'A', 'B', 'X', 'D', 'V', 'C', 'Y', 'Z'
+        };
+        sortedCharData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+
+        integerData = new Integer[]{1, 1, 1, 1, 1, 1, 4, 5, 3, 6, 8, 4, 3, 6, 8};
+        sortedIntegerData = new Integer[]{1, 1, 1, 1, 1, 1, 3, 3, 4, 4, 5, 6, 6, 8, 8};
+
+        selectionSorter = new SelectionSorter(charData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(integerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(charData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(integerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(charData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(integerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+
+        heapsorter = new HeapSorter<>(charData);
+        compareQueueWithArray(heapsorter.sort(CHAR_C), sortedCharData);
+        heapsorter = new HeapSorter<>(integerData);
+        compareQueueWithArray(heapsorter.sort(Interger_C), sortedIntegerData);;
+    }
+
+    @Test
+    public void testEqualsRight() {
+        charData = new Character[]{
+            'W', 'A', 'B', 'X', 'D', 'V', 'C', 'Y', 'Z', 'P', 'P', 'P', 'P', 'P'
+        };
+        sortedCharData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+
+        integerData = new Integer[]{1, 4, 5, 3, 8, 4, 3, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+        sortedIntegerData = new Integer[]{1, 3, 3, 4, 4, 5, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+
+        selectionSorter = new SelectionSorter(charData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(integerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(charData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(integerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(charData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(integerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+
+        heapsorter = new HeapSorter<>(charData);
+        compareQueueWithArray(heapsorter.sort(CHAR_C), sortedCharData);
+        heapsorter = new HeapSorter<>(integerData);
+        compareQueueWithArray(heapsorter.sort(Interger_C), sortedIntegerData);
+    }
+
+    @Test
+    public void testEmpty() {
+        charData = new Character[0];
+        sortedCharData = new Character[0];
+
+        integerData = new Integer[0];
+        sortedIntegerData = new Integer[0];
+
+        selectionSorter = new SelectionSorter(charData);
+        compareQueueWithArray(selectionSorter.sort(CHAR_C), sortedCharData);
+        selectionSorter = new SelectionSorter(integerData);
+        compareQueueWithArray(selectionSorter.sort(Interger_C), sortedIntegerData);
+
+        insertionSorter = new InsertionSorter<>(charData);
+        compareQueueWithArray(insertionSorter.sort(CHAR_C), sortedCharData);
+        insertionSorter = new InsertionSorter<>(integerData);
+        compareQueueWithArray(insertionSorter.sort(Interger_C), sortedIntegerData);
+
+        quickSorter = new QuickSorter<>(charData);
+        compareQueueWithArray(quickSorter.sort(CHAR_C), sortedCharData);
+        quickSorter = new QuickSorter<>(integerData);
+        compareQueueWithArray(quickSorter.sort(Interger_C), sortedIntegerData);
+
+        heapsorter = new HeapSorter<>(charData);
+        compareQueueWithArray(heapsorter.sort(CHAR_C), sortedCharData);
+        heapsorter = new HeapSorter<>(integerData);
+        compareQueueWithArray(heapsorter.sort(Interger_C), sortedIntegerData);
+    }
+
+    private void compareQueueWithArray(Queue q, Object[] a) {
+        for (Object i : a) {
+            assertEquals(i, q.get());
+        }
+    }
+
+}

@@ -1,0 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ * Abstract class for other subclasses
+ *
+ * @author gagandeepsingh
+ */
+public abstract class SuperSort<E> implements Sort<E> {
+
+    protected Node<E> head = new Node<>(null);
+    protected int size = 0;
+
+    public class Node<E> {
+
+        //TODO: implement a linked list inner class.
+        public Node<E> next;
+        public E item;
+
+        public Node(E item) {
+            // head
+            this.item = item;
+            this.next = null;
+        }
+
+    }
+
+    /**
+     * convert a array into a linkedlist
+     *
+     * @param e
+     */
+    public SuperSort(E[] e) {
+        Node<E> temp = head;
+        for (int i = 0; i < e.length; i++) {
+            temp.next = new Node<>(e[i]);
+            temp = temp.next;
+        }
+    }
+
+    /**
+     *
+     * @return size of the linkedList
+     */
+    public int getSize() {
+        Node<E> temp = head;
+        for (; temp.next != null; temp = temp.next) {
+            size++;
+        }
+        return size;
+    }
+
+    /**
+     * exchange two nodes not the items
+     *
+     * @param beforeMin node beofore the smallest value
+     * @param current the curentNode of the first for loop
+     */
+    public void exchange(Node<E> beforeMin, Node<E> current) {
+        // remove min
+        Node<E> min = beforeMin.next;
+        beforeMin.next = beforeMin.next.next;
+
+        // insert it after current
+        min.next = current.next;
+        current.next = min;
+
+    }
+
+}

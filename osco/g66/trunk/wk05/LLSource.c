@@ -3,65 +3,75 @@
 #include <stdlib.h>
 
 void constructLL(LL*list){
-    list = (LL*)malloc(sizeof(LL));
-
-    list->head = malloc(sizeof(node*));
-    list->tail = malloc(sizeof(node*));
-    
-
-    list->tail->value = 0;
-    list->tail->next = NULL;
-
-    list->head->next = list->tail;
+    *list = (node*)malloc(sizeof(LL));
+    list->head = NULL;
 }
 
 void addFrontLL(LL *list,int number){
+
 
     node *newNode = malloc(sizeof(node));
     newNode->value = number;
     newNode->next = list->head;
     list->head= newNode;
-  
+
 }
 void addRearLL(LL *list,int number){
-    node * temp = malloc(sizeof(node));
-    for(temp = list->head;  temp->next != NULL; temp = temp->next);
+
+      if (!list->head) {
+        addFrontLL(list,number);
+        return;
+    }
+
+    node * temp = NULL;
+    for(temp = list->head;  temp->next; temp = temp->next);
 
     node *newNode = malloc(sizeof(node));
     newNode->value = number;
     newNode->next = temp->next;
     temp->next = newNode;
-    
+
 }
 
 void copyLL(LL *copy, LL *original){
-    
-    copy->head = original->head;
-    
+     for(node* newNode = original->head; newNode; newNode = newNode->next)
+   {
+       addRearLL(copy,newNode->value);
+
+   }
+
+
 }
 
 void destructLL(LL* list){
-    free(list);
+
+   node* temp =NULL;
+   for(node* newNode = list->head; newNode; newNode = newNode->next)
+   {
+       if (temp) {
+          free(temp);
+       }
+        temp = newNode;
+   }
+
 
 }
 void removeLL(LL*list,int value){}
 
-
-
 int countLL(LL* list){
     int count = 0;
 
-    for(node * temp = list->head; temp != NULL;temp = temp->next)
+    for(node * temp = list->head; temp;temp = temp->next)
     {
         count++;
     }
     return count;
 }
 void printLL(LL *list){
-    
-    for(node* temp = list->head; temp != NULL; temp = temp->next)
+
+    for(node* temp = list->head; temp; temp = temp->next)
     {
         printf("The Value is: %d\n",temp->value);
     }
-    
+
 }

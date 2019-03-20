@@ -1,0 +1,151 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package quicksort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class QuickSorter<E> implements Sort {
+
+    private int counter = 0;
+    private Node<E> head = new Node(null);
+    private Node<E> tail = new Node(null);
+
+    private static class Node<E> {
+
+        private E item;
+        private Node<E> next;
+        private Node<E> prev;
+
+        public Node(E item) {
+            this.item = item;
+            this.next = null;
+        }
+
+        public Node(E item, Node<E> next, Node<E> prev) {
+            this.item = item;
+            this.prev = prev;
+            this.next = next;
+        }
+    }
+
+    public QuickSorter(E[] e) {
+
+        head.next = new Node(null);
+        Node<E> nodeList = head.next;
+        Node<E> prev = head;
+        for (int i = 0; i < e.length; i++) {
+            nodeList = new Node(e[i], this.tail, prev);
+
+            prev.next = nodeList;
+            prev = nodeList;
+            this.tail.prev = nodeList;
+            nodeList = nodeList.next;
+        }
+    }
+
+    public int getSize() {
+        Node<E> temp = head.next;
+        for (; temp.next != null; temp = temp.next) {
+//            System.out.println("Previous: " + temp.prev.item + " Item: " + temp.item + " Next: " + temp.next.item);
+            counter++;
+        }
+        return counter;
+    }
+
+    private Node<E> bigger;
+    private Node<E> smaller;
+    private Node<E> pivot;
+
+    @Override
+    public Queue sort(Comparator comparator) {
+        Queue result = new Queue();
+        this.quickSort(comparator);
+        
+        System.out.println("-------------AM ENDE QUEUE ----");
+//        _quickSort(head.next, this.tail.prev, comparator);
+        for (Node<E> temp = head.next; temp.next != null; temp = temp.next) {
+            System.out.print(temp.item +" ");
+            result.put(temp.item);
+        }
+        return result;
+    }
+
+    private void exchange(Node<E> sm, Node<E> bi) {
+        E item = sm.item;
+        sm.item = bi.item;
+        bi.item = item;
+    }
+
+    private void quickSort(Comparator com) {
+
+        boolean wasNotIn = true;
+
+        smaller = head.next;
+        pivot = this.tail.prev;
+        bigger = pivot.prev;
+
+        Node<E> exLeft = smaller;
+        Node<E> exRight = bigger.prev;
+
+        do {
+            while (com.compare(smaller.item, pivot.item) < 0 && smaller.next != null) {
+                System.out.println("smaller: " + smaller.item);
+                smaller = smaller.next;
+            }
+            
+            System.out.println("smaller ist raus " + smaller.item);
+
+            while (com.compare(pivot.item, bigger.item) < 0 && bigger.prev != null) {
+                System.out.println("bigger: " + bigger.item);
+                bigger = bigger.prev;
+            }
+            System.out.println("bigger ist raus " + bigger.item);
+
+            if (com.compare(smaller.item, pivot.item) == 0) {
+                this.exchange(smaller, exLeft);
+                exLeft = exLeft.next;
+                wasNotIn = false;
+            }
+
+            if (com.compare(bigger.item, pivot.item) == 0) {
+                this.exchange(bigger, exRight);
+                exRight = exRight.prev;
+                wasNotIn = false;
+            }
+            if (wasNotIn) {
+                this.exchange(smaller, bigger);
+            }
+
+            wasNotIn = true;
+
+        } while (smaller != bigger.next);
+    }
+
+//    private void _quickSort(Node<E> leftIndex, Node<E> rightIndex, Comparator com) {
+//        if (com.compare(rightIndex.item, leftIndex.item) < 0) {
+//            return;
+//        }
+//
+//        pivot = rightIndex;
+//        bigger = pivot.prev;
+//        smaller = leftIndex;
+//
+//        do {
+//
+//            while (com.compare(smaller.item, pivot.item) <= 0 && com.compare(smaller.item, rightIndex.item) < 0) {
+//
+//            }
+//
+//        } while (com.compare(smaller.item, bigger.item) < 0);
+//
+//    }
+}

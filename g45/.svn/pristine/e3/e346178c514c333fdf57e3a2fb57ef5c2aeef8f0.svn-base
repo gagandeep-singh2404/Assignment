@@ -1,0 +1,104 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package quicksort;
+
+import java.util.Comparator;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Ignore;
+import sort.Queue;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class QuickSorterTest {
+
+    public QuickSorterTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    @Test
+    public void constructorTest() {
+        Integer[] i = {1, 2, 3, 4, 5, 6, 7, 8};
+
+        QuickSorter q = new QuickSorter(i);
+
+        assertEquals(i.length, q.getSize());
+
+        /**
+         * testing the switch statement in the sort method
+         */
+    }
+
+    @Ignore
+    @Test
+    public void testSwitchMethod() {
+        Integer[] i = new Integer[0];
+        QuickSorter q = new QuickSorter(i);
+        Comparator<Integer> com = (b1, b2) -> {
+            return b1 - b2;
+        };
+        // 
+        Queue qu = q.sort(com);
+        assertNull(qu.get());
+
+        Integer[] rightOrder = {1};
+
+        q = new QuickSorter(rightOrder);
+        qu = q.sort(com);
+        assertEquals(1, qu.get());
+
+        Integer[] lo = {2, 1};
+        Integer[] right = {1, 2};
+
+        q = new QuickSorter(lo);
+        Object[] result = new Object[lo.length];
+        qu = q.sort(com);
+
+        for (int j = 0; j < lo.length; j++) {
+            result[j] = qu.get();
+        }
+        assertArrayEquals(right, result);
+    }
+
+    @Test
+    public void testSortMethod() {
+        String[] c = {"P", "A", "B", "X", "W", "P", "P", "V", "P", "D", "P", "C", "Y", "Z"};
+        String[] r = {"A", "D", "B", "C", "P", "P", "P", "P", "P", "Z", "W", "X", "V", "Y"};
+
+        Comparator<String> com = (b1, b2) -> {
+            return b1.compareTo(b2);
+        };
+
+        QuickSorter q = new QuickSorter(c);
+        Queue quee = q.sort(com);
+    }
+}

@@ -1,0 +1,115 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class InsertionSorter<E> implements Sort {
+
+    private Queue result = new Queue();
+    private Node<E> head = new Node(null);
+    private Node<E> tail = new Node(null);
+
+    private static class Node<E> {
+
+        //TODO: implement a linked list inner class.
+        private Node<E> next;
+        private E item;
+        private Node<E> prev;
+
+        public Node(E item) {
+            // head
+            this.item = item;
+            this.next = null;
+        }
+
+        public Node(E item, Node<E> next) {
+            this.item = item;
+            this.next = next;
+        }
+
+        public Node(E item, Node<E> next, Node<E> prev) {
+            this.item = item;
+            this.prev = prev;
+            this.next = next;
+        }
+    }
+
+    public InsertionSorter(E[] e) {
+        head.next = new Node(null);
+        Node<E> prev = head;
+        Node<E> nodeList = head.next;
+
+        for (int i = 0; i < e.length; i++) {
+            nodeList = new Node(e[i], this.tail, prev);
+            prev.next = nodeList;
+            prev = nodeList;
+            nodeList = nodeList.next;
+        }
+
+    }
+
+    public int getSize() {
+
+        int counter = 0;
+
+        Node<E> nodeList = head.next;
+
+        while (nodeList.next != null) {
+            counter++;
+//            System.out.println(" " + nodeList.item);
+            nodeList = nodeList.next;
+
+        }
+
+        return counter;
+    }
+
+    @Override
+    public Queue sort(Comparator comparator) {
+        Node<E> tempNode = null;
+        E item = null;
+
+        // Die erste kleinste Zahl
+        for (Node<E> i = head.next.next; i.next != null; i = i.next) {
+            item = i.item;
+            if (comparator.compare(i.item, head.next.item) < 0) {
+
+                i.item = head.next.item;
+                head.next.item = item;
+            }
+        }
+
+        // 
+        for (Node<E> i = head.next; i.next.next != null; i = i.next) {
+            tempNode = i.next;
+            E com = tempNode.item;
+
+            while (comparator.compare(com, tempNode.prev.item) < 0) {
+                tempNode.item = tempNode.prev.item;
+                tempNode = tempNode.prev;
+            }
+            tempNode.item = com;
+
+        }
+
+        // QUEUE 
+        Node<E> nodeList = head.next;
+
+        while (nodeList.next != null) {
+            result.put(nodeList.item);
+            nodeList = nodeList.next;
+        }
+
+        return result;
+    }
+}

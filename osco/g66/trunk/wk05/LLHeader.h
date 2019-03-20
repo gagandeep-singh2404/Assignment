@@ -11,7 +11,7 @@ typedef struct nodes
 typedef struct list
 {
     node* head;
-    node* tail;
+    
 }LL;
 
 void constructLL(LL*list);

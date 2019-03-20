@@ -1,0 +1,115 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class SelectionSorter<E> implements Sort {
+
+    private Node<E> head = new Node(null);
+    private Node<E> tail = new Node(null);
+    private Queue result = new Queue();
+
+    private static class Node<E> {
+
+        //TODO: implement a linked list inner class.
+        private Node<E> next;
+        private Node<E> prev;
+        private E item;
+
+        public Node(E item) {
+            // head
+            this.item = item;
+            this.next = null;
+        }
+
+        public Node(E item, Node<E> next, Node<E> prev) {
+            this.item = item;
+            this.prev = prev;
+            this.next = next;
+        }
+
+    }
+
+    public SelectionSorter(E[] e) {
+        head.next = new Node(null);
+        Node<E> nodeList = head.next;
+        Node<E> prev = head;
+        for (int i = 0; i < e.length; i++) {
+            nodeList = new Node(e[i], this.tail, prev);
+
+            prev.next = nodeList;
+            prev = nodeList;
+
+            nodeList = nodeList.next;
+        }
+
+    }
+
+    public int getSize() {
+        Node<E> nodeList = head.next;
+        int counter = 0;
+        while (nodeList.next != null) {
+            counter++;
+
+            nodeList = nodeList.next;
+
+        }
+        return counter;
+    }
+
+    @Override
+    public Queue sort(Comparator comparator) {
+        Node<E> min = null;
+
+        for (Node<E> i = head.next; i.next != null; i = i.next) {
+            // First Minum
+            min = i;
+            // Item which will be changed
+            for (Node<E> j = i.next; j.next != null; j = j.next) {
+                //Compare 
+                if (comparator.compare(j.item, min.item) < 0) {
+                    min = j;
+                }
+            }  
+            // check if there was a change
+            if (min.item != i.item) {
+                this.exchange(min, i);
+                i = min;
+            }
+            
+        }
+
+        Node<E> nodeList = head.next;
+
+        while (nodeList.next != null) {
+
+            result.put(nodeList.item);
+            System.out.println("List" + nodeList.item);
+
+            nodeList = nodeList.next;
+        }
+        return result;
+    }
+
+    private void exchange(Node<E> min, Node<E> i) {
+
+        min.prev.next = min.next;
+        min.next.prev = min.prev;
+        min.prev = i.prev;
+
+        i.prev.next = min;
+        i.prev = min;
+        min.next = i;
+
+    }
+}

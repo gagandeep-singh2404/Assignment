@@ -9,11 +9,6 @@
 */
 void init();
 
-/*
-    store new Objects into the Bucket or Overflow
-    Also add to a json file
-*/
-bool addInfo(int id);
 
 /*
     delete a object from the Bucket or Overflow
@@ -24,7 +19,9 @@ bool myDelete(int id);
 /*
     read the data of a stored object
 */
-bool myRead(int id);
+bool myRead(char * name);
 
 void addObject(Bucket * bucket);
+
+int calculateKey(char* name);
 #endif

@@ -5,6 +5,6 @@
 
 int main(){
     init();
-   
+    add();
     return 0;
 }

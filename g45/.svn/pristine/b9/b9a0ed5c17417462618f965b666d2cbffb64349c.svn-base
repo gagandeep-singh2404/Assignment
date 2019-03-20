@@ -1,0 +1,48 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ * my code sucks
+ *
+ * @author gagandeepsingh
+ */
+public class SelectionSorter<E> extends SuperSort<E> {
+
+    public SelectionSorter(E[] e) {
+        super(e);
+    }
+
+    @Override
+    public int getSize() {
+        return super.getSize();
+    }
+
+    @Override
+    public Queue<E> sort(Comparator<E> comparator) {
+        Queue result = new Queue();  // Queue 
+        Node<E> toSort;// min
+
+        for (Node<E> currentNode = head; currentNode.next != null; currentNode = currentNode.next) {
+            toSort = currentNode; // the node (min)
+
+            for (Node<E> beforeMin = currentNode.next; beforeMin.next != null; beforeMin = beforeMin.next) {
+                if (comparator.compare(beforeMin.next.item, toSort.next.item) < 0) {    // search smallest item
+                    toSort = beforeMin;                                                // one Node before min item is safed
+                }
+
+            }
+            result.put(toSort.next.item); // put item in queue 
+            exchange(toSort, currentNode); // exchange the nodes
+        }
+        return result;
+    }
+
+}

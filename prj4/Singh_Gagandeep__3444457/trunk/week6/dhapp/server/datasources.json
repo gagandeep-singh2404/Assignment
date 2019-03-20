@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "gaganSQL": {
+    "host": "sl-eu-gb-p05.dblayer.com",
+    "port": 17840,
+    "url": "mysql://admin:GXRGLWVYZFVFQEOW@sl-eu-gb-p05.dblayer.com:17840/compose",
+    "database": "compose",
+    "password": "GXRGLWVYZFVFQEOW",
+    "name": "gaganSQL",
+    "user": "admin",
+    "connector": "mysql"
+  }
+}

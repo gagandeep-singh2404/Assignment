@@ -1,0 +1,91 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class SelectionSorter<E> implements Sort<E> {
+
+    private Node<E> head = new Node(null);
+    private int counter = 0;
+    private Queue result = new Queue();
+
+    private static class Node<E> {
+
+        private E item;
+        private Node<E> next;
+
+        public Node(E item) {
+            this.item = item;
+            this.next = null;
+        }
+    }
+
+    public SelectionSorter(E[] e) {
+        Node<E> temp = head;
+        for (int i = 0; i < e.length; i++) {
+            temp.next = new Node(e[i]);
+            temp = temp.next;
+
+        }
+    }
+
+    public int getSize() {
+        Node<E> temp = head;
+        for (; temp.next != null; temp = temp.next) {
+            counter++;
+        }
+        return counter;
+    }
+
+    @Override
+    public Queue<E> sort(Comparator<E> comparator) {
+        Node<E> toSort = new Node(null);
+        Node<E> heady = null;
+
+        for (Node<E> currentNode = head; currentNode.next != null; currentNode = currentNode.next) {
+            
+            toSort = currentNode;
+            heady = currentNode;
+
+            for (Node<E> beforeMin = currentNode.next; beforeMin.next != null; beforeMin = beforeMin.next) {
+                if (comparator.compare(beforeMin.next.item, toSort.next.item) < 0) toSort = beforeMin;  
+            }
+            
+            result.put(toSort.next.item);
+            System.out.println(toSort.next.item);
+            
+            if (toSort.item != currentNode.item) {
+                exchange(toSort, currentNode);
+                currentNode = heady;
+
+            }
+
+        }
+
+        return result;
+    }
+
+    public void exchange(Node<E> beforeMin, Node<E> currentNode) {
+
+        Node<E> oldNext = currentNode.next;
+        Node<E> min = beforeMin.next;
+
+        beforeMin.next = beforeMin.next.next;
+
+        min.next = oldNext;
+
+        currentNode.next = min;
+
+    }
+
+}

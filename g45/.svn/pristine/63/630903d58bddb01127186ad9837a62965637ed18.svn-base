@@ -1,0 +1,180 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package quicksort;
+
+import java.util.Comparator;
+import java.util.Random;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Ignore;
+import sort.Queue;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class QuickSorterTest {
+
+    public QuickSorterTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    @Test
+    public void constructorTest() {
+        Integer[] i = {1, 2, 3, 4, 5, 6, 7, 8};
+
+        QuickSorter q = new QuickSorter(i);
+
+        assertEquals(i.length, q.getSize());
+
+        /**
+         * testing the switch statement in the sort method
+         */
+    }
+
+    @Ignore
+    @Test
+    public void testSwitchMethod() {
+        Integer[] i = new Integer[0];
+        QuickSorter q = new QuickSorter(i);
+        Comparator<Integer> com = (b1, b2) -> {
+            return b1 - b2;
+        };
+        // 
+        Queue qu = q.sort(com);
+        assertNull(qu.get());
+
+        Integer[] rightOrder = {1};
+
+        q = new QuickSorter(rightOrder);
+        qu = q.sort(com);
+        assertEquals(1, qu.get());
+
+        Integer[] lo = {2, 1};
+        Integer[] right = {1, 2};
+
+        q = new QuickSorter(lo);
+        Object[] result = new Object[lo.length];
+        qu = q.sort(com);
+
+        for (int j = 0; j < lo.length; j++) {
+            result[j] = qu.get();
+        }
+        assertArrayEquals(right, result);
+    }
+
+    
+    @Test
+    public void testSortMethod() {
+        String[] c = {"P", "A", "B", "X", "W", "P", "P", "V", "P", "D", "P", "C", "Y", "Z"};
+
+        Comparator<String> com = (b1, b2) -> {
+            return b1.compareTo(b2);
+        };
+
+        QuickSorter q = new QuickSorter(c);
+        Queue quee = q.sort(com);
+    }
+
+    @Ignore
+    @Test
+    public void testWithMoreSame() {
+        String[] c = {"P", "P", "P", "X", "W", "P", "V", "V", "C", "D", "P", "C", "Y", "V"};
+        String[] expected = {"C", "C", "D", "P", "P", "P", "P", "P", "V", "V", "V", "W", "X", "Y",};
+        Object[] r = new String[c.length];
+        Comparator<String> com = (b1, b2) -> {
+            return b1.compareTo(b2);
+        };
+
+        QuickSorter q = new QuickSorter(c);
+        Queue quee = q.sort(com);
+
+        for (int i = 0; i < r.length; i++) {
+            r[i] = quee.get();
+        }
+
+        assertArrayEquals(expected, r);
+    }
+
+    @Test
+    public void testRandom() {
+
+        Integer[] i = new Integer[30];
+
+        Comparator<Integer> com = (n1, n2) -> {
+            return n1 - n2;
+        };
+        randomFill(i);
+        QuickSorter q = new QuickSorter<>(i);
+        q.printArray();
+        q.sort(com);
+        System.out.println("after sort: ");
+        q.printArray();
+    }
+
+    public void randomFill(Integer[] arr) {
+        Random r = new Random();
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = r.nextInt(100);
+        }
+    }
+
+    @Ignore
+    @Test
+    public void testSortIntegers() {
+        Integer[] numbers = {44, 2, 52, 77, 5, 65, 43, 1, 9};
+        QuickSorter<Integer> instance = new QuickSorter<>(numbers);
+
+        Comparator<Integer> comp = (a, b) -> {
+            return a - b;
+        };
+
+        Integer[] exp = {1, 2, 5, 9, 43, 44, 52, 65, 77};
+        Queue<Integer> expQ = new Queue<>();
+        for (Integer integer : exp) {
+            expQ.put(integer);
+        }
+
+        Queue<Integer> resQ = instance.sort(comp);
+        System.out.println("Expected: ");
+
+        System.out.println("Result: ");
+
+        Integer expInt;
+        Integer result;
+        for (Integer exp1 : exp) {
+            expInt = expQ.get();
+            result = resQ.get();
+            assertEquals(expInt, result);
+        }
+    }
+
+}

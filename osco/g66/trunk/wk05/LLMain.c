@@ -20,8 +20,8 @@ printLL(&list1);
 printf("number of elements: %d\n", countLL(&list1));
 copyLL(&list2, &list1);
 printLL(&list2);
-//destructLL(&list1);
-//destructLL(&list2);
+destructLL(&list1);
+destructLL(&list2);
 
 return 0;
 } 

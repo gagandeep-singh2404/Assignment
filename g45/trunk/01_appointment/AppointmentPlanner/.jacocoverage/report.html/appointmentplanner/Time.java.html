@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Time.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;AppointmentPlanner&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">appointmentplanner</a> &gt; <span class="el_source">Time.java</span></div><h1>Time.java</h1><pre class="source lang-java linenums">package appointmentplanner;
+
+import java.text.DecimalFormat;
+
+/**
+ * A 24 hour Time class
+ *
+ * @author ode
+ */
+public final class Time {
+
+    private final int hours;
+    private final int minutes;
+    private static final int DMIN = 60;
+    private static final int DH = 24;
+
+    /**
+     * Constructor with two arguments: hours and minutes. No mercy for those who
+     * do not follow the pre-conditions! Pre conditions are: - hours should be
+     * in range 0..23 - minutes should be in range 0..59
+     *
+     * But: A static method is available that returns a Time object with
+     * parameters that need not fulfill these conditions.
+     *
+     * @param hours the number of hours
+     * @param minutes the number of minutes
+     */
+<span class="fc" id="L28">    public Time(int hours, int minutes) {</span>
+<span class="fc" id="L29">        this.hours = hours;</span>
+<span class="fc" id="L30">        this.minutes = minutes;</span>
+
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Getter for hours of this Time.
+     *
+     * @return hours of this Time object
+     */
+    public int getHours() {
+<span class="fc" id="L40">        return hours;</span>
+    }
+
+    /**
+     * Getter for minutes of this Time.
+     *
+     * @return minutes of this Time object
+     */
+    public int getMinutes() {
+<span class="fc" id="L49">        return minutes;</span>
+    }
+
+    /**
+     * A given time is added to this time. The result is returned as a new Time
+     * object.
+     *
+     * @param t The time that will be added to this time.
+     * @return The Time object as a result of adding t to this time.
+     */
+    public Time addTime(Time t) {
+
+<span class="fc" id="L61">        Time addedTime = new Time(this.getHours() + t.getHours(), this.getMinutes() + t.getMinutes());</span>
+<span class="fc" id="L62">        return Time.getProperTime(addedTime.getHours(), addedTime.getMinutes());</span>
+    }
+
+    /**
+     * This method actually tests if this time is before the given other time.
+     *
+     * @param otherTime The Time object to compare with.
+     * @return true if the this time is before other.
+     */
+    public boolean isBefore(Time otherTime) {
+
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (this.getHours() &lt; otherTime.getHours()) {</span>
+<span class="fc" id="L74">            return true;</span>
+<span class="fc bfc" id="L75" title="All 4 branches covered.">        } else if ((this.getHours() == otherTime.getHours() &amp;&amp; this.getMinutes() &lt; otherTime.getMinutes())) {</span>
+<span class="fc" id="L76">            return true;</span>
+        } else {
+<span class="fc" id="L78">            return false;</span>
+        }
+
+    }
+
+    /**
+     * Get your Time object here if you are in doubt if parameters are not in
+     * the correct (proper) range: 0 &amp;lt;= hrs &amp;lt; 24 &amp;amp; 0 &amp;lt;= mts &amp;lt;
+     * 60. Negative hour values are 'normalized' to zero, negative minute values
+     * are subtracted from the hours. Hour values that are too big are
+     * normalized to values in range (e.g. 25 hours becomes 2 hours), an
+     * overflow of minutes is added to the hours.
+     *
+     * @param hrs hour of the time object
+     * @param mts minutes of the time object
+     * @return a new Time object.
+     */
+    public static Time getProperTime(int hrs, int mts) {
+<span class="fc" id="L96">        int hours = hrs;</span>
+<span class="fc" id="L97">        int minutes = mts;</span>
+<span class="fc" id="L98">        int restMinutes = minutes % DMIN;</span>
+      
+<span class="fc" id="L100">        int hourCount = (minutes / DMIN);</span>
+   
+<span class="fc" id="L102">        int restHours = hours / DH;</span>
+       
+
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (minutes &lt; 0) {</span>
+
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if (minutes &lt;= -DMIN) {</span>
+<span class="fc" id="L108">                hours += hourCount;</span>
+            } else {
+<span class="fc" id="L110">                hours--;</span>
+            }
+
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (minutes % DMIN != 0) {</span>
+<span class="fc" id="L114">                minutes = DMIN + (mts % DMIN);</span>
+
+            } else {
+<span class="fc" id="L117">                minutes = (mts % DMIN);</span>
+            }
+
+        }
+
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (minutes &gt; 59) {</span>
+<span class="fc" id="L123">            hours += hourCount;</span>
+<span class="fc" id="L124">            minutes = restMinutes;</span>
+            
+        }
+
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (hours &lt; 0) {</span>
+<span class="fc" id="L129">            hours = 0;</span>
+<span class="fc" id="L130">            minutes = 0;</span>
+        }
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (hours &gt; 23) {</span>
+<span class="fc" id="L133">            hours = restHours;</span>
+        }
+
+   
+<span class="fc" id="L137">        return new Time(hours, minutes);</span>
+
+    }
+
+    /**
+     * corrects the negative time houres negative == 0 hours negative minutes
+     * deincrement hour, 60 -minutes
+     *
+     * @param hours the hours
+     * @param minutes the minutes
+     *
+     * @return the Time Object
+     */
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (!(o instanceof Time)) {</span>
+<span class="fc" id="L153">            return false;</span>
+        } else {
+<span class="fc" id="L155">            Time t = (Time) o;</span>
+<span class="fc bfc" id="L156" title="All 4 branches covered.">            return t.hours == this.hours &amp;&amp; t.minutes == this.minutes;</span>
+        }
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L162">        int hash = 5;</span>
+<span class="fc" id="L163">        hash = 11 * hash + this.hours;</span>
+<span class="fc" id="L164">        hash = 11 * hash + this.minutes;</span>
+<span class="fc" id="L165">        return hash;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L170">        DecimalFormat df = new DecimalFormat(&quot;00&quot;);</span>
+<span class="fc" id="L171">        return df.format(hours) + &quot;:&quot; + df.format(minutes);</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,251 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package heapsort;
+
+import basicsort.SuperSort;
+import java.util.Comparator;
+import java.util.Stack;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class HeapSorter<E> implements Sort<E> {
+
+    private Comparator com;
+    private Node<E> root;
+    private Stack<Node> parentStack = new Stack();
+    private Stack<Node> copyStack = new Stack();
+    private Queue<E> resultQueue;
+
+    public class Node<E> {
+
+       
+        public Node<E> leftChild;
+        public Node<E> rightChild;
+        public Node<E> parentNode;
+        public E item;
+
+        public Node(E item) {
+            this.item = item;
+        }
+
+        /**
+         * Adding two children to the parentNode
+         * @param leftChild
+         * @param rightChild 
+         */
+        private void addChildren(Node<E> leftChild, Node<E> rightChild) {
+            this.leftChild = leftChild;
+            this.rightChild = rightChild;
+
+            this.leftChild.parentNode = this;
+            this.rightChild.parentNode = this;
+        }
+
+        /**
+         * Adding one child to the parentNode
+         * @param leftChild 
+         */
+        private void addChild(Node<E> leftChild) {
+            this.leftChild = leftChild;
+            this.leftChild.parentNode = this;
+
+        }
+
+    }
+
+    /**
+     * buildtree and createStack 
+     * @param e 
+     */
+    public HeapSorter(E[] e) {
+        root = buildTree(e);
+        createStack();
+    }
+
+    /**
+     * We are building the tree 
+     * first element of array in recusive _buildTree method
+     * @param e 
+     * @return  
+     */
+    private Node<E> buildTree(E[] e) {
+        if (e.length == 0) return null; 
+        root = new Node(e[0]);
+        _buildTree(e, root, 1);
+        return root;
+    }
+
+    /**
+     * Here the tree is built with recursion
+     *
+     * @param e
+     * @param parentNode
+     * @param leftItem leftItem is the item of the leftChild
+     */
+    private void _buildTree(E[] e, Node<E> parentNode, int leftItem) {
+        int rightItem = leftItem + 1;
+        if (leftItem > e.length - 1) return;
+
+        // add one child to the parentNode
+        if (rightItem > e.length - 1) {
+            parentNode.addChild(new Node(e[leftItem]));
+            return;
+        }
+        // add two childs to the parentNode
+        parentNode.addChildren(new Node(e[leftItem]), new Node(e[rightItem]));
+
+        _buildTree(e, parentNode.leftChild, leftItem * 2 + 1);
+        _buildTree(e, parentNode.rightChild, rightItem = rightItem * 2 + 1);
+    }
+
+    /**
+     * sorting of the tree after heapifying first 
+     * @param comparator
+     * @return a sorted Queue 
+     */
+    @Override
+    public Queue<E> sort(Comparator comparator) {
+        resultQueue = new Queue<>();
+        this.com = comparator;
+        heapify();
+
+        while (!copyStack.isEmpty()) {
+            removeLastNode(copyStack.lastElement());
+            _sink(root);
+        }
+        return resultQueue;
+    }
+
+    /**
+     * give the last parentNode in the stack 
+     * sink it 
+     */
+    private void heapify() {
+        while (!parentStack.isEmpty()) {
+            _sink(parentStack.pop());
+        }
+    }
+
+    /**
+     * _sink is recurive 
+     * All parentNodes are smaller or equal to the parentNodes
+     * @param parentNode 
+     */
+    private void _sink(Node<E> parentNode) {
+        if (parentNode.leftChild == null) return;
+        
+        // min Node in the subtree 
+        Node<E> min = parentNode.leftChild;
+
+        if (parentNode.rightChild != null) {
+            // if rightChild is smaller than leftChild min is changed to rightChild
+            if (less(parentNode.rightChild, parentNode.leftChild)) {
+                min = parentNode.rightChild;
+            }
+        }
+        // if min is smaller than parentNode exchange Items 
+        if (less(min, parentNode)) {
+            exchangeItems(min, parentNode);
+        }
+        // sink for min again
+        _sink(min);
+    }
+
+    /**
+     * Helper method 
+     * @param n1 firstNode is coming
+     * @param n2 secondNode is coming 
+     * @return true if n1 is smaller than n2  
+     */
+    private boolean less(Node<E> n1, Node<E> n2) {
+        return com.compare(n1.item, n2.item) < 0;
+    }
+
+    /**
+     * Helper Method 
+     * -removing lastNode from the tree
+     * -first check if left or rightchild is lastNode 
+     * -exhcnage Items with root and lastNode 
+     * -remove connection with parent and child
+     * @param parentNode 
+     */
+    private void removeLastNode(Node<E> parentNode) {
+        Node<E> child;
+
+        // if the only child is a leftchild 
+        if (parentNode.rightChild == null && parentNode.leftChild != null) {
+            child = parentNode.leftChild;
+            
+            exchangeItems(child, root);
+            resultQueue.put(child.item);
+            // remove connection with child and parent
+            parentNode.leftChild = null;
+            child.parentNode = null;
+
+        }
+        // if the rightChild is still there 
+        if (parentNode.rightChild != null) {
+            child = parentNode.rightChild;
+            exchangeItems(child, root);
+            resultQueue.put(child.item);
+
+            parentNode.rightChild = null;
+            child.parentNode = null;
+        }
+        // if there are no children put the parentNode in Queue  
+        if (parentNode.leftChild == null && parentNode.parentNode == null) {
+            resultQueue.put(parentNode.item); 
+            System.out.println("child added: " + parentNode.item);
+        }
+
+        // if no children poo the Stack
+        if (parentNode.leftChild == null) {
+            parentNode = copyStack.pop();
+        }
+    }
+    /**
+    * Helper Method
+    * exchange items with n1 and n2
+    * @param n1
+    * @param n2 
+    */
+    private void exchangeItems(Node<E> n1, Node<E> n2) {
+        E temp = n1.item;
+
+        n1.item = n2.item;
+        n2.item = temp;
+
+    }
+
+    /**
+     * creating two Stacks of the tree 
+     * All ParentNodes are safed in there
+     */
+    private void createStack() {
+        Queue<Node> queue = new Queue();
+
+        queue.put(root);
+        Node<E> tempNode;
+
+        while (!queue.isEmpty()) {
+            tempNode = queue.get();
+
+            if (tempNode.leftChild != null) {
+                parentStack.add(tempNode);
+                copyStack.add(tempNode);
+                queue.put(tempNode.leftChild);
+            }
+
+            if (tempNode.rightChild != null) {
+                queue.put(tempNode.rightChild);
+            }
+        }
+    }
+}

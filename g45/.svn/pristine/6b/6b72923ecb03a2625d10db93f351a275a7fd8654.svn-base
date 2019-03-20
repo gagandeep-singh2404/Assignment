@@ -1,0 +1,274 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package heapsort;
+
+import java.util.Comparator;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Ignore;
+import sort.Queue;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class HeapSorterTest {
+
+    public HeapSorterTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    
+    
+    
+    
+    private Character[] data;
+    private Character[] sortedData;
+    private HeapSorter<Character> sorter;
+    private static final Comparator<Character> CHAR_C = (c1, c2) -> {
+        return c1 - c2;
+    };
+
+    @Ignore
+    @Test
+    public void testQSOneElement() {
+        data = new Character[]{'C'};
+        sortedData = data;
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSTwoElements() {
+        data = new Character[]{'W', 'S'};
+        sortedData = new Character[]{'S', 'W'};
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSElementsSorted() {
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new HeapSorter<>(sortedData);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQuickSorter() {
+        System.out.println("========DEFAULT TEST========");
+        data = new Character[]{
+            'P', 'A', 'B', 'X', 'W', 'P', 'P', 'V', 'P', 'D', 'P', 'C', 'Y', 'Z'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+        System.out.println("========END DEFAULT TEST========");
+    }
+
+    @Test
+    public void testQSSortedReverse() {
+        data = new Character[]{
+            'Z', 'Y', 'X', 'W', 'V', 'P', 'P', 'P', 'P', 'P', 'D', 'C', 'B', 'A'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSMiddlesEqual() {
+        data = new Character[]{
+            'W', 'A', 'B', 'X', 'P', 'P', 'P', 'P', 'P', 'D', 'V', 'C', 'Y', 'Z'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSEqualsLeft() {
+        data = new Character[]{
+            'P', 'P', 'P', 'P', 'P', 'W', 'A', 'B', 'X', 'D', 'V', 'C', 'Y', 'Z'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSEqualsRight() {
+        data = new Character[]{
+            'W', 'A', 'B', 'X', 'D', 'V', 'C', 'Y', 'Z', 'P', 'P', 'P', 'P', 'P'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSAllSame() {
+        data = new Character[]{
+            'F', 'F', 'F', 'F', 'F', 'F', 'F'
+        };
+        sortedData = new Character[]{
+            'F', 'F', 'F', 'F', 'F', 'F', 'F'
+        };
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSEmpty() {
+        data = new Character[0];
+        sortedData = new Character[0];
+        sorter = new HeapSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    private void compareQueueWithArray(Queue<Character> q, Character[] a) {
+        for (Character i : a) {
+            assertEquals(i, q.get());
+        }
+    }
+
+    @Test
+    public void test() {
+
+        Integer[] rightOrder = {0, 1, 2, 3, 4, 5, 6};
+        Integer[] wrongOrder = {6, 5, 4, 3, 2, 1, 0};
+
+        Comparator<Integer> com = (number1, number2) -> {
+            return number1 - number2;
+        };
+
+        HeapSorter s = new HeapSorter(wrongOrder);
+
+        Queue q = s.sort(com);
+
+        Object[] result = new Integer[wrongOrder.length];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = q.get();
+
+        }
+
+        assertArrayEquals(rightOrder, result);
+    }
+
+    @Test
+    public void testSortInteger() {
+        System.out.println("---------------SORT TEST INTEGER -------------");
+
+        Integer[] rightOrder = {1, 2, 3, 4, 5, 6, 7};
+        Integer[] wrongOrder = {4, 2, 7, 5, 3, 1, 6};
+
+        Comparator<Integer> com = (number1, number2) -> {
+            return number1 - number2;
+        };
+
+        HeapSorter s = new HeapSorter(wrongOrder);
+
+        Queue q = s.sort(com);
+
+        Object[] result = new Integer[wrongOrder.length];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = q.get();
+
+        }
+
+        assertArrayEquals(rightOrder, result);
+
+    }
+
+  
+
+    @Test
+    public void testSortSameNumbers() {
+        System.out.println("Test with same numbers");
+
+        Integer[] sameNumberCorrectOrder = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7};
+
+        Integer[] wrong = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
+
+        Comparator<Integer> com = (number1, number2) -> {
+            return number1 - number2;
+        };
+
+        HeapSorter<Integer> s = new HeapSorter(wrong);
+
+        Queue q = s.sort(com);
+        Object[] result = new Integer[wrong.length];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = q.get();
+
+        }
+        assertArrayEquals(sameNumberCorrectOrder, result);
+    }
+
+    @Test
+    public void testSortString() {
+        System.out.println("------------------SORT TEST STRING ---------------");
+
+        String[] rightOrder = {"Alan", "Anna", "Daniel", "Hans", "Markus", "Rick", "Sebastian", "Xona"};
+
+        String[] wrongOrder = {"Anna", "Daniel", "Alan", "Xona", "Rick", "Sebastian", "Markus", "Hans"};
+
+        HeapSorter s = new HeapSorter(wrongOrder);
+
+        Comparator<String> com = (name1, name2) -> {
+            return name1.compareTo(name2); 
+        };
+
+        Queue q = s.sort(com);
+
+        Object[] result = new String[wrongOrder.length];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = q.get();
+
+        }
+        assertArrayEquals(rightOrder, result);
+    }
+
+}

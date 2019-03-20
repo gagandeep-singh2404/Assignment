@@ -1,0 +1,162 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package appointmentplanner;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class DayTest {
+
+    public DayTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    @Test
+    public void sizeOfDummyHeadListTest() {
+        Day montag = new Day(1);
+        assertEquals(1, montag.getNrOfAppointments());
+    }
+
+    @Test
+    public void canAddAppointmentOfDuration() {
+
+        Day monday = new Day(1);
+        TimeSpan meetingHours = new TimeSpan(4, 30);
+        assertFalse(monday.canAddAppointmentOfDuration(meetingHours));
+
+    }
+
+    @Test
+    public void containsAppointmentWithDescriptionTest() {
+        Day monday = new Day(1);
+        String description = "lunch break";
+        assertTrue(monday.containsAppointmentWithDescription(description));
+
+    }
+
+//    @Test
+//    public void removeAppointmentTest() {
+//        Day monday = new Day(1);
+//        String description = "lunch break";
+//        monday.removeAppointment(description);
+//
+//        assertFalse(monday.containsAppointmentWithDescription(description));
+//    }
+    // ALl THESE TEST ARE WITH STARTTIME 
+    @Test
+    public void addAppointmentWithStartTime() {
+        Day monday = new Day(1);
+        Time start = new Time(10, 30);
+        Time end = new Time(12, 00);
+        // create Appointment and set Start
+        Appointment javaCourse = new Appointment("Java Course", new TimeSpan(start, end));
+        javaCourse.setStart(start);
+        // add Appointment and get the Counter Before add
+        int appointmentNumberBefore = monday.getNrOfAppointments();
+        monday.addAppointmentWithStartTimeSet(javaCourse);
+        // look if increase of one 
+        assertEquals(appointmentNumberBefore + 1, monday.getNrOfAppointments());
+
+    }
+
+    @Test
+    public void addAppointmentStartWithoutStartTime() {
+        Day monday = new Day(1);
+        Time start = new Time(10, 30);
+        Time end = new Time(12, 00);
+        // create Appointment and set Start
+        Appointment javaCourse = new Appointment("Java Course", new TimeSpan(start, end));
+        // add Appointment and get the Counter Before add
+        int appointmentNumberBefore = monday.getNrOfAppointments();
+        monday.addAppointmentWithStartTimeSet(javaCourse);
+        // look if increase of one 
+        assertEquals(appointmentNumberBefore + 1, monday.getNrOfAppointments());
+
+    }
+
+    @Test
+    public void addAppointmentStartDescriptionUnique() {
+        Day monday = new Day(1);
+        Time start = new Time(10, 30);
+        Time end = new Time(12, 00);
+        // create Appointment and set Start
+        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+        funWithTobias.setStart(start);
+        // add Appointment and get the Counter Before add
+        int appointmentNumberBefore = monday.getNrOfAppointments();
+        monday.addAppointmentWithStartTimeSet(funWithTobias);
+        // look if increase of one 
+        assertEquals(appointmentNumberBefore + 1, monday.getNrOfAppointments());
+
+    }
+
+    @Test
+    public void notAddAppointmentStartWithSameDescription() {
+        // first Appointment 
+        Day monday = new Day(1);
+        Time start = new Time(10, 30);
+        Time end = new Time(12, 00);
+
+        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+        funWithTobias.setStart(start);
+
+        monday.addAppointmentWithStartTimeSet(funWithTobias);
+        int appointmentNumberBefore = monday.getNrOfAppointments();
+
+        // second Appointment with same Description
+        Appointment funWithLuca = new Appointment("Netflix and Chill", new TimeSpan(new Time(10, 30), new Time(10, 35)));
+        funWithLuca.setStart(new Time(10, 30));
+
+        monday.addAppointmentWithStartTimeSet(funWithLuca);
+        int appointmentNumberAfter = monday.getNrOfAppointments();
+
+        assertEquals(appointmentNumberBefore, appointmentNumberAfter);
+    }
+
+    @Test
+    public void overFourHoursTimeSpan() {
+        Day monday = new Day(1);
+        Time start = new Time(10, 30);
+        Time end = new Time(17, 49); // TimeSpan bigger than 4 hours 
+        
+        int appointmentNumberBefore = monday.getNrOfAppointments();
+        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+        funWithTobias.setStart(start);
+
+        monday.addAppointmentWithStartTimeSet(funWithTobias);
+        int appointmentNumberAfter = monday.getNrOfAppointments();
+        assertEquals(appointmentNumberBefore, appointmentNumberAfter);
+    }
+
+}

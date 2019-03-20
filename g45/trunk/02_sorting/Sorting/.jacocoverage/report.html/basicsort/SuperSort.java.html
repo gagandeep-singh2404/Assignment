@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SuperSort.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Sorting&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">basicsort</a> &gt; <span class="el_source">SuperSort.java</span></div><h1>SuperSort.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ * Abstract class for other subclasses
+ *
+ * @author gagandeepsingh
+ */
+public abstract class SuperSort&lt;E&gt; implements Sort&lt;E&gt; {
+
+<span class="fc" id="L19">    protected Node&lt;E&gt; head = new Node&lt;&gt;(null);</span>
+<span class="fc" id="L20">    protected int size = 0;</span>
+
+    public class Node&lt;E&gt; {
+
+        //TODO: implement a linked list inner class.
+        public Node&lt;E&gt; next;
+        public E item;
+
+<span class="fc" id="L28">        public Node(E item) {</span>
+            // head
+<span class="fc" id="L30">            this.item = item;</span>
+<span class="fc" id="L31">            this.next = null;</span>
+<span class="fc" id="L32">        }</span>
+
+    }
+
+    /**
+     * convert a array into a linkedlist
+     *
+     * @param e
+     */
+<span class="fc" id="L41">    public SuperSort(E[] e) {</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (e.length == 0) {</span>
+<span class="fc" id="L43">            return;</span>
+        }
+<span class="fc" id="L45">        Node&lt;E&gt; temp = head;</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (int i = 0; i &lt; e.length; i++) {</span>
+<span class="fc" id="L47">            temp.next = new Node&lt;&gt;(e[i]);</span>
+<span class="fc" id="L48">            temp = temp.next;</span>
+        }
+<span class="fc" id="L50">    }</span>
+
+    /**
+     *
+     * @return size of the linkedList
+     */
+    public int getSize() {
+<span class="fc" id="L57">        Node&lt;E&gt; temp = head;</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (; temp.next != null; temp = temp.next) {</span>
+<span class="fc" id="L59">            size++;</span>
+        }
+<span class="fc" id="L61">        return size;</span>
+    }
+
+    /**
+     * exchange two nodes not the items
+     *
+     * @param beforeMin node beofore the smallest value
+     * @param current the curentNode of the first for loop
+     */
+    public void exchange(Node&lt;E&gt; beforeMin, Node&lt;E&gt; current) {
+        // remove min
+<span class="fc" id="L72">        Node&lt;E&gt; min = beforeMin.next;</span>
+<span class="fc" id="L73">        beforeMin.next = beforeMin.next.next;</span>
+
+        // insert it after current
+<span class="fc" id="L76">        min.next = current.next;</span>
+<span class="fc" id="L77">        current.next = min;</span>
+
+<span class="fc" id="L79">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

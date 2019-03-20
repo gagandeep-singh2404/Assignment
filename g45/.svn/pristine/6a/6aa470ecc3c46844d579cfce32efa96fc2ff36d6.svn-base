@@ -1,0 +1,77 @@
+package appointmentplanner;
+
+import java.util.Objects;
+
+/**
+ * A class for a time span at a certain start time. Derived class is
+ * Appointment.
+ *
+ * @author ode
+ */
+public class TimeGap {
+
+    private final TimeSpan length;
+    private Time start;
+    private Time end;
+
+    public TimeGap(TimeSpan length, Time start) {
+        //TODO
+        Time duration = new Time(length.getHours(), length.getMinutes());
+        this.length = length;
+        this.start = start;
+        this.end = start.addTime(duration);
+    }
+
+    public TimeGap(Time start, Time end) {
+        //TODO
+        TimeSpan duration = new TimeSpan(start, end);
+        length = duration;
+        this.start = start;
+        this.end = end;
+    }
+
+    public Time getStart() {
+        //TODO
+        return this.start;
+    }
+
+    public Time getEnd() {
+        //TODO
+        return this.end;
+    }
+
+    public TimeSpan getLength() {
+        //TODO
+        return this.length;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeGap{" + "length=" + length + ", start=" + start + ", end=" + end + '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TimeGap other = (TimeGap) obj;
+        if (!Objects.equals(this.length, other.length)) {
+            return false;
+        }
+        if (!Objects.equals(this.start, other.start)) {
+            return false;
+        }
+//        if (!Objects.equals(this.end, other.end)) {
+//            return false;
+//        }
+        return true;
+    }
+
+}

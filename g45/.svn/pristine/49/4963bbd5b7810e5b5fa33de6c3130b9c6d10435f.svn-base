@@ -1,0 +1,54 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package appointmentplanner;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class TimeGapTest {
+    
+    public TimeGapTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    
+     @Test
+    public void testTimeGap(){
+        
+        TimeGap timegap = new TimeGap(new Time(10, 30), new Time(12, 00));
+        TimeGap timegap2 = new TimeGap(new TimeSpan(01, 30), new Time(10, 30)); 
+        assertEquals(timegap, timegap2);
+        
+    }
+}

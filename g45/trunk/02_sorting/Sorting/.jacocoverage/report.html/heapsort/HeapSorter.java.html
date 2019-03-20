@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HeapSorter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Sorting&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">heapsort</a> &gt; <span class="el_source">HeapSorter.java</span></div><h1>HeapSorter.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package heapsort;
+
+import basicsort.SuperSort;
+import java.util.Comparator;
+import java.util.Stack;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class HeapSorter&lt;E&gt; implements Sort&lt;E&gt; {
+
+    private Comparator com;
+    private Node&lt;E&gt; root;
+<span class="fc" id="L22">    private Stack&lt;Node&gt; parentStack = new Stack();</span>
+<span class="fc" id="L23">    private Stack&lt;Node&gt; copyStack = new Stack();</span>
+    private Queue&lt;E&gt; resultQueue;
+
+    public class Node&lt;E&gt; {
+
+        public Node&lt;E&gt; leftChild;
+        public Node&lt;E&gt; rightChild;
+        public Node&lt;E&gt; parentNode;
+        public E item;
+
+<span class="fc" id="L33">        public Node(E item) {</span>
+<span class="fc" id="L34">            this.item = item;</span>
+<span class="fc" id="L35">        }</span>
+
+        // Adding two children to the parentNode 
+        private void addChildren(Node&lt;E&gt; leftChild, Node&lt;E&gt; rightChild) {
+<span class="fc" id="L39">            this.leftChild = leftChild;</span>
+<span class="fc" id="L40">            this.rightChild = rightChild;</span>
+
+<span class="fc" id="L42">            this.leftChild.parentNode = this;</span>
+<span class="fc" id="L43">            this.rightChild.parentNode = this;</span>
+<span class="fc" id="L44">        }</span>
+
+        // adding one Child to the parentNode
+        private void addChild(Node&lt;E&gt; leftChild) {
+<span class="fc" id="L48">            this.leftChild = leftChild;</span>
+<span class="fc" id="L49">            this.leftChild.parentNode = this;</span>
+
+<span class="fc" id="L51">        }</span>
+    }
+
+    // constructor build Tree and create Stack 
+<span class="fc" id="L55">    public HeapSorter(E[] e) {</span>
+<span class="fc" id="L56">        root = buildTree(e);</span>
+<span class="fc" id="L57">        createStack();</span>
+<span class="fc" id="L58">    }</span>
+
+    // call the recurive buildtree method
+    private Node&lt;E&gt; buildTree(E[] e) {
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (e.length == 0) return null;</span>
+
+<span class="fc" id="L64">        root = new Node(e[0]);</span>
+<span class="fc" id="L65">        _buildTree(e, root, 1);</span>
+<span class="fc" id="L66">        return root;</span>
+    }
+
+    // building the tree  with recursion 
+    private void _buildTree(E[] e, Node&lt;E&gt; parentNode, int leftItem) {
+<span class="fc" id="L71">        int rightItem = leftItem + 1;</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (leftItem &gt; e.length - 1) return;</span>
+
+        // add one child to the parentNode
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (rightItem &gt; e.length - 1) {</span>
+<span class="fc" id="L76">            parentNode.addChild(new Node(e[leftItem])); return;</span>
+        }
+        // add two childs to the parentNode
+<span class="fc" id="L79">        parentNode.addChildren(new Node(e[leftItem]), new Node(e[rightItem]));</span>
+
+<span class="fc" id="L81">        _buildTree(e, parentNode.leftChild, leftItem * 2 + 1);</span>
+<span class="fc" id="L82">        _buildTree(e, parentNode.rightChild, rightItem = rightItem * 2 + 1);</span>
+<span class="fc" id="L83">    }</span>
+
+    // sort the tree after heapifing it first and removing the lastNode with Children
+    @Override
+    public Queue&lt;E&gt; sort(Comparator comparator) {
+<span class="fc" id="L88">        resultQueue = new Queue&lt;&gt;();</span>
+<span class="fc" id="L89">        this.com = comparator;</span>
+<span class="fc" id="L90">        heapify();</span>
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        while (!copyStack.isEmpty()) {</span>
+<span class="fc" id="L93">            removeLastNode(copyStack.lastElement());</span>
+<span class="fc" id="L94">            _sink(root);</span>
+        }
+<span class="fc" id="L96">        return resultQueue;</span>
+    }
+
+    // heapify the tree give the last parentNode in the stack sink it
+    private void heapify() {
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        while (!parentStack.isEmpty()) _sink(parentStack.pop());</span>
+<span class="fc" id="L102">    }</span>
+
+    // _sink is recurive All parentNodes are smaller or equal to the parentNodes
+    private void _sink(Node&lt;E&gt; parentNode) {
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (parentNode.leftChild == null)  return;</span>
+        
+        // min Node in the subtree 
+<span class="fc" id="L109">        Node&lt;E&gt; min = parentNode.leftChild;</span>
+
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (parentNode.rightChild != null) {</span>
+            // if rightChild is smaller than leftChild min is changed to rightChild
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (less(parentNode.rightChild, parentNode.leftChild)) {</span>
+<span class="fc" id="L114">                min = parentNode.rightChild;</span>
+            }
+        }
+        // if min is smaller than parentNode exchange Items 
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (less(min, parentNode)) exchangeItems(min, parentNode);</span>
+        
+        // sink for min again
+<span class="fc" id="L121">        _sink(min);</span>
+<span class="fc" id="L122">    }</span>
+
+    // return true if n1 is smaller than n2
+    private boolean less(Node&lt;E&gt; n1, Node&lt;E&gt; n2) {
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        return com.compare(n1.item, n2.item) &lt; 0;</span>
+    }
+
+    // remove the lastNode with Children
+    private void removeLastNode(Node&lt;E&gt; parentNode) {
+        Node&lt;E&gt; child;
+
+        // if the only child is a leftchild 
+<span class="pc bpc" id="L134" title="1 of 4 branches missed.">        if (parentNode.rightChild == null &amp;&amp; parentNode.leftChild != null) {</span>
+<span class="fc" id="L135">            removeChild(parentNode, parentNode.leftChild,true);</span>
+        }
+        
+        // if the rightChild is still there 
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        if (parentNode.rightChild != null) {</span>
+<span class="fc" id="L140">            removeChild(parentNode, parentNode.rightChild,false);</span>
+        }
+        // if there are no children put the parentNode in Queue  
+<span class="fc bfc" id="L143" title="All 4 branches covered.">        if (parentNode.leftChild == null &amp;&amp; parentNode.parentNode == null) {</span>
+<span class="fc" id="L144">            resultQueue.put(parentNode.item);</span>
+        }
+
+        // if no children poo the Stack
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        if (parentNode.leftChild == null) parentNode = copyStack.pop();</span>
+<span class="fc" id="L149">    }</span>
+
+    // exchange n1 and n2 items
+    private void exchangeItems(Node&lt;E&gt; n1, Node&lt;E&gt; n2) {
+<span class="fc" id="L153">        E temp = n1.item;</span>
+
+<span class="fc" id="L155">        n1.item = n2.item;</span>
+<span class="fc" id="L156">        n2.item = temp;</span>
+<span class="fc" id="L157">    }</span>
+
+    // remove connection with child and parent 
+    private void removeChild(Node&lt;E&gt; parentNode, Node&lt;E&gt; child,boolean isLeft) {
+<span class="fc" id="L161">        exchangeItems(child, root);</span>
+<span class="fc" id="L162">        resultQueue.put(child.item);</span>
+        // remove connection with child and parent
+        
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        if (isLeft) parentNode.leftChild = null;</span>
+<span class="fc" id="L166">        else parentNode.rightChild = null; </span>
+<span class="fc" id="L167">        child.parentNode = null;</span>
+<span class="fc" id="L168">    }</span>
+
+ 
+
+    // creating two Stacks of the tree All ParentNodes are safed in there
+    private void createStack() {
+<span class="fc" id="L174">        Queue&lt;Node&gt; queue = new Queue();</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">        if (root == null)  return;</span>
+        
+<span class="fc" id="L177">        queue.put(root);</span>
+        Node&lt;E&gt; tempNode;
+
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        while (!queue.isEmpty()) {</span>
+<span class="fc" id="L181">            tempNode = queue.get();</span>
+
+<span class="fc bfc" id="L183" title="All 2 branches covered.">            if (tempNode.leftChild != null) {</span>
+<span class="fc" id="L184">                parentStack.add(tempNode);</span>
+<span class="fc" id="L185">                copyStack.add(tempNode);</span>
+<span class="fc" id="L186">                queue.put(tempNode.leftChild);</span>
+            }
+            
+<span class="fc bfc" id="L189" title="All 2 branches covered.">            if (tempNode.rightChild != null) queue.put(tempNode.rightChild);</span>
+        }
+<span class="fc" id="L191">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

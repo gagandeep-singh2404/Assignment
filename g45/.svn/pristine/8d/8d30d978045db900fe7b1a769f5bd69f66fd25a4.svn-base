@@ -1,0 +1,77 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package appointmentplanner;
+
+/**
+ *
+ * @author GAGANDEEP
+ */
+public class Queue {
+
+    private Item first, last; 
+    private int counter; 
+
+    private static class Item<E> {
+
+        //TODO: implement a linked list inner class.
+        private Item<E> next;
+        private E item;
+
+        public Item(E item) {
+            // head
+            this.item = item;
+            this.next = null;
+        }
+
+        public Item(E item, Item<E> next) {
+            this.item = item;
+            this.next = next;
+        }
+
+        int sizeOfDummyHeadList(Item<E> list) {
+            //TODO: implement a linked list with a dummy head.
+            Item<E> newList = list;
+            int counter = 1;
+
+            while (newList != null) {
+                counter++;
+                newList = newList.next;
+            }
+
+            return counter;
+        }
+    }
+
+    public Queue() {
+        // dummy head
+        this.first.next = null; 
+        this.counter = 0; 
+    }
+
+    public boolean isEmpty() {
+        return first == null; 
+    }
+
+    public void put(Item item) {
+       
+        if (item != null) {
+            this.counter++;   
+        }
+    }
+
+    public Item get() {
+        return this.last;
+    }
+
+    public void removeAll() {
+        this.last.next = null; 
+        this.counter = 0; 
+    }
+
+    public int getSize() {
+        return counter;
+    }
+}

@@ -1,0 +1,222 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package quicksort;
+
+import java.util.Comparator;
+import java.util.Random;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Ignore;
+import sort.Queue;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class QuickSorterTest {
+
+    public QuickSorterTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    private Character[] data;
+    private Character[] sortedData;
+    private QuickSorter<Character> sorter;
+    private static final Comparator<Character> CHAR_C = (c1, c2) -> {
+        return c1 - c2;
+    };
+
+    @Test
+    public void testQSOneElement() {
+        data = new Character[]{'C'};
+        sortedData = data;
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSTwoElements() {
+        data = new Character[]{'W', 'S'};
+        sortedData = new Character[]{'S', 'W'};
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSElementsSorted() {
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new QuickSorter<>(sortedData);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQuickSorter() {
+        System.out.println("========DEFAULT TEST========");
+        data = new Character[]{
+            'P', 'A', 'B', 'X', 'W', 'P', 'P', 'V', 'P', 'D', 'P', 'C', 'Y', 'Z'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+        System.out.println("========END DEFAULT TEST========");
+    }
+
+    @Test
+    public void testQSSortedReverse() {
+        data = new Character[]{
+            'Z', 'Y', 'X', 'W', 'V', 'P', 'P', 'P', 'P', 'P', 'D', 'C', 'B', 'A'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSMiddlesEqual() {
+        data = new Character[]{
+            'W', 'A', 'B', 'X', 'P', 'P', 'P', 'P', 'P', 'D', 'V', 'C', 'Y', 'Z'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSEqualsLeft() {
+        data = new Character[]{
+            'P', 'P', 'P', 'P', 'P', 'W', 'A', 'B', 'X', 'D', 'V', 'C', 'Y', 'Z'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSEqualsRight() {
+        data = new Character[]{
+            'W', 'A', 'B', 'X', 'D', 'V', 'C', 'Y', 'Z', 'P', 'P', 'P', 'P', 'P'
+        };
+        sortedData = new Character[]{
+            'A', 'B', 'C', 'D', 'P', 'P', 'P', 'P', 'P', 'V', 'W', 'X', 'Y', 'Z'
+        };
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSAllSame() {
+        data = new Character[]{
+            'F', 'F', 'F', 'F', 'F', 'F', 'F'
+        };
+        sortedData = new Character[]{
+            'F', 'F', 'F', 'F', 'F', 'F', 'F'
+        };
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    @Test
+    public void testQSEmpty() {
+        data = new Character[0];
+        sortedData = new Character[0];
+        sorter = new QuickSorter<>(data);
+        compareQueueWithArray(sorter.sort(CHAR_C), sortedData);
+    }
+
+    private void compareQueueWithArray(Queue<Character> q, Character[] a) {
+        for (Character i : a) {
+            assertEquals(i, q.get());
+        }
+    }
+
+    @Ignore
+    @Test
+    public void testRandom() {
+
+        Integer[] i = new Integer[30];
+
+        Comparator<Integer> com = (n1, n2) -> {
+            return n1 - n2;
+        };
+        randomFill(i);
+        QuickSorter q = new QuickSorter<>(i);
+        q.sort(com);
+        System.out.println("after sort: ");
+    }
+
+    public void randomFill(Integer[] arr) {
+        Random r = new Random();
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = r.nextInt(100);
+        }
+    }
+
+    @Ignore
+    @Test
+    public void testSortIntegers() {
+        Integer[] numbers = {44, 2, 52, 77, 5, 65, 43, 1, 9};
+        QuickSorter<Integer> instance = new QuickSorter<>(numbers);
+
+        Comparator<Integer> comp = (a, b) -> {
+            return a - b;
+        };
+
+        Integer[] exp = {1, 2, 5, 9, 43, 44, 52, 65, 77};
+        Queue<Integer> expQ = new Queue<>();
+        for (Integer integer : exp) {
+            expQ.put(integer);
+        }
+
+        Queue<Integer> resQ = instance.sort(comp);
+        System.out.println("Expected: ");
+
+        System.out.println("Result: ");
+
+        Integer expInt;
+        Integer result;
+        for (Integer exp1 : exp) {
+            expInt = expQ.get();
+            result = resQ.get();
+            assertEquals(expInt, result);
+        }
+    }
+
+}

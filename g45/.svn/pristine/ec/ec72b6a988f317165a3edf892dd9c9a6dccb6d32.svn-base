@@ -1,0 +1,230 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import sort.Queue;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class SelectionSorterTest {
+
+    public SelectionSorterTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+//
+//     TODO add test methods here.
+//     The methods must be annotated with annotation @Test. For example:
+
+    @Test
+    public void hello() {
+    }
+
+    @Test
+    public void testConstructor() {
+        Integer[] a = {1, 2, 3, 4, 5, 6, 7};
+
+        SelectionSorter in = new SelectionSorter(a);
+
+        assertEquals(a.length, in.getSize());
+    }
+
+    @Test
+    public void testSortInteger() {
+        System.out.println("---------------SORT TEST INTEGER -------------");
+
+        Integer[] rightOrder = {1, 2, 3, 4, 5, 6, 7};
+        Integer[] wrongOrder = {4, 2, 7, 5, 3, 1, 6};
+
+        Comparator<Integer> com = (number1, number2) -> {
+            return number1 - number2;
+        };
+
+        SelectionSorter s = new SelectionSorter(wrongOrder);
+        assertEquals(wrongOrder.length, s.getSize());
+
+        Queue q = s.sort(com);
+
+        Object[] result = new Integer[wrongOrder.length];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = q.get();
+
+        }
+
+        assertArrayEquals(rightOrder, result);
+
+    }
+
+    @Test
+    public void testSortCorrectOrder() {
+        System.out.println("------------- correct Order----------------");
+        Integer[] rightOrder = {1, 2, 3, 4, 5, 6, 7};
+
+        Comparator com = (Comparator<Integer>) (Integer one, Integer two) -> {
+            if (one < two) {
+                return -1;
+            } else {
+                return 2;
+            }
+        };
+
+        SelectionSorter s = new SelectionSorter(rightOrder);
+        s.sort(com);
+        Queue q = s.sort(com);
+        Object[] result = new Integer[rightOrder.length];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = q.get();
+
+        }
+        assertArrayEquals(rightOrder, result);
+    }
+
+    @Test
+    public void testSortSameNumbers() {
+        System.out.println("-------------same numbers---------------");
+
+        Integer[] sameNumberCorrectOrder = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7};
+
+        Integer[] wrong = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
+
+        Comparator com = (Comparator<Integer>) (Integer one, Integer two) -> {
+            if (one < two) {
+                return -1;
+            } else {
+                return 2;
+            }
+        };
+
+        SelectionSorter s = new SelectionSorter(wrong);
+        assertEquals(wrong.length, s.getSize());
+
+        Queue q = s.sort(com);
+        Object[] result = new Integer[wrong.length];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = q.get();
+
+        }
+        assertArrayEquals(sameNumberCorrectOrder, result);
+    }
+
+    @Test
+    public void testSortString() {
+        System.out.println("------------------SORT TEST STRING ---------------");
+
+        String[] rightOrder = {"Alan", "Anna", "Daniel", "Hans", "Markus", "Rick", "Sebastian", "Xona"};
+
+        String[] wrongOrder = {"Anna", "Daniel", "Alan", "Xona", "Rick", "Sebastian", "Markus", "Hans"};
+
+        SelectionSorter s = new SelectionSorter(wrongOrder);
+
+        assertEquals(wrongOrder.length, s.getSize());
+
+        Comparator com = (Comparator<String>) (String one, String two) -> {
+            if (one.compareTo(two) < 0) {
+                return -1;
+            } else {
+                return 3;
+            }
+        };
+        Queue q = s.sort(com);
+
+        Object[] result = new String[wrongOrder.length];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = q.get();
+
+        }
+        assertArrayEquals(rightOrder, result);
+    }
+
+//    @Test
+//    public void testFromTeacher() {
+//        Queue result = new Queue();
+//
+//        Book[] books = new Book[12];
+//        books[0] = new Book("Ubik", "P.K.Dick", 1969);
+//        books[1] = new Book("Eye in the Sky", "P.K.Dick", 1957);
+//        books[2] = new Book("We Can Remember It for You Wholesale", "P.K.Dick", 1966);
+//        books[3] = new Book("A Maze of Death", "P.K.Dick", 1970);
+//        books[4] = new Book("A Scanner Darkly", "P.K.Dick", 1977);
+//        books[5] = new Book("VALIS", "P.K.Dick", 1981);
+//        books[6] = new Book("The Divine Invasion", "P.K.Dick", 1981);
+//        books[7] = new Book("Galactic Pot-Healer", "P.K.Dick", 1969);
+//        books[8] = new Book("The Crack in Space", "P.K.Dick", 1966);
+//        books[9] = new Book("Do Androids Dream of Electric Sheep?", "P.K.Dick", 1968);
+//        books[10] = new Book("The Minority Report", "P.K.Dick", 1956);
+//        books[11] = new Book("The Unteleported Man", "P.K.Dick", 1966);
+//
+//        Integer[] yearBooks = new Integer[books.length];
+//        yearBooks[0] = books[10].getYear();
+//        yearBooks[1] = books[1].getYear();
+//        yearBooks[2] = books[8].getYear();
+//        yearBooks[3] = books[2].getYear();
+//        yearBooks[4] = books[11].getYear();
+//        yearBooks[5] = books[9].getYear();
+//        yearBooks[6] = books[7].getYear();
+//        yearBooks[7] = books[0].getYear();
+//        yearBooks[8] = books[3].getYear();
+//        yearBooks[9] = books[4].getYear();
+//        yearBooks[10] = books[5].getYear();
+//        yearBooks[11] = books[6].getYear();
+//
+//        Object[] array = new String[yearBooks.length];
+//
+//        Comparator<Book> yearComparator = (o, t) -> {
+//            return o.getYear() - t.getYear();
+//        };
+//
+//        System.out.println("-------------------------New one -----------");
+//        Comparator<Book> titleComparator = (o, t) -> {
+//            return o.getTile().compareTo(t.getTile());
+//        };
+//
+//        SelectionSorter s = new SelectionSorter(books);
+//
+//        result = s.sort(titleComparator);
+//
+//        for (int i = 0; i < array.length; i++) {
+//            array[i] = result.get();
+//        }
+//
+//        System.out.println("--------------------------------------------");
+//
+//        result = s.sort(yearComparator);
+//
+//        for (int i = 0; i < array.length; i++) {
+//            array[i] = (String) result.get();
+//        }
+//        assertArrayEquals(yearBooks, array);
+//    }
+
+}

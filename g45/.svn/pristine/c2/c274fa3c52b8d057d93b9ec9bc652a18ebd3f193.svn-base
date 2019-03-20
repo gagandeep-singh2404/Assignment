@@ -1,0 +1,77 @@
+package appointmentplanner;
+
+//TODO
+/**
+ *
+ * @author ode
+ */
+public final class Appointment {
+
+    private String description;
+    private Time start, end;
+    private TimeSpan duration;
+
+    /**
+     * Constructs a new appointment with given description and duration. The
+     * priority (AFTER WEEK 4) is set to LOW.
+     *
+     * @param description The description of the appointment.
+     * @param duration The time span needed for this appointment.
+     */
+    public Appointment(String description, TimeSpan duration) {
+        this.description = description;
+        this.duration = duration;
+
+    }
+
+    /**
+     * @return The description of this appointment.
+     */
+    public String getDescription() {
+        //TODO
+        return this.description;
+    }
+
+    /**
+     * Sets the start time for this appointment.
+     *
+     * @param start The start time for this appointment.
+     */
+    public void setStart(Time start) {
+        Time duration = new Time(this.duration.getHours(),this.duration.getMinutes());
+        this.start = start;
+        this.end = this.start.addTime(duration); 
+    }
+
+    /**
+     * Returns the duration of this appointment.
+     *
+     * @return The duration of this appointment.
+     */
+    public TimeSpan getDuration() {
+        //TODO
+        return this.duration;
+    }
+
+    /**
+     * Returns the end time of this appointment. Returns null if the start time
+     * has not been set.
+     *
+     * @return Time when this appointment is done
+     */
+    public Time getEnd() {
+        //TODO
+        return end;
+    }
+
+    /**
+     * Returns the start time of this appointment.
+     *
+     * @return start The start time of this appointment.
+     */
+    public Time getStart() {
+        //TODO
+        return this.start;
+    }
+    //TODO AFTER WEEK 4
+}

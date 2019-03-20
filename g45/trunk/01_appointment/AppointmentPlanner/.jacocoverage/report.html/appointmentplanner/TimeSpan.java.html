@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TimeSpan.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;AppointmentPlanner&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">appointmentplanner</a> &gt; <span class="el_source">TimeSpan.java</span></div><h1>TimeSpan.java</h1><pre class="source lang-java linenums">package appointmentplanner;
+
+import java.util.Objects;
+
+/**
+ * TimeSpan is a period of time, consisting of a number of hours and a number of
+ * minutes. The biggest possible TimeSpan is 23 hours and 59 minutes.
+ *
+ * @author ode
+ */
+public class TimeSpan {
+
+    private Time span;
+
+    /**
+     * Creates a new TimeSpan. The pre-conditions on the parameters are the same
+     * as for the constructor of Time.
+     *
+     *
+     *
+     *
+     *
+     * @param hours hours part of the time span.
+     * @param minutes minutes part of the time span.
+     */
+<span class="fc" id="L26">    public TimeSpan(int hours, int minutes) {</span>
+        //TODO
+
+<span class="fc" id="L29">        this.span = Time.getProperTime(hours, minutes);</span>
+<span class="fc" id="L30">    }</span>
+
+    /**
+     * A constructor that takes a start- and end-time as definition of a certain
+     * time span. If from is not before to, the to time will be taken as the
+     * start time and the from time will be taken as the end time for the new
+     * time span!
+     *
+     * @param from The start time of the time span.
+     * @param to The end time of the time span.
+     */
+<span class="fc" id="L41">    public TimeSpan(Time from, Time to) {</span>
+
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (!from.isBefore(to)) {</span>
+<span class="fc" id="L44">            Time temp = from;</span>
+
+<span class="fc" id="L46">            from = to;</span>
+<span class="fc" id="L47">            to = temp;</span>
+
+        }
+
+<span class="fc" id="L51">        this.span = Time.getProperTime(to.getHours() - from.getHours(), to.getMinutes() - from.getMinutes());</span>
+
+<span class="fc" id="L53">    }</span>
+
+    /**
+     * Just a getter.
+     *
+     * @return the amount of hours in this time span.
+     */
+    public int getHours() {
+<span class="fc" id="L61">        return span.getHours();</span>
+    }
+
+    /**
+     * Just a getter.
+     *
+     * @return the amount of minutes in this time span.
+     */
+    public int getMinutes() {
+<span class="fc" id="L70">        return span.getMinutes();</span>
+    }
+
+    /**
+     * This method converts the complete time span into the corresponding number
+     * of minutes.
+     *
+     * @return The length of this time span in minutes.
+     */
+    public int getTimeSpanInMinutes() {
+        //TODO
+
+<span class="fc" id="L82">        return this.span.getHours() * 60 + this.span.getMinutes();</span>
+    }
+
+    /**
+     * Compares this time span to another one. Returns true is this time span is
+     * the smallest.
+     *
+     * @param timeSpan the time span to be compared to this time span.
+     * @return true if this time span is shorter than the timeSpan.
+     */
+    public boolean isSmallerThan(TimeSpan timeSpan) {
+
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        return this.getTimeSpanInMinutes() &lt; timeSpan.getTimeSpanInMinutes();</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (obj == null) {</span>
+<span class="fc" id="L100">            return false;</span>
+        }
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L103">            return false;</span>
+        }
+<span class="fc" id="L105">        final TimeSpan other = (TimeSpan) obj;</span>
+<span class="fc" id="L106">        return Objects.equals(this.span, other.span);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L111">        int hash = 5;</span>
+<span class="fc" id="L112">        hash = 83 * hash + Objects.hashCode(this.span);</span>
+<span class="fc" id="L113">        return hash;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L118">        return &quot;TimeSpan{&quot; + &quot;span=&quot; + span + '}';</span>
+    }
+
+    /**
+     * Adds a time span to this time span. The method takes care that the pre
+     * condition of the TimeSpan constructor is respected.
+     *
+     * @param timeSpan the time span to be added to this
+     */
+    public void addTimeSpan(TimeSpan timeSpan) {
+        //TODO
+<span class="fc" id="L129">        int hours = 0;</span>
+
+<span class="fc" id="L131">        int minutes = this.getTimeSpanInMinutes() + timeSpan.getTimeSpanInMinutes();</span>
+
+<span class="fc" id="L133">        this.span = Time.getProperTime(hours, minutes);</span>
+
+<span class="fc" id="L135">    }</span>
+
+    /**
+     * A static utility method for converting a time span into a number of
+     * minutes. The value is always positive whether 'from' is before 'to' or
+     * not.
+     *
+     * @param from Begin of time span.
+     * @param to End of time span.
+     * @return The number of minutes in this time interval.
+     */
+    public static int getMinutesInTimeSpan(Time from, Time to) {
+        //TODO
+<span class="fc" id="L148">        return new TimeSpan(from, to).getTimeSpanInMinutes();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

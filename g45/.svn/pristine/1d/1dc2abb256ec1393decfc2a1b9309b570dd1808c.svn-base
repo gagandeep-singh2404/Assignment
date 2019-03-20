@@ -1,0 +1,72 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class InsertionSorter<E> implements Sort {
+
+    private Queue result;
+    private Node<E> head;
+
+    private static class Node<E> {
+
+        //TODO: implement a linked list inner class.
+        private Node<E> next;
+        private E item;
+
+        public Node(E item) {
+            // head
+            this.item = item;
+            this.next = null;
+        }
+
+        public Node(E item, Node<E> next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+
+    public InsertionSorter(E[] e) {
+        System.out.println("e" + e.length);
+        head  = new Node(null); 
+        head.next = new Node(null);
+
+       
+        Node<E> nodeList = head;
+        for (int i = 0; i < e.length; i++) {
+            nodeList.next = new Node(e[i]);
+            nodeList = nodeList.next;
+        }
+
+    }
+
+    public int getSize() {
+
+        int counter = 0;
+
+        Node<E> nodeList = head; 
+        while (nodeList.next != null) {
+            counter++;
+            nodeList = nodeList.next;
+        }
+
+        return counter;
+    }
+
+    @Override
+    public Queue sort(Comparator comparator) {
+
+        return result;
+    }
+
+}

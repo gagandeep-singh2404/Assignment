@@ -1,0 +1,377 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package appointmentplanner;
+
+import appointmentplanner.util.Priority;
+import appointmentplanner.util.Queue;
+import appointmentplanner.util.Stack;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Ignore;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class DayTest {
+
+    public DayTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+//     @Test
+//     public void hello() {}
+//    @Test
+//    public void sizeOfDummyHeadListTest() {
+//        Day montag = new Day(1);
+//        assertEquals(1, montag.getNrOfAppointments());
+//    }
+//    @Test
+//    public void canAddAppointmentOfDuration() {
+//
+//        Day monday = new Day(1);
+//        TimeSpan meetingHours = new TimeSpan(4, 30);
+//        assertFalse(monday.canAddAppointmentOfDuration(meetingHours));
+//
+//    }
+//
+//    @Test
+//    public void containsAppointmentWithDescriptionTest() {
+//        Day monday = new Day(1);
+//        String description = "lunch break";
+//        assertTrue(monday.containsAppointmentWithDescription(description));
+//
+//    }
+//
+//    @Test
+//    public void removeAppointmentTest() {
+//        Day monday = new Day(1);
+//        String description = "lunch break";
+//        monday.removeAppointment(description);
+//
+//        assertFalse(monday.containsAppointmentWithDescription(description));
+//    }
+//    
+//     @Ignore
+//    @Test
+//    public void removeMultipleTimesAppointmentTest() {
+//        Day monday = new Day(1);
+//        Time start = new Time(10, 30);
+//        Time end = new Time(12, 00);
+//        int appointmentNumberBefore = monday.getNrOfAppointments();
+//
+//        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+//        funWithTobias.setStart(start);
+//        // add firstAppointment 
+//        monday.addAppointmentWithStartTimeSet(funWithTobias);
+//
+//        // remove appointment 
+//        monday.removeAppointment("Netflix and Chill");
+//        // add second Appointment 
+//        Appointment funWithLuca = new Appointment("Netflix and", new TimeSpan(new Time(13, 40), new Time(13, 55)));
+//        funWithLuca.setStart(new Time(13, 40));
+//        monday.addAppointmentWithStartTimeSet(funWithLuca);
+//        // remove second Appointment 
+//        System.out.println(appointmentNumberBefore);
+//        System.out.println(monday.getNrOfAppointments());
+//        assertEquals(appointmentNumberBefore + 1, monday.getNrOfAppointments());
+//
+//        monday.removeAppointment("Netflix and");
+//        // add third appointment 
+//
+//        Appointment funWith = new Appointment("Netflix and", new TimeSpan(new Time(10, 30), new Time(10, 35)));
+//        monday.addAppointment(funWith);
+//
+//        int appointmentNumberAfter = monday.getNrOfAppointments();
+//        System.out.println(appointmentNumberAfter);
+//        assertEquals(appointmentNumberBefore + 1, appointmentNumberAfter);
+//    }
+////    
+//    // ALl THESE TEST ARE WITH STARTTIME 
+// @Ignore
+//    @Test
+//    public void addAppointmentWithStartTimeTest() {
+//        Day monday = new Day(1);
+//        Time start = new Time(10, 30);
+//        Time end = new Time(12, 00);
+//        // create Appointment and set Start
+//        Appointment javaCourse = new Appointment("Java Course", new TimeSpan(start, end));
+//        javaCourse.setStart(start);
+//        //  add Appointment and get the Counter Before add
+//        int appointmentNumberBefore = monday.getNrOfAppointments();
+//        monday.addAppointmentWithStartTimeSet(javaCourse);
+//        //  look if increase of one 
+//        assertEquals(appointmentNumberBefore + 1, monday.getNrOfAppointments());
+//
+//    }
+// @Ignore
+//    @Test
+//    public void addAppointmentStartWithoutStartTimeTest() {
+//        Day monday = new Day(1);
+//        Time start = new Time(10, 30);
+//        Time end = new Time(12, 00);
+//        //  create Appointment and set Start
+//        Appointment javaCourse = new Appointment("Java Course", new TimeSpan(start, end));
+//        // add Appointment and get the Counter Before add
+//        int appointmentNumberBefore = monday.getNrOfAppointments();
+//        monday.addAppointmentWithStartTimeSet(javaCourse);
+//        // look if increase of one 
+//        assertEquals(appointmentNumberBefore, monday.getNrOfAppointments());
+//
+//    }
+// @Ignore
+//    @Test
+//    public void addAppointmentStartDescriptionUniqueTest() {
+//        Day monday = new Day(1);
+//        Time start = new Time(10, 30);
+//        Time end = new Time(12, 00);
+//        //  create Appointment and set Start
+//        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+//        funWithTobias.setStart(start);
+//        // add Appointment and get the Counter Before add
+//        int appointmentNumberBefore = monday.getNrOfAppointments();
+//        monday.addAppointmentWithStartTimeSet(funWithTobias);
+//        // look if increase of one 
+//
+//        assertEquals(appointmentNumberBefore + 1, monday.getNrOfAppointments());
+//
+//    }
+// @Ignore
+//    @Test
+//    public void notAddAppointmentStartWithSameDescriptionTest() {
+//        // first Appointment 
+//        Day monday = new Day(1);
+//        Time start = new Time(10, 30);
+//        Time end = new Time(12, 00);
+//
+//        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+//        funWithTobias.setStart(start);
+//
+//        monday.addAppointmentWithStartTimeSet(funWithTobias);
+//        int appointmentNumberBefore = monday.getNrOfAppointments();
+//
+//        //second Appointment with same Description 
+//        Appointment funWithLuca = new Appointment("Netflix and Chill", new TimeSpan(new Time(10, 30), new Time(10, 35)));
+//        funWithLuca.setStart(new Time(10, 30));
+//
+//        monday.addAppointmentWithStartTimeSet(funWithLuca);
+//        int appointmentNumberAfter = monday.getNrOfAppointments();
+//
+//        assertEquals(appointmentNumberBefore, appointmentNumberAfter);
+//    }
+// @Ignore
+//    @Test
+//    public void overFourHoursTimeSpanTest() {
+//        Day monday = new Day(1);
+//        Time start = new Time(10, 30);
+//        Time end = new Time(17, 49); // TimeSpan bigger than 4 hours 
+//
+//        int appointmentNumberBefore = monday.getNrOfAppointments();
+//        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+//        funWithTobias.setStart(start);
+//
+//        monday.addAppointmentWithStartTimeSet(funWithTobias);
+//        int appointmentNumberAfter = monday.getNrOfAppointments();
+//        assertEquals(appointmentNumberBefore, appointmentNumberAfter);
+//    }
+////    
+// @Ignore
+//    @Test
+//    public void appointmentIsOverLunchbreakStartTest() {
+//        Day monday = new Day(1);
+//        Time start = new Time(16, 40);
+//        Time end = new Time(17, 22); // TimeSpan bigger than 4 hours 
+//
+//        int appointmentNumberBefore = monday.getNrOfAppointments();
+//        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+//        funWithTobias.setStart(start);
+//
+//        monday.addAppointmentWithStartTimeSet(funWithTobias);
+//
+//        Appointment fun = new Appointment("Netflix", new TimeSpan(new Time(10, 30), new Time(12, 00)));
+//        fun.setStart(new Time(10, 30));
+//
+//        monday.addAppointmentWithStartTimeSet(fun);
+//        int appointmentNumberAfter = monday.getNrOfAppointments();
+//        TimeGap[] timegaps = monday.getAvailableTimeGaps();
+//
+//        assertEquals(appointmentNumberBefore + 2, appointmentNumberAfter);
+//
+//    }
+// @Ignore
+//    @Test
+//    public void appointmentIsOverLunchbreakEndTest() {
+//        Day monday = new Day(1);
+//        Time start = new Time(10, 30);
+//        Time end = new Time(13, 49); //  
+//
+//        int appointmentNumberBefore = monday.getNrOfAppointments();
+//        Appointment funWithTobias = new Appointment("Netflix and Chill", new TimeSpan(start, end));
+//        funWithTobias.setStart(start);
+//
+//        monday.addAppointmentWithStartTimeSet(funWithTobias);
+//        int appointmentNumberAfter = monday.getNrOfAppointments();
+//        assertEquals(appointmentNumberBefore, appointmentNumberAfter);
+//
+//    }
+//
+//    @Test
+//    public void getAvailableTimeGapsTest() {
+//
+//        Appointment app1 = new Appointment("Test one", new TimeSpan(new Time(10, 30), new Time(12, 00)));
+//        Day monday = new Day(1);
+//
+//        TimeGap[] result = monday.getAvailableTimeGaps();
+//        assertEquals(2, result.length);
+//
+//    }
+//
+//    @Ignore
+//    @Test
+//    public void getAppointmentOfPriority() {
+//
+//        Day monday = new Day(1);
+//        Stack<Appointment> stack = new Stack(); 
+//        Appointment one = new Appointment("1", new TimeSpan(0, 20), Priority.MEDIUM);
+//        Appointment two = new Appointment("2", new TimeSpan(0, 20));
+//        Appointment three = new Appointment("3", new TimeSpan(0, 20), Priority.MEDIUM);
+//        Appointment four = new Appointment("4", new TimeSpan(0, 20), Priority.HIGH);
+//        Appointment five = new Appointment("5", new TimeSpan(0, 20));
+//        Appointment six = new Appointment("6", new TimeSpan(0, 20), Priority.HIGH);
+//        Appointment seven = new Appointment("7", new TimeSpan(0, 20));
+//        Appointment eight = new Appointment("8", new TimeSpan(0, 20));
+//        Appointment nine = new Appointment("9", new TimeSpan(0, 20));
+//        Appointment ten = new Appointment("10", new TimeSpan(0, 20));
+//
+//        monday.addAppointment(one);
+//        monday.addAppointment(two);
+//        monday.addAppointment(three);
+//        monday.addAppointment(four);
+//        monday.addAppointment(five);
+//        monday.addAppointment(six);
+//        monday.addAppointment(seven);
+//        monday.addAppointment(eight);
+//        monday.addAppointment(nine);
+//        monday.addAppointment(ten);
+//
+//        assertEquals(11, monday.getNrOfAppointments());
+//        
+//        stack = monday.getAppointmentsOfPriority(Priority.LOW); 
+// 
+//        assertEquals(7, stack.size());
+//        assertEquals(two, stack.pop());
+//        
+//        stack = monday.getAppointmentsOfPriority(Priority.MEDIUM); 
+//        
+//        assertEquals(2, stack.size());
+//        assertEquals(one, stack.pop());
+//        
+//       stack = monday.getAppointmentsOfPriority(Priority.HIGH); 
+//       
+//        assertEquals(2, stack.size());
+//        assertEquals(four, stack.pop());
+//    }
+//    
+//    
+    @Test
+    public void testimesti() {
+        Time[] start = new Time[7];
+        Day day = new Day(1);
+
+        start[0] = new Time(8, 30);
+        start[1] = new Time(9, 30);
+        start[2] = new Time(10, 30);
+        start[3] = new Time(11, 30);
+        start[4] = new Time(13, 30);
+        start[5] = new Time(14, 30);
+        start[6] = new Time(15, 30);
+
+        Time[] end = new Time[7];
+
+        end[0] = new Time(9, 00);
+        end[1] = new Time(10, 00);
+        end[2] = new Time(11, 00);
+        end[3] = new Time(12, 00);
+        end[4] = new Time(14, 00);
+        end[5] = new Time(15, 00);
+        end[6] = new Time(16, 00);
+
+        Appointment one = new Appointment("one", new TimeSpan(start[0], end[0]));
+        one.setStart(start[0]);
+
+        Appointment two = new Appointment("two", new TimeSpan(start[1], end[1]));
+        two.setStart(start[1]);
+        Appointment three = new Appointment("three", new TimeSpan(start[2], end[2]));
+        three.setStart(start[2]);
+        Appointment four = new Appointment("four", new TimeSpan(start[3], end[3]));
+        four.setStart(start[3]);
+        Appointment five = new Appointment("five", new TimeSpan(start[4], end[4]));
+        five.setStart(start[4]);
+        Appointment six = new Appointment("six", new TimeSpan(start[5], end[5]));
+        six.setStart(start[5]);
+        Appointment seven = new Appointment("seven", new TimeSpan(start[6], end[6]));
+        seven.setStart(start[6]);
+        Appointment eight = new Appointment("eight", new TimeSpan(0, 20));
+        Appointment nine = new Appointment("nine", new TimeSpan(1, 50));
+        Appointment ten = new Appointment("ten", new TimeSpan(0, 20));
+        Appointment eleven = new Appointment("eleven", new TimeSpan(0, 20));
+        Appointment twelve = new Appointment("twelve", new TimeSpan(0, 20));
+        Appointment thirteen = new Appointment("thirteen", new TimeSpan(0, 20));
+        Appointment fourteen = new Appointment("fourteen", new TimeSpan(0, 20));
+        Appointment fifteen = new Appointment("fifteen", new TimeSpan(0, 20));
+        Appointment sixteen = new Appointment("sixteen", new TimeSpan(0, 20));
+        Appointment seventeen = new Appointment("seventeen", new TimeSpan(0, 20));
+
+        day.addAppointmentWithStartTimeSet(one);
+        System.out.println(" 1day.getAvailableTimeGaps(); " + day.getAvailableTimeGaps().length);
+        day.addAppointmentWithStartTimeSet(two);
+        System.out.println(" 2day.getAvailableTimeGaps(); " + day.getAvailableTimeGaps().length);
+        day.addAppointmentWithStartTimeSet(three);
+        System.out.println(" 3day.getAvailableTimeGaps(); " + day.getAvailableTimeGaps().length);
+        day.addAppointmentWithStartTimeSet(four);
+        System.out.println(" 4day.getAvailableTimeGaps(); " + day.getAvailableTimeGaps().length);
+        day.addAppointmentWithStartTimeSet(five);
+        System.out.println(" 5day.getAvailableTimeGaps(); " + day.getAvailableTimeGaps().length);
+        day.addAppointmentWithStartTimeSet(six);
+        System.out.println(" 6day.getAvailableTimeGaps(); " + day.getAvailableTimeGaps().length);
+        day.addAppointmentWithStartTimeSet(seven);
+        System.out.println(" 7day.getAvailableTimeGaps(); " + day.getAvailableTimeGaps().length);
+          day.addAppointment(eight);
+          day.addAppointment(nine);
+//        day.addAppointment(ten);
+//        day.addAppointment(eleven);
+//        day.addAppointment(twelve);
+//        day.addAppointment(thirteen);
+//        day.addAppointment(fourteen);
+//        day.addAppointment(fifteen);
+//        day.addAppointment(sixteen);
+//        day.addAppointment(seventeen);
+System.out.println(" 8day.getAvailableTimeGaps(); " + day.getAvailableTimeGaps().length);
+
+    }
+}

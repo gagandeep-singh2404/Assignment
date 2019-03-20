@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InsertionSorter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Sorting&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">basicsort</a> &gt; <span class="el_source">InsertionSorter.java</span></div><h1>InsertionSorter.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class InsertionSorter&lt;E&gt; extends SuperSort&lt;E&gt; {
+
+    // call the constructor of the super class
+    public InsertionSorter(E[] e) {
+<span class="fc" id="L20">        super(e);</span>
+
+<span class="fc" id="L22">    }</span>
+
+    @Override
+    public int getSize() {
+<span class="fc" id="L26">        return super.getSize();</span>
+    }
+
+    @Override
+    public Queue&lt;E&gt; sort(Comparator comparator) {
+<span class="fc" id="L31">        Queue result = new Queue();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (getSize() == 0) return result; </span>
+        // currentNode is firstItem
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (Node&lt;E&gt; currentNode = head.next; currentNode.next != null;) {</span>
+<span class="fc" id="L35">            boolean hasbeenSorted = true;</span>
+            // if node.next is not null and node.next equals currentNode.next. go one more to the right 
+<span class="pc bpc" id="L37" title="1 of 4 branches missed.">            for (Node&lt;E&gt; node = head; node.next != null &amp;&amp; node.next != currentNode.next; node = node.next) {</span>
+                // if currentNode.next item is smaller than node.next.item 
+<span class="fc bfc" id="L39" title="All 2 branches covered.">                if (comparator.compare(currentNode.next.item, node.next.item) &lt; 0) {</span>
+                    // exchange these too items
+<span class="fc" id="L41">                    exchange(currentNode, node);</span>
+                    // set hasbeenSorted to false 
+<span class="fc" id="L43">                    hasbeenSorted = false;</span>
+<span class="fc" id="L44">                    break;</span>
+                }
+            }
+            // if hasbeenSorted is true 
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            if (hasbeenSorted) {</span>
+<span class="fc" id="L49">                currentNode = currentNode.next;</span>
+            }
+<span class="fc" id="L51">        }</span>
+
+        // build the result Queue 
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        for (Node&lt;E&gt; node = head; node.next != null; node = node.next) {</span>
+<span class="fc" id="L55">            result.put(node.next.item);</span>
+        }
+
+<span class="fc" id="L58">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

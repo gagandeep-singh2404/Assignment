@@ -1,0 +1,409 @@
+package appointmentplanner;
+
+//TODO
+import appointmentplanner.util.Priority;
+import appointmentplanner.util.Queue;
+import appointmentplanner.util.Stack;
+import java.util.Arrays;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public final class Day {
+
+    public final static String[] DAYS = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    public final static Time DAY_START = new Time(8, 30);
+    public final static Time DAY_END = new Time(17, 30);
+    public final static Time LUNCH_TIME = new Time(12, 30);
+    public final static TimeSpan DAY_PART = new TimeSpan(4, 0);
+    public final static Appointment LUNCH_BREAK = new Appointment("lunch break", new TimeSpan(1, 0));
+    public final static TimeSpan StartAndEnd = new TimeSpan(0, 0);
+    public final static Appointment START_OF_DAY = new Appointment("Start of the Day", StartAndEnd,Priority.NOTOUCH);
+    public final static String END_DESCRIPTION = "End of the Day";
+    public final static Appointment END_OF_DAY = new Appointment(END_DESCRIPTION, StartAndEnd,Priority.NOTOUCH);
+
+    private final static Time AFTERNOON_START = new Time(13, 30);
+    private Node<Appointment> appointments = null;
+    private final int nr;
+
+    /**
+     * The number of appointments added by the user.
+     */
+    private int nrOfAppointments;
+
+    private static class Node<E> {
+
+        //TODO: implement a linked list inner class.
+        private Node<E> next;
+        private E item;
+
+        public Node(E item) {
+            // head
+            this.item = item;
+            this.next = null;
+        }
+
+        public Node(E item, Node<E> next) {
+            this.item = item;
+            this.next = next;
+        }
+
+        int sizeOfDummyHeadList(Node<E> list) {
+            //TODO: implement a linked list with a dummy head.
+            Node<E> newList = list;
+            int counter = 1;
+
+            while (newList != null) {
+                counter++;
+                newList = newList.next;
+            }
+
+            return counter;
+        }
+    }
+
+    /**
+     * Creates a Day object with no appointments. A week does not contain a
+     * weekend: no appointments on Saturdays or Sundays. Days of the week are
+     * numbered as follows: Monday = 1 .. Friday = 5.
+     *
+     * @param nr day of the week: Monday = 1 .. Sunday = 7.
+     */
+    public Day(int nr) {
+        this.nr = nr;
+        LUNCH_BREAK.setStart(LUNCH_TIME);
+        this.nrOfAppointments = 0;
+        //TODO initialize datastructure for the appointments.
+
+        if (nr >= 1 && nr <= 5) {
+
+            END_OF_DAY.setStart(DAY_END);
+            Node<Appointment> dayEnd = new Node<>(END_OF_DAY);
+
+            START_OF_DAY.setStart(DAY_START);
+            Node<Appointment> dayStart = new Node<>(START_OF_DAY);
+            // DummyHead
+            this.appointments = new Node<>(null);
+
+            this.appointments.next = dayStart;
+            LUNCH_BREAK.setStart(LUNCH_TIME);
+            this.appointments.next.next = new Node<>(LUNCH_BREAK, dayEnd);
+
+            this.nrOfAppointments++; 
+//            this.START_OF_DAY.setStart(DAY_START);
+//            this.addAppointmentWithStartTimeSet(START_OF_DAY);
+//            this.END_OF_DAY.setStart(DAY_END);
+//            this.addAppointmentWithStartTimeSet(END_OF_DAY);
+
+        }
+    }
+
+    /**
+     * Returns the number of appointments on this day, including the lunch break
+     * which is always present.
+     *
+     * @return Number of appointments on this day!
+     */
+    public int getNrOfAppointments() {
+        return this.nrOfAppointments;
+    }
+
+    // METHODS INTRODUCED IN WEEK 3 OF APPOINTMENT PROJECT
+    /**
+     * Returns the name of the day in English. So if number of this day is 1,
+     * the return value is "Monday" etc.
+     *
+     * @return String holding name of this day.
+     */
+    public String getNameOfTheDay() {
+        return DAYS[nr - 1];
+    }
+
+    /**
+     * Checks if an appointment of given duration can be made. Returns true if
+     * an appointment can be made, false otherwise.
+     *
+     * @param duration time length of appointment
+     * @return true if there is a gap of at least the size of duration in the
+     * planning.
+     */
+    public boolean canAddAppointmentOfDuration(TimeSpan duration) {
+
+        TimeGap[] timegaps = this.getAvailableTimeGaps();
+
+        for (TimeGap timegap : timegaps) {
+
+            if (duration.isSmallerThan(timegap.getLength())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds a new appointment to this day. The description of the appointment
+     * should be unique for this day. Objective is to insert an appointment in
+     * such a way that the list keeps all of its appointments ordered in time.
+     * <pre>
+     * pre:  The start time of the appointment has been set.<br>
+     *       The start time lies outside the time spans of other appointments.
+     *       The appointment does not overlap with existing appointments on this day.
+     * post: The appointment has been added to this day.
+     * </pre> In case the pre-conditions are not fulfilled, the appointment will
+     * not be added to this day.
+     *
+     * @param appointment start time of the appointment has been set in advance
+     */
+    public void addAppointmentWithStartTimeSet(Appointment appointment) {
+        //TODO
+        Time[] allStartTimes = this.getAvailableStartTimesForAppointmentsOfDuration(appointment.getDuration());
+        Node<Appointment> appointmentNode = new Node(appointment);
+        Node<Appointment> nodeList = appointments;
+
+        if (!verification(appointment)) {
+            return;
+        }
+
+        for (int i = 0; i < allStartTimes.length; i++) {
+
+            if (appointment.getStart().equals(allStartTimes[i])) {
+                Time endTime = nodeList.next.item.getEnd();
+
+                while (nodeList.next != null) {
+
+                    Appointment nextAppointment = nodeList.next.item;
+
+                    if ((endTime.isBefore(appointment.getStart()) || appointment.getStart().equals(endTime)) && appointment.getEnd().isBefore(nextAppointment.getStart())) {
+
+                        Node<Appointment> tempNode = nodeList.next;
+                        nodeList.next = appointmentNode;
+                        appointmentNode.next = tempNode;
+
+                        this.nrOfAppointments++;
+
+                        return;
+                    }
+                    nodeList = nodeList.next;
+                    endTime = nodeList.item.getEnd();
+                }
+            }
+        }
+    }
+
+    private boolean verification(Appointment appointment) {
+
+        if (appointment.getStart() == null) {
+            System.out.println("Start Problem");
+            return false;
+        }
+        if (appointment.getDuration().getTimeSpanInMinutes() > DAY_PART.getTimeSpanInMinutes()) {
+            System.out.println("Duration Problem");
+            return false;
+        }
+        if (appointment.getStart().isBefore(DAY_START) && DAY_END.isBefore(appointment.getEnd())) {
+            System.out.println("Is Before Problem");
+            return false;
+
+        }
+        if (this.containsAppointmentWithDescription(appointment.getDescription())) {
+            System.out.println("Description Problem");
+            return false;
+        }
+        if (!this.canAddAppointmentOfDuration(appointment.getDuration())) {
+            System.out.println("Duration is too big");
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Adds a new appointment to this day. The method searches a time gap for an
+     * appointment of given duration. This will be done according to the first
+     * fit approach. The description of the appointment should be unique for
+     * this day. The start time will be set by this method, and the appointment
+     * is added to this day. The result is that the list of appointments in this
+     * class is ordered in time.
+     *
+     * @param appointment The appointment that will be added to this day.
+     */
+    public void addAppointment(Appointment appointment) {
+        //TODO
+
+        Time[] startTimes = new Time[nrOfAppointments];
+        startTimes = this.getAvailableStartTimesForAppointmentsOfDuration(appointment.getDuration());
+
+        appointment.setStart(startTimes[0]);
+        this.addAppointmentWithStartTimeSet(appointment);
+
+    }
+
+    /**
+     * Removes the appointment with the given description.
+     *
+     * @param description The description of the appointment for which a search
+     * has to be done.
+     */
+    public void removeAppointment(String description) {
+        //TODO
+
+        Node<Appointment> nextNode = appointments.next;
+
+        while (nextNode.next != null) {
+
+            if (nextNode.next.item.getDescription().endsWith(description)) {
+
+                nextNode.next = nextNode.next.next;
+                this.nrOfAppointments--;
+            }
+
+            nextNode = nextNode.next;
+        }
+
+    }
+
+    /**
+     * Checks if an appointment with given description exists.
+     *
+     * @param description The description of the appointment for which this
+     * method finds out if it exists. Each description is unique for
+     * appointments on the same day.
+     *
+     * @return Returns true if an appointment with given description exists.
+     */
+    public boolean containsAppointmentWithDescription(String description) {
+        //TODO
+        Node<Appointment> listOfAppointments = appointments.next;
+
+        do {
+
+            if (listOfAppointments.item.getDescription().equals(description)) {
+                return true;
+            }
+
+            listOfAppointments = listOfAppointments.next;
+        } while (listOfAppointments != null);
+
+        return false;
+    }
+
+    /**
+     * This method finds all start times that are available on this day for an
+     * appointment of given duration.
+     *
+     * @param duration the requested duration for an appointment
+     * @return an array of start times on which an appointment can be scheduled
+     */
+    public Time[] getAvailableStartTimesForAppointmentsOfDuration(TimeSpan duration) {
+
+        TimeGap[] timegaps = new TimeGap[nrOfAppointments + 1];
+        timegaps = this.getAvailableTimeGaps();
+        Time[] times = new Time[0];
+
+        for (TimeGap timegap : timegaps) {
+
+            if (duration.isSmallerThan(timegap.getLength())) {
+                Time currentTime = timegap.getStart();
+                int availableTime = timegap.getLength().getTimeSpanInMinutes() - duration.getTimeSpanInMinutes();
+                Time[] tempTime = new Time[times.length + availableTime + 1];
+                System.arraycopy(times, 0, tempTime, 0, times.length);
+
+                for (int i = 0; i <= availableTime; i++) {
+                    tempTime[times.length + i] = currentTime;
+                    currentTime = currentTime.addTime(new Time(0, 1));
+                }
+
+                times = tempTime;
+            }
+
+        }
+
+        for (int i = 0; i < times.length; i++) {
+            // System.out.println("Time starts at: " + times[i]);
+
+        }
+        return times;
+    }
+
+    // METHODS INTRODUCED IN WEEK 4 OF APPOINTMENT PROJECT
+    /**
+     * This method gives a list of available time gaps on this day. Each time
+     * gap holds the available time between appointments, and possibly at the
+     * begin and at the end of the day.
+     *
+     * @return an array of TimeGaps containing all available time slots that are
+     * available on this day.
+     */
+    public TimeGap[] getAvailableTimeGaps() {
+        //TODO
+
+        int counter = 0;
+        TimeGap[] timegaps = new TimeGap[20];
+        TimeGap[] restgap;
+        Time start;
+        Time end;
+        Node<Appointment> currend = appointments.next;
+
+        for (Node<Appointment> i = appointments.next; i.next != null; i = i.next) {
+
+            System.out.println(i.item.getDescription());
+
+            if (i.item.getEnd().isBefore(i.next.item.getStart())) {
+                start = i.item.getEnd();
+                end = i.next.item.getStart();
+                timegaps[counter++] = new TimeGap(start, end);
+            }
+
+        }
+        restgap = new TimeGap[counter];
+
+        for (int i = 0; i < counter; i++) {
+            restgap[i] = timegaps[i];
+            // System.out.println("restgap " + restgap[i].getStart() + " " + restgap[i].getEnd());
+
+        }
+        return restgap;
+    }
+
+    public Queue<Appointment> getAppointments() {
+
+        Queue q = new Queue();
+        Node<Appointment> newNode = appointments.next;
+
+        while (newNode.next != null) {
+            if (!newNode.next.item.getDescription().equals(END_DESCRIPTION)) {
+
+                q.put(newNode.item);
+
+            }
+            newNode = newNode.next;
+        }
+
+        return q;
+    }
+    
+    
+   public Stack getAppointmentsOfPriority(Priority priority){
+       Stack firstStack = new Stack(); 
+       Stack secondStack = new Stack(); 
+       
+       Node<Appointment> newNode = appointments.next; 
+       
+       while (newNode.next != null) {           
+           
+           if (priority.equals(newNode.item.getPriority())) {
+               firstStack.push(newNode.item);
+           }
+           newNode = newNode.next; 
+       }
+       
+       while (firstStack.getSize() != 0) {           
+           
+           secondStack.push(firstStack.pop());
+       }
+       
+       return secondStack; 
+       
+   }
+}

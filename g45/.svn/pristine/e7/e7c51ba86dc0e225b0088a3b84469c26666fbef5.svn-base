@@ -1,0 +1,223 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package quicksort;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class QuickSorter<E> implements Sort {
+
+    private int counter = 0;
+    private Node<E> head = new Node<>(null);
+    private Node<E> tail = new Node<>(null);
+    private Comparator<E> com;
+
+    private class Node<E> {
+
+        private E item;
+        private Node<E> next;
+        private Node<E> prev;
+
+        public Node(E item) {
+            this.item = item;
+            this.next = null;
+        }
+
+        public Node(E item, Node<E> next, Node<E> prev) {
+            this.item = item;
+            this.prev = prev;
+            this.next = next;
+        }
+    }
+
+    public QuickSorter(E[] e) {
+
+        head.next = new Node<>(null);
+        Node<E> nodeList = head.next;
+        Node<E> prev = head;
+        
+        for (int i = 0; i < e.length; i++) {
+            nodeList = new Node<E>(e[i], this.tail, prev);
+
+            prev.next = nodeList;
+            prev = nodeList;
+
+            this.tail.prev = nodeList;
+            nodeList = nodeList.next;
+        }
+    }
+
+    public int getSize() {
+        Node<E> temp = head.next;
+        for (; temp.next != null; temp = temp.next) {
+            counter++;
+        }
+        return counter;
+    }
+
+  /**
+   * Sorting method in which i 
+   * 
+   * @param comparator
+   * @return a sorted Queue 
+   */
+    @Override
+    public Queue sort(Comparator comparator) {
+        Queue<E> result = new Queue();
+        com = comparator;
+        int size = getSize();
+        
+        if (size == 0) return result; 
+        if(size == 1 ) return getQueue(result);
+        
+        Node<E> p = this.getPivot(size, head.next, tail.prev);
+        this._quickSort(head.next, p);
+
+        return getQueue(result);
+    }
+    /**
+    * recursive _quicksort method which is used to sort the nodes items in
+    * @param firstNode first Node of a partition 
+    * @param lastNode last Node of a partition 
+    */
+    private void _quickSort(Node<E> firstNode, Node<E> lastNode) {
+        if (firstNode == null || isBeforeOrEqual(lastNode, firstNode))
+            return;
+
+        Node<E> pivot = lastNode, smaller = firstNode.prev, bigger = lastNode;
+        Node<E> exLeft = smaller, exRight = bigger, tempNode;
+
+        while (true) {
+
+            // go left to right 
+            do {
+                smaller = smaller.next;
+            } while (isLess(smaller, pivot));
+
+            // go right to left
+            do {
+                if (bigger == firstNode) break;
+                bigger = bigger.prev;
+            } while (isLess(pivot, bigger));
+
+            // 
+            if (isBeforeOrEqual(bigger, smaller)) break;
+
+            exchange(smaller, bigger);
+
+            // check if pivot equals smaller
+            if (isEqual(pivot, smaller)) { exLeft = exLeft.next; exchange(exLeft, smaller); }
+
+            // check if pivot equals bigger i 
+            if (isEqual(pivot, bigger)) { exRight = exRight.prev; exchange(exRight, bigger);}
+
+        }
+        
+        // out of the loop swap lastNode and smaller so you can start with the 3 way partioning 
+        // we are changing here smaller and bigger because it could be that lo and hi are on the same Node, 
+        exchange(smaller, lastNode);
+        bigger = smaller.prev;
+        smaller = smaller.next;
+
+        // here we are swapping all items which are equals to pivot in middle from the left side
+        for (tempNode = firstNode; tempNode != exLeft.next; tempNode = tempNode.next, bigger = bigger.prev) {
+            this.exchange(tempNode, bigger);
+        }
+        // here too from the right side 
+        for (tempNode = lastNode.prev; tempNode != exRight.prev; tempNode = tempNode.prev, smaller = smaller.next) {
+            this.exchange(tempNode, smaller);
+        }
+        
+        _quickSort(firstNode, bigger);
+        _quickSort(smaller, lastNode);
+
+    }
+
+    /**
+     * first check if secondNode is smaller than lastNode
+     * secondNode is smaller than firstNode
+     * lastNode is smaller than firstNode
+     * @param size size of the noddList
+     * @param com
+     * @return pivot
+     */
+    
+    private Node<E> getPivot(int size, Node<E> firstNode, Node<E> lastNode) {
+        Node<E> secondNode = firstNode.next;
+        // get The Middle Value of the List
+       
+        if (isLess(secondNode, lastNode)) this.exchange(secondNode, lastNode);
+        if (isLess(secondNode, firstNode)) this.exchange(firstNode, secondNode);
+        if (isLess(lastNode, firstNode)) this.exchange(firstNode, lastNode);
+
+        return lastNode;
+    }
+
+    /**
+     * Helper method to exchange two items within these two nodes
+     * @param first first node 
+     * @param second  second Node 
+     */
+    private void exchange(Node<E> first, Node<E> second) {
+        E temp = first.item;
+        
+        first.item = second.item;
+        second.item = temp;
+
+    }
+
+    
+    /**
+     * check if first Node item  is smaller than second Node item
+     * @param first first Node which item is compared 
+     * @param second second node which item is compared 
+     * @return boolean 
+     */
+    private boolean isLess(Node<E> first, Node<E> second) {
+        return this.com.compare(first.item, second.item) < 0;
+    }
+
+    
+    /**
+     * checking if the first Node item  and second Node item are equal
+     * @param first first Node which item is compared 
+     * @param second second node which item is compared 
+     * @return boolean
+     */
+    private boolean isEqual(Node<E> first, Node<E> second) {
+        return this.com.compare(first.item, second.item) == 0;
+    }
+
+    /**
+     *  checking if the first Node is on the same node as the second Node,
+     * or checking if first node is before the second Node
+     * @param first first Node compared 
+     * @param second second Node compared 
+     * @return 
+     */
+    private boolean isBeforeOrEqual(Node<E> first, Node<E> second) {
+        return first == second || first.next == second;
+    }
+
+    /**
+     * helper method to get the a queue 
+     * @param result a Queue with no items
+     * @return a queue with sorted items
+     */
+    private Queue<E> getQueue(Queue<E> result) {
+        for (Node<E> temp = head.next; temp.next != null; temp = temp.next) {
+            result.put(temp.item);
+        }
+        return result;
+    }
+}

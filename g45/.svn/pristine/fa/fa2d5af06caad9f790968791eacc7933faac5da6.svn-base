@@ -1,0 +1,55 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package basicsort;
+
+import java.util.Comparator;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class InsertionSorter<E> extends SuperSort<E> {
+
+    public InsertionSorter(E[] e) {
+        super(e);
+
+    }
+
+    @Override
+    public int getSize() {
+        return super.getSize();
+    }
+
+    @Override
+    public Queue sort(Comparator comparator) {
+        Queue result = new Queue();
+        for (Node<E> currentNode = head.next; currentNode.next != null;) {
+            boolean hasbeenSorted = true;
+
+            for (Node<E> node = head; node.next != null && node.next != currentNode.next; node = node.next) {
+
+                if (comparator.compare(currentNode.next.item, node.next.item) < 0) {
+                    exchange(currentNode, node);
+                    hasbeenSorted = false;
+                    break;
+                }
+            }
+            if (hasbeenSorted) {
+                currentNode = currentNode.next;
+            }
+        }
+
+        for (Node<E> node = head; node.next != null; node = node.next) {
+            System.out.println("node.next: " + node.next.item);
+            result.put(node.next.item);
+
+        }
+
+        return result;
+    }
+}

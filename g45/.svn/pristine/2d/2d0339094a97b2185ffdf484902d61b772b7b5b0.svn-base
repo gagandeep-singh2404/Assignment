@@ -1,0 +1,180 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package heapsort;
+
+import basicsort.SuperSort;
+import java.util.Comparator;
+import java.util.Stack;
+import sort.Queue;
+import sort.Sort;
+
+/**
+ *
+ * @author gagandeepsingh
+ */
+public class HeapSorter<E> implements Sort<E> {
+
+    private Comparator com;
+    private int size;
+    private Node<E> root;
+    private Stack<Node> parentStack = new Stack();
+    private Stack<Node> copyStack = new Stack();
+    private Queue<E> resultQueue;
+
+    public class Node<E> {
+
+        //TODO: implement a linked list inner class.
+        public Node<E> leftChild;
+        public Node<E> rightChild;
+        public Node<E> parentNode;
+        public E item;
+
+        public Node(E item) {
+            this.item = item;
+        }
+
+        private void addChildren(Node<E> leftChild, Node<E> rightChild) {
+            this.leftChild = leftChild;
+            this.rightChild = rightChild;
+
+            this.leftChild.parentNode = this;
+            this.rightChild.parentNode = this;
+        }
+
+        private void addChild(Node<E> leftChild) {
+            this.leftChild = leftChild;
+            this.leftChild.parentNode = this;
+
+        }
+
+    }
+
+    public HeapSorter(E[] e) {
+        resultQueue = new Queue<>();
+
+        root = buildTree(e);
+        createStack();
+    }
+
+    @Override
+    public Queue<E> sort(Comparator comparator) {
+        this.com = comparator;
+        heapify();
+        System.out.println("root: " + root.item);
+        return new Queue();
+    }
+
+    private Node<E> buildTree(E[] e) {
+        if (e.length == 0)
+            return null;
+
+        root = new Node(e[0]);
+        _buildTree(e, root, 1);
+
+        return root;
+    }
+
+    /**
+     * Here the tree is built with recursion
+     *
+     * @param e
+     * @param parentNode
+     * @param leftItem leftItem is the item of the leftChild
+     */
+    private void _buildTree(E[] e, Node<E> parentNode, int leftItem) {
+        int rightItem = leftItem + 1;
+        if (leftItem > e.length - 1)
+            return;
+
+        if (rightItem > e.length - 1)
+            return;
+
+        parentNode.addChildren(new Node(e[leftItem]), new Node(e[rightItem]));
+
+        _buildTree(e, parentNode.leftChild, leftItem * 2 + 1);
+        _buildTree(e, parentNode.rightChild, rightItem = rightItem * 2 + 1);
+    }
+
+    private Node<E> heapify() {
+        _sink(copyStack.pop());
+        return root;
+    }
+
+    private void _sink(Node<E> parentNode) {
+        if (parentNode.leftChild == null)
+            return;
+
+        if (parentNode.rightChild != null) {
+            if (less(parentNode.rightChild, parentNode))
+                exchangeItems(parentNode, parentNode.rightChild);
+            System.out.println("parentNode: " + parentNode.item);
+            System.out.println("leftchild: " + parentNode.leftChild.item);
+            System.out.println("rightChild" + parentNode.rightChild.item);
+            System.out.println("");
+        }
+        if (less(parentNode.leftChild, parentNode))
+            exchangeItems(parentNode, parentNode.leftChild);
+
+        System.out.println("parentNode: " + parentNode.item);
+        System.out.println("leftchild: " + parentNode.leftChild.item);
+        System.out.println("");
+        if (copyStack.isEmpty())
+            return;
+
+        _sink(this.copyStack.pop());
+    }
+
+    private boolean less(Node<E> n1, Node<E> n2) {
+        return com.compare(n1.item, n2.item) < 0;
+    }
+
+    private void removeLastNode(Node<E> parentNode) {
+
+    }
+
+    private void exchangeItems(Node<E> n1, Node<E> n2) {
+        Node<E> temp = n1;
+
+        n1.item = n2.item;
+        n2.item = temp.item;
+    }
+
+    private void printQueue() {
+//        for (int i = 0; i <; i++) {
+//            Object object = arr[i];
+//
+//        }
+    }
+
+    private int getSize() {
+        return this.size;
+    }
+
+    /**
+     * creating two Stacks for the heapifyng of the tree All ParentNodes are
+     * safed in there
+     */
+    public void createStack() {
+        Queue<Node> queue = new Queue();
+
+        queue.put(root);
+        Node<E> tempNode;
+
+        while (!queue.isEmpty()) {
+            tempNode = queue.get();
+
+            if (tempNode.leftChild != null) {
+                parentStack.add(tempNode);
+                copyStack.add(tempNode);
+                queue.put(tempNode.leftChild);
+            }
+
+            if (tempNode.rightChild != null)
+                queue.put(tempNode.rightChild);
+        }
+    }
+
+}
