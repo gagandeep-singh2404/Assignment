@@ -2,9 +2,14 @@
 #ifndef _STRUCTHEADER_
 #define _STRUCTHEADER_
 
-#define IndexSize 1
-#define OverflowSize 1
+// How many Buckets should be there
+#define NumberOfOverflow 1
+#define NumberOfBuckets 1
+
+// The length of the array 
+#define OvIndex 0
 #define BucketSize 1
+
 /*
     An Bucket structure. 
     Contains: 
@@ -27,9 +32,10 @@
 */
 
     typedef struct index_str{
-        Bucket *bucket;
-        Bucket *overflow;
+        Bucket *bucket[BucketSize];
+        Bucket *overflow[OvIndex+1];
     }Index;
-    
+
+
     Index *myIndex;
 #endif

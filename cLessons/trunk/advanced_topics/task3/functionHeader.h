@@ -1,4 +1,5 @@
 #ifndef _FUNCTIONHEADER_
+
 #define _FUNCTIONHEADER_
 
 #include <stdbool.h>
@@ -14,14 +15,16 @@ void init();
     delete a object from the Bucket or Overflow
     (Also json ?)
 */
-bool myDelete(int id);
+bool myDelete(char * name);
 
 /*
     read the data of a stored object
 */
-bool myRead(char * name);
+Bucket* myRead(char * name);
 
 void addObject(Bucket * bucket);
 
 int calculateKey(char* name);
+
+bool add();
 #endif

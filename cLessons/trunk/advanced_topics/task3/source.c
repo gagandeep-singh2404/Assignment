@@ -5,54 +5,51 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 void init(){
-    myIndex = (Index*)malloc(IndexSize+1*sizeof(Bucket));
-    myIndex->overflow = (Bucket*)malloc(OverflowSize*sizeof(Bucket*));
-
-    for(int i = 0; i < IndexSize; i++)
+    myIndex = malloc(sizeof(Index));
+    
+    for(int i = 0; i < BucketSize; i++)
     {
-        myIndex[i].bucket = malloc(BucketSize*sizeof(Bucket*));
+        myIndex->bucket[i] = calloc(NumberOfBuckets,sizeof(Bucket));
     }
 
+    myIndex->overflow[OvIndex] = calloc(NumberOfOverflow,sizeof(Bucket));    
 }
 
 bool add(){
     Bucket *bucket = malloc(sizeof(Bucket));
     addObject(bucket);
     int index = calculateKey(bucket->name);
-    printf("Index: %d\n", index);
-    
-    Bucket* tempbucket = myIndex[index].bucket;
-    for(int i = 0; i< BucketSize;i++)
+
+
+    for(int i = 0; i < BucketSize; i++)
     {
-        if (tempbucket == NULL) {
-            
-            tempbucket = bucket;
-            printf("hat geaddet in dies\n");
-            return 1;
-        }
-        tempbucket++ ;
-    }
-/*
-     for(int i = 0 ; i< OverflowSize;i++)
-    {
-        if (&myIndex[0].overflow[i] == NULL) {
-            
-            myIndex[0].overflow[i] = *bucket;
-            printf("in overflow amk\n");
-            return 1;
+        for(int j = 0; j < NumberOfBuckets; j++)
+        {
+            if (myIndex->bucket[i][j].name == NULL) {
+                myIndex->bucket[i][j] = *bucket;
+                printf("gerade hier:BU \n");
+                return 1;
+            }
         }
     }
-  */  
+   
+        for(int j = 0; j < NumberOfOverflow; j++)
+        {
+            if (myIndex->overflow[OvIndex][j].name == NULL) {
+                myIndex->overflow[OvIndex][j] = *bucket;  
+                printf("gerade hier:Ov \n");
+                return 1;
+        }
+    }
+
     printf("hat nicht geaddet\n");
 return 0;
 }
 
 void addObject(Bucket * bucket){
-    bucket->address = (char*)malloc(sizeof(char*));
-    bucket->name = (char*)malloc(sizeof(char*));
-    bucket->id = (int)malloc(sizeof(int));
+    bucket->address = (char*)malloc(sizeof(char)*20);
+    bucket->name = (char*)malloc(sizeof(char)*20);
 
     printf("Please enter an ID: \n");
     scanf("%d",&bucket->id);
@@ -65,32 +62,56 @@ void addObject(Bucket * bucket){
 int calculateKey(char * name){
     int key = 0;
     for(; *name != '\0'; name++){ key += *name; }
-    return key%IndexSize;
+    return key%BucketSize;
 }
 
-/*
-bool myRead(char* name){
-    int index = calculateKey(name);
+
+Bucket* myRead(char* name){
 
     for(int i = 0; i < BucketSize; i++)
     {
-        if (strcmp(name, myIndex[index].bucket[i]->name) == 0) {
-            printf("ID: %d\nName\nAddress\n",myIndex[index].bucket[i]->id,myIndex[index].bucket[i]->name,myIndex[index].bucket[i]->address);
-            return 1;
+        for(int j = 0; j < NumberOfBuckets; j++)
+        {
+            if (myIndex->bucket[i][j].name == NULL)continue;
+            
+            if (strcmp(myIndex->bucket[i][j].name, name) == 0) {
+                printf("\n----------------\n");
+                printf("ID: %d\nNAME: %s\nADDRESS: %s\n",myIndex->bucket[i][j].id,myIndex->bucket[i][j].name,myIndex->bucket[i][j].address);
+                return &myIndex->bucket[i][j];
+            }
         }
     }
 
-      for(int i = 0; i < OverflowSize; i++)
+    for(int j = 0; j < NumberOfOverflow; j++)
     {
-        if (strcmp(name,myIndex->overflow[i].name)== 0) {
-            printf("ID: %d\nName\nAddress\n",myIndex->overflow[i].id,myIndex->overflow[i].name,myIndex->overflow[i].address);
-            return 1;
+        if (myIndex->overflow[OvIndex][j].name == NULL) continue;
+
+        if (strcmp(myIndex->overflow[OvIndex][j].name, name)== 0) {
+            printf("\n----------------\n");
+            printf("ID: %d\nNAME: %s\nADDRESS: %s\n",myIndex->overflow[OvIndex][j].id,myIndex->overflow[OvIndex][j].name,myIndex->overflow[OvIndex][j].address);
+            return &myIndex->overflow[OvIndex][j];
         }
-        
+              
     }
-    
-    printf("Sorry Person not found!");
-    return 0;
+    printf("\n----------------\n");
+    printf("%s Not found\n", name);
+    return NULL;
 }
 
-*/
+
+bool myDelete(char * name){
+
+    Bucket * bucket = myRead(name);
+
+    if (bucket == NULL) {
+        printf("\n----------------\n");
+        printf("%s Not found\n",name);
+        return 0;
+    }
+    bucket->address = NULL;
+    bucket->id = (int)NULL;
+    bucket->name = NULL;
+    free(bucket);
+    return 1;
+}
+
