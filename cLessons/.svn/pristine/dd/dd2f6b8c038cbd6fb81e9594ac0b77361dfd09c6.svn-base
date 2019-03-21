@@ -1,0 +1,13 @@
+12
+die Socket address, ist der dritte member von struct sockaddr_in 
+address.sin_addr.s_addr = INADDR_ANY;
+
+SO_REUSEADDR
+This option controls whether bind should permit reuse of local addresses for this socket. 
+If you enable this option, you can actually have two sockets with the same Internet port number; 
+but the system won't allow you to use the two identically-named sockets in a way that would confuse the Internet. 
+The reason for this option is that some higher-level Internet protocols, including FTP, require you to keep reusing the same port number.
+
+SQL_SOCKET
+
+its on his own
