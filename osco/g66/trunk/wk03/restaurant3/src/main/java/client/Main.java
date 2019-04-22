@@ -86,4 +86,13 @@ public class Main implements Executor {
     public void execute(Runnable command) {
 
     }
+    
+    
+    
+    public static double getGewischt(){
+        return 0;
+    }
+    public static float getGewischt(){
+        return 0;
+    }
 }

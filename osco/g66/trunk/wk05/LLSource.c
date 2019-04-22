@@ -56,7 +56,21 @@ void destructLL(LL* list){
 
 
 }
-void removeLL(LL*list,int value){}
+void removeLL(LL*list,int value){
+
+  
+    for(node * head = list->head; head->next != NULL; head= head->next)
+    {
+        if (head->next->value == value) {
+            node* temp = head->next;
+            head->next = temp->next;
+            free(temp);
+            return; 
+        }
+        
+    }
+
+}
 
 int countLL(LL* list){
     int count = 0;

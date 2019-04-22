@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <immintrin.h>	
+
 #define M (1024*1024)
 
 
 int main(void){
-    float* array1 = (float*)malloc(M*sizeof(float));
-    float* array2 = (float*)malloc(M*sizeof(float));
-
+    float* array1 = (float*)aligned_alloc(32,M*sizeof(float));
+    float* array2 = (float*)aligned_alloc(32,M*sizeof(float));
 
     printf("Pointer %p\n", array1);
     printf("Pointer %p\n", array2);
@@ -24,6 +25,6 @@ int main(void){
         printf("Array 2: %f\n", array2[j-M]);
     }
 */
-    
+
     return 0;
 }
