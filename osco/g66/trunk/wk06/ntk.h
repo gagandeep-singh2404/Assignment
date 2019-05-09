@@ -27,6 +27,7 @@
 #define _INC_WINDOWS
 #endif
  
+int gloabl = 200;
 typedef struct _task* task;
 
 typedef unsigned (__stdcall *taskType)(void*);
