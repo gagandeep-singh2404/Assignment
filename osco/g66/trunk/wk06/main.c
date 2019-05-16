@@ -28,7 +28,7 @@ unsigned __stdcall tascCode(void* args) {
 	task* t1 = (task*)args;
 	int* a = (int*)getArgument_task(t1);
 	Sleep(a[0]*1000);
-	
+
 	return 0;
 
 }
@@ -73,15 +73,24 @@ void task2() {
 		setPriority_task(decrease,high);
 		create_task(decrease, decreaseGlobal, &par, sizeof(int), 0);
 
+		Sleep(5000);
 	}
-	int decreaseGlobal() {
+	int decreaseGlobal(void* args) {
+		task* t = (task*)args;
 
-		while (global != 0) {--global;}
-		return 0;
+		while (!isTerminated_task(t)){
+			--global;
+		}
+
+		return 0
 	}
-	int increaseGlobal() {
+	int increaseGlobal(void* args) {
+		task* t = (task*)args;
 
-		while (global != 300) {++global;}
+		while (!isTerminated_task(t)){
+			++global;
+		}
+
 		return 0;
 	}
 
