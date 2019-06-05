@@ -1,16 +1,14 @@
-#ifndef NODES
-#define NODES
+#ifndef PROCESS_H
+#define PROCESS_H
 
-#define ArraySize 5
-typedef struct node
-{
-    int serviceTime;
+typedef struct process {
+    int id;
     int arrivalTime;
-    struct node *next;
-}Node;
+    int serviceTime;
+    int progress;
+} process;
 
-void addNewNodeToQueue(int,int,Node*);
-void FCFS(int** array);
-void removeNodeFromQueue(Node*);
+struct process getProcess(int id, int arrival, int service);
+void printProcess(process* process);
 
-#endif
+#endif /* PROCESS_H */

@@ -1,24 +1,3 @@
-sits_left_of(dean,dennis).
-sits_left_of(dennis,lee).
-sits_left_of(lee,george).
-sits_left_of(george,fred).
-sits_left_of(fred,alicia).
-sits_left_of(alicia,neville).
-sits_left_of(neville,lavender).
-sits_left_of(lavender,parvati).
-sits_left_of(parvati,katie).
-sits_left_of(katie,natalie).
-sits_left_of(natalie,ron).
-sits_left_of(ron,hermione).
-sits_left_of(hermione,harry).
-sits_left_of(harry,colin).
-sits_left_of(colin,seamus).
-sits_left_of(seamus,angelina).
-sits_left_of(angelina,ginny).
-sits_left_of(ginny,dean).
-
-
-
 sits_right_of(dean,ginny).
 sits_right_of(ginny,angelina).
 sits_right_of(angelina,seamus).
@@ -39,12 +18,47 @@ sits_right_of(lee,dennis).
 sits_right_of(dennis,dean).
 
 
+sits_left_of(Y, X) :-
+sits_right_of(X, Y).
 
 
 are_neighbors_of(X,Z,Y) :- sits_left_of(X,Z) ,sits_right_of(Y,Z).
 
 
 next_to_each_other(X,Y) :- sits_left_of(X,Y) ; sits_left_of(X,Y).
+
+
+/*** Is Lavender to the right of Parvati?
+* sits_right_of('Lavander Brown', 'Parvati Patil').
+* false
+***/
+
+/*** Is Lavender to the right of Neville?
+* sits_right_of('Lavander Brown', 'Neville Longbottom').
+* true
+***/
+
+/*** Who is to the right of Hermione?
+* sits_right_of('Lavander Brown', X).
+* X = 'Neville Longbottom'.
+***/
+
+/*** Who is sitting at the table?
+* findall(X, sits_right_of(X, Y), Z), write(Z).
+* [Katie Bell,Parvati Patil,Lavander Brown,Neville Longbottom,Alicia Spinnet,Fred Weasley,George Weasley,Lee Jordan,Dennis Creevey,Dean Thomas,Ginny Weasley,Angelina Johnson,Seamus Finnigan,Colin Creevey,Harry Potter,Hermione Granger,Ron Weasley,Natalie McDonald]
+* Z = ['Katie Bell', 'Parvati Patil', 'Lavander Brown', 'Neville Longbottom', 'Alicia Spinnet', 'Fred Weasley', 'George Weasley', 'Lee Jordan', 'Dennis Creevey'|...].
+***/
+
+/*** Who is sitting two seats to the right of Hermione?
+* sits_right_of('Hermione Granger', X), sits_right_of(X, Y).
+* X = 'Ron Weasley',
+* Y = 'Natalie McDonald'.
+***/
+
+/*** Who is sitting between Neville and Fred?
+*  are_neighbors_of('Neville Longbottom', 'Fred Weasley', X).
+*  X = 'Alicia Spinnet'.
+***/
 
 
 
