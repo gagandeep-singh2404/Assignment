@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include "header.h"
+
+#define NR_PROCESSES 5
+
+int main(int argc, const char *argv[])
+{
+
+    int headPos = 100;
+    int tasks[55, 58, 39, 18, 90, 160, 150, 38, 184];
+    int time = 0;
+
+    for (int i = 0; i < 9; i++)
+    {
+        if
+            headPos > tasks[i]
+            {
+                time += headPos - tasks[i];
+                headPos = tasks[i];
+            }
+        else
+        {
+            time += tasks[i] - headPos;
+            headPos = tasks[i];
+        }
+    }
+
+    printf("%s%d\n", "Ammount of movement for FIFO", time);
+
+    return 0;
+}
